@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="20 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
+<meta name="description" content="22 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
 <title>AE 表达式手册 · v3 更新版</title>
 <style>:root{--bg:#17181d;--sidebar:#1b1c22;--panel:#202127;--stage:#16171d;--line:#33343e;--line-soft:#2a2b33;--text:#eeeef3;--muted:#a1a3b2;--dim:#7f8293;--accent:#b6a2ff;--accent-strong:#9c82ef;--accent-bg:#2d273e;--green:#8dd5bc;--code:#1a1b21;--radius:12px;font-size:16px;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;display:flex;height:100dvh;overflow:hidden;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}button,input,select,a{ -webkit-tap-highlight-color:transparent}button{color:inherit}button:disabled{cursor:default;opacity:.4}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button svg{width:18px;height:18px;flex:none}svg.icon{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}button{border:0;background:none}a{color:var(--accent)}[hidden]{display:none!important}::selection{background:#63508f;color:#fff}::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-thumb{background:#3f404c;border-radius:8px}::-webkit-scrollbar-thumb:hover{background:#5d5c70}::-webkit-scrollbar-track{background:transparent}
@@ -38,6 +38,9 @@
 
 .transport-btn .icon{pointer-events:none}.transport-btn{min-width:36px;min-height:36px}
 .mic-device-label{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:12px}.mic-device-label select{max-width:100%;min-width:0;padding:7px 10px;border:1px solid #454151;border-radius:5px;background:#202128;color:#dad6e5}
+.follow-mode{font-size:12px;color:var(--muted);padding:5px 8px}.demo-switch{flex-wrap:wrap}[data-follow-handle]:hover rect:first-child,[data-follow-handle]:focus-visible rect:first-child{stroke:white;stroke-width:2}
+
+.control textarea{width:100%;min-height:90px;resize:vertical;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;background:#1c1d23;color:var(--text);padding:10px 12px;font:13px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}.text-example{margin-top:6px}.control input:disabled,.control select:disabled{opacity:.38;cursor:default}.demo-switch{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -46,12 +49,12 @@
 <aside class="sidebar" id="sidebar" aria-label="手册导航">
   <div class="brand"><span class="brand-mark" aria-hidden="true">Ae</span><div><strong>表达式手册</strong><span>EXPRESSION MANUAL</span></div><button id="closeNav" class="icon-button mobile-only" aria-label="关闭目录">×</button></div>
   <div class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" aria-label="搜索表达式或快捷键" placeholder="搜索名称、属性、效果" autocomplete="off"><button id="clearSearch" class="clear-search" aria-label="清空搜索" hidden>×</button></div>
-  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">20</span></div>
+  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">22</span></div>
   <nav id="nav" aria-label="分类目录"></nav>
   <div class="sidebar-footer"><span><i></i> 离线手册</span><span>VERSION 3.1</span></div>
 </aside>
 <div class="workspace">
-  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>20</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
+  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>22</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
   <main id="main" tabindex="-1" aria-labelledby="pageTitle"></main>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -61,7 +64,7 @@ const choice = (key,label,value,options,explain='') => ({key,label,value,options
 const textParam = (key,label,value,explain='') => ({key,label,value,explain,type:'text'});
 const durationParam = (value=2) => range('duration','动画时长',value,.5,6,.1,'s','从图层入点开始计算，结束后保持最终值。');
 const recipesById = Object.fromEntries(originalDB.expressions.flatMap(c=>c.items).map(x=>[x.demo,{...x,id:x.demo,params:[],needs:'无需关键帧',note:'预览重播仅用于观察，不会给表达式额外添加循环。'}]));
-function recipe(id,values){Object.assign(recipesById[id],values)}
+function recipe(id,values){Object.assign(recipesById[id] ||= {id,params:[]},values)}
 recipe('value',{
  title:'保留原始值',fn:'value',short:'value',desc:'读取属性原本的值。有关键帧时，表达式会完整保留原动画。',target:'Position · 2D 位置',
  params:[range('travel','移动距离',180,0,260,10,'px','这是预览中原关键帧的移动距离，不写入表达式。')],
@@ -93,12 +96,12 @@ recipe('linear',{
  params:[choice('previewType','复制的映射方式','linear',[['linear','线性 linear'],['ease','缓动 ease']],'仅切换可复制代码；预览始终演示线性映射。'),range('x','预览位置 X',500,0,1000,1,'px','控制宽度；只用于网页预览。'),range('y','预览位置 Y',500,0,1000,1,'px','控制高度；向下移动，Y 数值增大。只用于网页预览。'),range('scaleMin','最小缩放',50,0,200,1,'%'),range('scaleMax','最大缩放',150,0,200,1,'%')],
  setup:['建立名为 INPUT 的二维控制图层，保持无父级。','把代码粘贴到另一个二维图层的 Scale / 缩放属性。','移动 INPUT：X 的 0–1000 对应宽度范围，Y 的 0–1000 对应高度范围。两轴互不影响。'],
  code:p=>`p = thisComp.layer("INPUT").transform.position;\nsx = ${p.previewType}(p[0], 0, 1000, ${p.scaleMin}, ${p.scaleMax});\nsy = ${p.previewType}(p[1], 0, 1000, ${p.scaleMin}, ${p.scaleMax});\n[sx, sy];`,
- note:'预览使用线性映射。拖动左侧控制点；方向键微调，双击回到中心。下方保留缓动表达式可供复制。',duration:()=>6
+ note:'预览使用线性映射。拖动起手方向决定 X 或 Y 轴，松开后可换轴；方向键微调，双击回到中心。下方保留缓动表达式可供复制。',duration:()=>6
 });
 recipe('elastic',{
  title:'弹性回弹',fn:'Keyframe Overshoot',short:'overshoot',target:'Position / Scale / Rotation',needs:'需要 2 个关键帧',
  desc:'左侧为原关键帧，右侧为落下后的衰减回弹。位置示例先加速下落，再向上弹起；也可切换 0–100% 缩放。',
- params:[choice('previewType','演示属性','position',[['position','竖向落下'],['scale','缩放 0–100%']],'竖向落下使用向上单侧回弹；缩放使用双向弹性。切换后预览与代码同步更新。'),range('amp','回弹强度',.15,0,.5,.01,'','根据结束关键帧前的速度计算振幅。'),range('freq','回弹频率',2,.5,5,.1,'Hz','每秒振荡次数。'),range('decay','衰减速度',5,1,10,.5,'','值越大，越快停稳。')],
+ params:[choice('previewType','演示属性','position',[['position','竖向落下'],['scale','缩放 0–100%']],'竖向落下使用向上单侧回弹；缩放使用双向弹性。切换后预览与代码同步更新。'),range('amp','回弹强度',.2,0,.5,.01,'','根据结束关键帧前的速度计算振幅。'),range('freq','回弹频率',1.8,.5,5,.1,'Hz','每秒振荡次数。'),range('decay','衰减速度',5,1,10,.5,'','值越大，越快停稳。')],
  setup:['在同一属性上设置起始和结束关键帧。','结束关键帧使用线性插值，或保留非零的入速度。','粘贴到同一属性。若结束速度为 0，回弹也会很弱或不明显。'],
  code:p=>`amp = ${p.amp};\nfreq = ${p.freq};\ndecay = ${p.decay};\nn = numKeys;\n\nif (n == 0) {\n    value;\n} else {\n    t = time - key(n).time;\n    if (t > 0) {\n        v = velocityAtTime(\n            key(n).time - thisComp.frameDuration / 10\n        );\n        value ${p.previewType==='position'?'-':'+'} v * amp * ${p.previewType==='position'?'Math.abs(Math.sin(freq * 2 * Math.PI * t))':'Math.sin(freq * 2 * Math.PI * t)'}\n            / Math.exp(decay * t);\n    } else {\n        value;\n    }\n}`,
  note:'位置预览：0.4–1.2 秒加速下落，随后向上回弹。AE 中请给原关键帧设置加速下落并保留结束入速度；缩放模式仍为 0–100% 弹性变化。',duration:()=>4
@@ -173,7 +176,7 @@ recipe('distance',{
 });
 recipe('audio',{
  title:'音频驱动缩放',fn:'Audio Amplitude → Scale',short:'audio',desc:'将音频振幅映射到图层缩放。输入音量与输出图形并排显示，观察每一拍如何改变尺寸。',target:'Scale · 2D 缩放',needs:'需要音频关键帧',
- params:[range('gain','收音灵敏度',2,.5,10,.5,'×','只影响浏览器麦克风输入；按实际收音音量调整。'),range('maxAudio','音量输入上限',30,10,60,1,'','音量达到上限时输出最大缩放。'),range('maxScale','最大缩放',180,100,250,5,'%','低音量时为 100%，高音量时达到此值。')],
+ params:[range('gain','收音灵敏度',6,.5,10,.5,'×','只影响浏览器麦克风输入；按实际收音音量调整。'),range('maxAudio','音量输入上限',30,10,60,1,'','音量达到上限时输出最大缩放。'),range('maxScale','最大缩放',300,100,400,5,'%','低音量时为 100%，高音量时达到此值。')],
  setup:['选中音频层：动画 → 关键帧辅助 → 将音频转换为关键帧。','将生成层命名为 Audio Amplitude，并将双声道滑块效果重命名为 AMP。','把代码贴到二维图层 Scale / 缩放。引用效果第 1 个参数，减少中英文名称差异。'],
  code:p=>`audio = thisComp.layer("Audio Amplitude")\n    .effect("AMP")(1);\ns = linear(audio, 0, ${p.maxAudio}, 100, ${p.maxScale});\n[s, s];`,
  note:'点击“启用麦克风”后实时显示柔和的音量柱状图与缩放。收音只在本页处理，不录制、不上传；离开此页或切到后台会停止。AE 仍使用转换后的音频关键帧。',duration:()=>6
@@ -202,12 +205,37 @@ const revisedNotes={
  path:'P1、P2、P3 决定路径锚点；手柄按相邻点的距离计算。路径保持开放。图层变换可改变，形状组自身的变换请保持默认。'
 };
 Object.entries(revisedNotes).forEach(([id,detail])=>recipesById[id].detail=detail);
+recipe('follow',{
+ title:'延迟跟随',name:'延迟跟随',fn:'valueAtTime()',short:'delay',desc:'领头方块先移动，后面的方块依次重复它走过的位置。拖动 LEADER，观察延迟形成的拖尾。',target:'Position · 2D 位置',needs:'需要 LEADER 与跟随图层',
+ params:[range('delay','每层延迟',.2,0,.6,.05,'s','第 1 个跟随层延迟一次，第 2 个延迟两次，以此类推。')],
+ setup:['创建名为 LEADER 的二维图层，在 Position 上设置运动关键帧。','将 4 个二维跟随图层连续排列在 LEADER 下方；这些图层与 LEADER 均保持无父级。','将表达式粘贴到每个跟随图层的 Position / 位置。图层排序决定延迟倍数。'],
+ code:p=>`leader = thisComp.layer("LEADER");\ndelay = ${p.delay};\nn = Math.max(1, index - leader.index);\nleader.transform.position.valueAtTime(time - n * delay);`,
+ detail:'读取 LEADER 在较早时刻的位置，不是向它当前的位置缓动。网页拖动只用于观察；AE 中需要给 LEADER 设置动画，静止的领头层不会形成拖尾。',note:'1 个领头层 + 4 个跟随层。拖动领头方块切换到实时跟随；点击“自动演示”返回预设运动。',duration:()=>6
+});
+recipe('text-box',{
+ title:'文字边框自适应',name:'文字边框自适应',fn:'sourceRectAtTime()',short:'text frame',desc:'文字变长，外框变宽；按 Enter 换行，外框自动增高。调整留白与圆角，也可以切换为聊天气泡。',target:'Rectangle Path · 矩形路径',needs:'需要 TEXT 与外框形状图层',
+ params:[choice('previewType','复制属性','size',[['size','尺寸 · Size'],['position','位置 · Position'],['radius','圆角 · Roundness'],['tail','尖角 · Path']],'尺寸、位置、圆角分别粘贴到矩形路径；尖角仅用于聊天气泡的独立路径。'),{...textParam('text','预览文字','Hello John, 今天会下雨吗？','按 Enter 手动换行。AE 中编辑 TEXT 点文本并换行；网页文字不会写入表达式。'),multiline:true},choice('boxStyle','外框样式','bubble',[['frame','普通边框'],['bubble','聊天气泡']],'普通边框使用描边；聊天气泡使用绿色填充，尖角与矩形使用相同填充且不加描边。'),choice('tailSide','尖角方向','right',[['left','左侧'],['right','右侧']],'尖角跟随外框边缘，仅在聊天气泡中显示。'),range('padX','水平内边距',24,0,80,1,'px','文字左右各留出的距离。'),range('padY','垂直内边距',16,0,60,1,'px','文字上下各留出的距离。'),choice('radiusMode','圆角方式','fixed',[['fixed','固定圆角'],['auto','自适应圆角']],'固定圆角保持像素值；自适应按外框短边的一半乘以比例计算。'),range('radius','圆角半径',12,0,80,1,'px','固定圆角的半径，上限为外框短边的一半。'),range('radiusRatio','自适应比例',40,0,100,1,'%','100% 表示外框短边的一半。')],
+ setup:['创建二维点文本图层，命名为 TEXT；输入文字并用 Enter 换行。再创建矩形形状图层，放在文字下方。','将外框图层的父级设为 TEXT；外框图层及其形状组的锚点、位置都设为 [0, 0]，缩放 100%，旋转 0°。','把“尺寸”“位置”“圆角”代码分别粘贴到同一个 Rectangle Path / 矩形路径的 Size、Position、Roundness。修改参数后，重新复制受影响的代码。','普通边框：添加描边并关闭填充。聊天气泡：使用绿色填充（#2DCD8D）和深色文字（#102820），关闭描边。','聊天气泡需要在外框图层内另建一个形状组，添加普通 Path / 路径，将“尖角”代码贴到 Path 属性；添加与矩形相同的填充，并保持该组变换为上述默认值。'],
+ code:p=>{
+  const rect='r = thisComp.layer("TEXT").sourceRectAtTime(time, false);';
+  const size=`${rect}\npadX = ${p.padX};\npadY = ${p.padY};`;
+  const radius=p.radiusMode==='auto'?`Math.min(w, h) / 2 * ${p.radiusRatio} / 100`:`Math.min(${p.radius}, w / 2, h / 2)`;
+  if(p.previewType==='size')return `${size}\n[r.width + padX * 2, r.height + padY * 2];`;
+  if(p.previewType==='position')return `${rect}\n[r.left + r.width / 2, r.top + r.height / 2];`;
+  const shape=`${size}\nw = r.width + padX * 2;\nh = r.height + padY * 2;\ncorner = ${radius};`;
+  if(p.previewType==='radius')return `${shape}\ncorner;`;
+  return `// 聊天气泡：粘贴到单独的 Path，使用同色填充，无描边\n${shape}\nside = ${p.tailSide==='left'?-1:1};\nedge = r.left + r.width / 2 + side * w / 2;\ny = r.top - padY + Math.max(corner, Math.min(h - corner, padY + 14));\na = Math.min(7, h / 4);\noverlap = Math.max(1, corner - Math.sqrt(Math.max(0, corner * corner - a * a)));\nbase = edge - side * Math.min(overlap, w / 2);\ncreatePath([[base, y - a], [edge + side * 8, y], [base, y + a]], [], [], true);`;
+ },
+ detail:'多行点文本按实际字形边界计算：宽度取最长一行，高度覆盖所有可见文字。末尾空行和纯空白不一定增加 AE 的字形边界；要增加空间请调内边距。网页不自动折行，超长内容会整体缩小以适应预览。浏览器与 AE 字体测量可能略有差异。圆角不超过短边的一半，尖角由同色填充的独立路径与矩形叠合。',note:'Enter 换行 · 外框跟随文字宽度与行高。长文字只缩小预览，不改变参数。',duration:()=>6
+});
+
+
 const groups = [
  {id:'motion',name:'基础与运动',icon:'motion',ids:['value','wiggle','time','sin','linear']},
  {id:'looping',name:'弹性与循环',icon:'loop',ids:['elastic','loop','posterize']},
- {id:'text',name:'文本与数字',icon:'text',ids:['typewriter','cursor','counter','counter-format','timecode']},
+ {id:'text',name:'文本与数字',icon:'text',ids:['typewriter','cursor','counter','counter-format','timecode','text-box']},
  {id:'random',name:'随机与颜色',icon:'random',ids:['random','blink']},
- {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','distance']},
+ {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','distance','follow']},
  {id:'control',name:'控制器与路径',icon:'sliders',ids:['audio','control','path']}
 ];
 const recipes = groups.flatMap(g=>g.ids.map(id=>Object.assign(recipesById[id],{group:g})));
@@ -221,7 +249,7 @@ const iconPaths = {
  down:'m6 9 6 6 6-6',
  motion:'M3 12h4l3-7 4 14 3-7h4',loop:'M19 8a8 8 0 0 0-14-2L3 9m0-5v5h5m-3 7a8 8 0 0 0 14 2l2-3m0 5v-5h-5',text:'M4 5h16M12 5v14M8 19h8',random:'M4 4h16v16H4zM8 8h.01M16 8h.01M12 12h.01M8 16h.01M16 16h.01',layers:'m12 3 10 5-10 5L2 8l10-5zm-10 9 10 5 10-5M2 16l10 5 10-5',sliders:'M4 7h7m4 0h5M4 17h2m4 0h10M11 4v6M6 14v6',chevron:'m9 5 7 7-7 7',left:'m15 5-7 7 7 7',play:'m8 4 12 8-12 8V4z',pause:'M8 5v14M16 5v14',replay:'M4 10a8 8 0 1 1 1 8M4 4v6h6',copy:'M8 8h12v12H8zM4 16H2V2h14v2',check:'m5 12 4 4 10-10',code:'m8 6-6 6 6 6m8-12 6 6-6 6m-3-15-2 18',box:'M4 4h16v16H4zM9 4v16M4 9h16',key:'m8 12 4-4 4 4-4 4-4-4z',info:'M12 11v6M12 7h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',keyboard:'M2 5h20v14H2zM6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 13h.01M10 13h8'};
 const icon = name => `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="${iconPaths[name]||iconPaths.box}"/></svg>`;
-const manualIds = new Set(['linear','lookAt','distance','control','path']);
+const manualIds = new Set(['text-box','linear','lookAt','distance','control','path']);
 const state = {mode:'exp',current:'wiggle',keyGroup:null,query:{exp:'',keys:''},collapsed:{},params:{},time:0,playing:true,repeat:true,frame:0,last:0,path:[[100,225],[300,105],[500,225]]};
 recipes.forEach(r=>state.params[r.id]=Object.fromEntries(r.params.map(p=>[p.key,p.value])));
 const current = () => recipesById[state.current];
@@ -246,28 +274,28 @@ function searchContext(count){return state.query[state.mode]?`<div class="search
 function emptyContent(){stopMicrophone();cancelAnimationFrame(state.frame);$('main').innerHTML=`<div class="empty-state"><div class="empty-symbol">⌕</div><h1 id="pageTitle">没有找到匹配内容</h1><p>试试函数名、应用属性或效果，例如 wiggle、位置、循环。</p><button data-action="clear">清空搜索</button></div>`;}
 function renderControl(p){
  const v=params()[p.key], id='param-'+p.key;
- return `<div class="control ${p.type==='text'?'full':''}"><label for="${id}">${p.label}<span>${p.key}</span></label>${p.type==='range'?`<div class="range-row"><input id="${id}" type="range" title="双击滑块圆点恢复默认值 ${p.value}${p.unit || ''}" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}" style="--fill:${(v-p.min)/(p.max-p.min)*100}%"><div class="number-wrap"><input type="number" aria-label="${p.label}数值" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div></div>`:p.type==='select'?`<select id="${id}" data-param="${p.key}">${p.options.map(([val,label])=>`<option value="${val}" ${String(v)===String(val)?'selected':''}>${label}</option>`).join('')}</select>`:`<input id="${id}" type="text" data-param="${p.key}" value="${escapeHTML(v)}" maxlength="60">`}</div>`;
+ return `<div class="control ${p.type==='text'?'full':''}"><label for="${id}">${p.label}<span>${p.key}</span></label>${p.type==='range'?`<div class="range-row"><input id="${id}" type="range" title="双击滑块圆点恢复默认值 ${p.value}${p.unit || ''}" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}" style="--fill:${(v-p.min)/(p.max-p.min)*100}%"><div class="number-wrap"><input type="number" aria-label="${p.label}数值" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div></div>`:p.type==='select'?`<select id="${id}" data-param="${p.key}">${p.options.map(([val,label])=>`<option value="${val}" ${String(v)===String(val)?'selected':''}>${label}</option>`).join('')}</select>`:p.multiline?`<textarea id="${id}" data-param="${p.key}" rows="3" maxlength="600" placeholder="输入文字，按 Enter 换行">${escapeHTML(v)}</textarea><button class="text-button text-example" data-action="text-example">填入两行聊天示例</button>`:`<input id="${id}" type="text" data-param="${p.key}" value="${escapeHTML(v)}" maxlength="60">`}</div>`;
 }
 function renderRecipe(){
  if(state.current!=='audio')stopMicrophone();
  cancelAnimationFrame(state.frame);state.last=0;
  const r=current(),visible=matchingRecipes(); if(!visible.length){emptyContent();return}
- const index=recipes.indexOf(r), manual=manualIds.has(r.id);
+ const index=recipes.indexOf(r), manual=manualIds.has(r.id)||r.id==='follow';
  $('main').innerHTML=`<div class="page-inner">${searchContext(visible.length)}
  <div class="eyebrow"><span>${r.group.name}</span><span> / </span><span class="index">${String(index+1).padStart(2,'0')}</span><span>OF ${recipes.length}</span></div>
  <div class="title-row"><div class="title-heading"><h1 id="pageTitle">${r.title}</h1><span class="function-name">${escapeHTML(r.fn)}</span></div><div class="page-nav"><button class="icon-button" data-action="prev" aria-label="上一个表达式" title="上一个表达式" ${visible.indexOf(r)<=0?'disabled':''}>${icon('left')}</button><button class="icon-button" data-action="next" aria-label="下一个表达式" title="下一个表达式" ${visible.indexOf(r)>=visible.length-1?'disabled':''}>${icon('chevron')}</button></div></div>
  <p class="page-desc">${r.desc}</p><div class="metadata"><span class="meta-item property-tag">${icon('layers')}${r.target}</span><span class="meta-item">${icon('key')}${r.needs}</span></div>
  <div class="recipe-workbench"><div class="preview-column"><section class="panel preview-panel" aria-labelledby="previewTitle"><div class="panel-bar"><h2 id="previewTitle">${icon('box')}效果预览</h2><span class="live-badge" id="playStatus"><i></i>${manual?'交互演示':state.playing?'播放中':'已暂停'}</span></div>
- ${r.id==='linear'?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}<div class="stage ${['path','lookAt','distance','linear','control'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="0 0 600 335" role="${['path','lookAt','distance','linear','control'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg><span class="stage-label">${r.id==='path'?'PATH CONTROLS':'COMPOSITION / PREVIEW'}</span><span class="stage-hint">${r.id==='control'?'拖动左侧滑杆':r.id==='linear'?'拖动控制点 · X / Y':r.id==='path'?'拖动控制点':['lookAt','distance'].includes(r.id)?'拖动 TARGET 点':r.id==='wiggle'?'十字标记 = 原始位置':r.id==='random'?'种子同步位置与颜色':manual?'调整下方参数':'实时预览'}</span></div>
+ ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="0 0 600 335" role="${['path','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg><span class="stage-label">${r.id==='path'?'PATH CONTROLS':'COMPOSITION / PREVIEW'}</span><span class="stage-hint">${r.id==='follow'?'拖动 LEADER':r.id==='control'?'拖动左侧滑杆':r.id==='linear'?'拖动控制点 · X / Y':r.id==='path'?'拖动控制点':['lookAt','distance'].includes(r.id)?'拖动 TARGET 点':r.id==='wiggle'?'十字标记 = 原始位置':r.id==='random'?'种子同步位置与颜色':manual?'调整下方参数':'实时预览'}</span></div>
  <div class="stage-readout"><span id="readoutLabel"></span><span id="readoutValue"></span></div>
  ${manual?'':`<div class="transport"><button class="transport-btn" data-action="play" id="playButton" aria-label="${state.playing?'暂停演示':'播放演示'}" title="${state.playing?'暂停演示':'播放演示'}">${icon(state.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击恢复到 0 秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${state.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${state.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`}
  <div class="preview-note">${r.note}</div></section>
  <section class="parameter-section" aria-labelledby="parameterTitle"><div class="section-bar"><h2 id="parameterTitle">调整参数</h2><button class="text-button" data-action="reset">${icon('replay')}恢复默认</button></div><div class="controls">${r.id==='linear'?r.params.filter(p=>p.key!=='previewType').map(renderControl).join(''):r.params.filter(p=>p.key!=='previewType').sort((a,b)=>Number(b.type==='text')-Number(a.type==='text')).map(renderControl).join('')}</div></section></div>
- <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${r.id==='linear'?renderVariants(r):''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
+ <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box'].includes(r.id)?renderVariants(r):''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
  <section class="setup-card"><h2>${icon('info')}在 AE 中使用</h2><ol>${r.setup.map(s=>`<li>${escapeHTML(s)}</li>`).join('')}</ol></section></div></div>
  <details class="detail-section"><summary>参数解释与使用注意</summary><div class="detail-body"><table class="parameter-table"><tbody>${r.params.map(p=>`<tr><td>${p.key}</td><td>${p.explain||p.label}</td></tr>`).join('')}</tbody></table><div><p><strong>使用提示</strong></p><p>${escapeHTML(r.detail||'')}</p><p>${r.id==='path'?'形状组自身的变换应保持默认。重叠控制点会产生退化曲线，请拉开控制点。':'涉及具体图层和效果时，请先按“在 AE 中使用”完成准备。'}</p></div></div></details>
  <footer class="page-footer"><span>${recipes.length} 个表达式 · 参数修改即时生效</span><a href="${referenceURL}" target="_blank" rel="noopener noreferrer">Adobe 表达式参考 ↗</a></footer></div>`;
- updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();syncAudioUI();if(r.id==='time')document.querySelector('.function-name').textContent='time × '+params().speed;schedule();
+ updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();syncAudioUI();if(r.id==='time')document.querySelector('.function-name').textContent='time × '+params().speed;schedule();
 }
 function highlight(code){
  const rx=/(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b(?:if|else|for|true|false|var|const|let)\b|\b[A-Za-z_$][\w$]*(?=\s*\())/g;
@@ -280,6 +308,10 @@ function highlight(code){
 }
 function updateCode(){const el=$('code');if(!el)return;el.innerHTML=current().code(params()).split('\n').map((s,i)=>`<span class="code-line" data-line="${i+1}">${highlight(s)||' '}</span>`).join('');if($('copyButton')){$('copyButton').classList.remove('copied');$('copyButton').innerHTML=icon('copy')+'<span>复制代码</span>';}
  if(state.current==='random'){$('codeHint').textContent=params().previewType==='color'?'粘贴到 Fill Color · 填充颜色':'粘贴到 Position · 位置';document.querySelectorAll('[data-param="fps"]').forEach(el=>el.disabled=params().fixed==='fixed')}
+ if(state.current==='text-box'){
+  $('codeHint').textContent={size:'矩形路径 · Size',position:'矩形路径 · Position',radius:'矩形路径 · Roundness',tail:'聊天气泡专用 · 独立 Path'}[params().previewType];
+  for(const [key,disabled]of [['radius',params().radiusMode!=='fixed'],['radiusRatio',params().radiusMode!=='auto'],['tailSide',params().boxStyle!=='bubble']])document.querySelectorAll('[data-param="'+key+'"]').forEach(el=>el.disabled=disabled);
+ }
  if(state.current==='elastic')$('codeHint').textContent=params().previewType==='position'?'位置 · 向上回弹':'缩放 · 双向弹性';
 }
 function renderShortcuts(){
@@ -292,7 +324,7 @@ function selectRecipe(id,{focus=false}={}){
  if(id==='ease'){id='linear';state.params.linear.previewType='ease'}
  if(id==='color'){id='random';state.params.random.previewType='color'}
  if(!recipesById[id])return;
- state.current=id;state.time=0;state.collapsed[current().group.id]=false;
+ state.current=id;if(id==='follow'){resetFollow();state.playing=true}state.time=0;state.collapsed[current().group.id]=false;
  try{history.replaceState(null,'','#'+id)}catch{}
  renderNav();renderRecipe();$('main').scrollTop=0;if(focus)$('main').focus({preventScroll:true});closeNav();
 }
@@ -328,8 +360,9 @@ function tick(now){
  if(state.current==='audio'&&mic.mode!=='simulated'&&mic.status!=='live')return;
  if(state.mode!=='exp'||(!state.playing&&mic.status!=='live')||document.hidden)return;
  if(mic.status==='live')sampleMicrophone(state.last?Math.min((now-state.last)/1000,.1):1/60);
+ if(state.current==='follow')advanceFollow(state.last?Math.min((now-state.last)/1000,.1):0);
  if(state.last)state.time+=Math.min((now-state.last)/1000,.1);state.last=now;
- const d=duration();if(state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
+ const d=duration();if(state.current!=='follow'&&state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
  drawScene();updateTransport();if(state.playing||mic.status==='live')state.frame=requestAnimationFrame(tick);
 }
 function onParameter(input){
@@ -345,6 +378,8 @@ function onParameter(input){
  state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
 }
 function action(name){
+ if(name==='text-example'){onParameter({dataset:{param:'text'},value:'Hello John, 今天会下雨吗？\n今天不会下雨。'});return}
+ if(name==='follow-auto'){resetFollow();state.playing=true;schedule();drawScene();return}
  if(name==='calibrate'){calibrateMicrophone();return}
  if(name==='mic'){startMicrophone();return}
  if(name==='stop-mic'){stopMicrophone();syncAudioUI();drawScene();return}
@@ -352,7 +387,7 @@ function action(name){
  if(name==='clear'){clearSearch();return}
  if(name==='copy'){copyCode();return}
  if(name==='prev'||name==='next'){const list=matchingRecipes(),i=list.findIndex(r=>r.id===state.current);const r=list[i+(name==='next'?1:-1)];if(r)selectRecipe(r.id);return}
- if(name==='reset'){if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
+ if(name==='reset'){if(state.current==='follow')resetFollow();if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
  if(name==='play'){state.playing=!state.playing;if(state.time>=duration())state.time=0}
  if(name==='replay'){state.time=0;state.playing=true}
  if(name==='repeat')state.repeat=!state.repeat;
@@ -414,12 +449,12 @@ function bindTarget(){
 }
 
 function bindMapping(){
- if(state.current!=='linear')return;const svg=$('scene');let dragging=false,offset=[0,0];
+ if(state.current!=='linear')return;const svg=$('scene');let dragging=false,offset=[0,0],origin=[0,0],start=[0,0],axis=null;
  const coord=e=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())};
  const set=(x,y)=>{onParameter({dataset:{param:'x'},value:String(x)});onParameter({dataset:{param:'y'},value:String(y)})};
- svg.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-mapping-handle]'))return;const pt=coord(e);offset=[pt.x-(65+params().x*.18),pt.y-(90+params().y*.18)];dragging=true;svg.setPointerCapture(e.pointerId);e.preventDefault()});
- svg.addEventListener('pointermove',e=>{if(!dragging)return;const pt=coord(e);set((pt.x-offset[0]-65)/.18,(pt.y-offset[1]-90)/.18)});
- for(const n of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(n,()=>dragging=false);
+ svg.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-mapping-handle]'))return;const pt=coord(e);offset=[pt.x-(65+params().x*.18),pt.y-(90+params().y*.18)];origin=[params().x,params().y];start=[e.clientX,e.clientY];axis=null;dragging=true;svg.setPointerCapture(e.pointerId);e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-start[0],dy=e.clientY-start[1];if(!axis){if(Math.max(Math.abs(dx),Math.abs(dy))<5||Math.abs(dx)===Math.abs(dy))return;axis=Math.abs(dx)>Math.abs(dy)?'x':'y';state.mappingAxis=axis}const pt=coord(e);set(axis==='x'?(pt.x-offset[0]-65)/.18:origin[0],axis==='y'?(pt.y-offset[1]-90)/.18:origin[1])});
+ for(const n of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(n,()=>{dragging=false;axis=null;state.mappingAxis=null;drawScene()});
  svg.addEventListener('dblclick',e=>{if(e.target.closest('[data-mapping-handle]')){set(500,500);svg.querySelector('[data-mapping-handle]').focus()}});
  svg.addEventListener('keydown',e=>{if(!e.target.closest('[data-mapping-handle]')||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const step=e.shiftKey?50:10;set(params().x+(e.key==='ArrowLeft'?-step:e.key==='ArrowRight'?step:0),params().y+(e.key==='ArrowUp'?-step:e.key==='ArrowDown'?step:0));svg.querySelector('[data-mapping-handle]').focus()});
 }
@@ -471,17 +506,21 @@ function sceneModel(id,p,t,pathPoints){
   const offset=Math.sin(t*2*Math.PI*p.frequency)*p.amplitude;
   svg=line(100,170,500,170,palette.line,'5 6')+line(300,70,300,280,palette.faint,'3 6')+ghost(300,170)+line(445,170-p.amplitude,445,170+p.amplitude,palette.green)+line(439,170-p.amplitude,451,170-p.amplitude,palette.green)+line(439,170+p.amplitude,451,170+p.amplitude,palette.green)+svgText(460,175,'±'+p.amplitude,palette.green,13,'start')+actor(300,170+offset,{id:'sin'})+svgText(300,299,'X 保持不变 · 仅改变 Y',palette.muted,13);
   label='Y OFFSET';value=`${fmt(offset)} px · ${p.frequency} Hz`;
+ }else if(id==='follow'){
+  return followScene(p,t);
+ }else if(id==='text-box'){
+  return textBoxScene(p);
  }else if(id==='linear'){
   const sx=mix(p.scaleMin,p.scaleMax,clamp01(p.x/1000)),sy=mix(p.scaleMin,p.scaleMax,clamp01(p.y/1000)),cx=65+p.x*.18,cy=90+p.y*.18;
   svg=svgText(155,62,'输入位置 · Position',palette.green,14)+svgText(435,62,'输出缩放 · Scale',palette.purple,14)
    +'<rect x="65" y="90" width="180" height="180" rx="5" fill="#ffffff02" stroke="#575365"/>'
-   +line(65,180,245,180,palette.faint,'3 5')+line(155,90,155,270,palette.faint,'3 5')
+   +line(65,cy,245,cy,p.mappingAxis==='x'?palette.green:palette.faint,'3 5')+line(cx,90,cx,270,p.mappingAxis==='y'?palette.green:palette.faint,'3 5')
    +svgText(65,82,'0',palette.muted,11)+svgText(245,82,'1000 X',palette.muted,11)+svgText(65,286,'1000 Y ↓',palette.muted,11,'start')
    +'<g data-mapping-handle class="path-handle" tabindex="0" role="button" aria-label="输入位置控制点，使用四个方向键移动" transform="translate('+cx+' '+cy+')"><circle r="19" fill="transparent"/><circle r="8" fill="'+palette.green+'" stroke="#191920" stroke-width="2"/></g>'
    +line(280,180,316,180,palette.muted)+'<path d="m309 174 7 6-7 6" fill="none" stroke="'+palette.muted+'"/>'
    +ghost(435,180,70)+actor(435,180,{size:70,scale:(sx/100)+' '+(sy/100),label:'',id:'mapping-output'})
    +svgText(155,314,'X '+p.x+' · Y '+p.y,palette.green,14)+svgText(435,314,'X '+fmt(sx)+'% · Y '+fmt(sy)+'%',palette.purple,14);
-  label='X → 宽度 / Y → 高度';value='LINEAR · 线性映射';
+  label='X → 宽度 / Y → 高度';value=p.mappingAxis?(p.mappingAxis==='x'?'X · 宽度':'Y · 高度'):'LINEAR · 线性映射';
  }else if(id==='elastic'){
   const progress=clamp01((t-.4)/.8),after=Math.max(0,t-1.2),base=160+170*progress,offset=t>1.2?170/.8*p.amp*Math.sin(p.freq*2*Math.PI*after)/Math.exp(p.decay*after):0;
   if(p.previewType==='scale'){
@@ -549,10 +588,10 @@ function sceneModel(id,p,t,pathPoints){
   label='DISTANCE → SCALE';value=`${fmt(dist)} px → ${fmt(s)} %`;
  }else if(id==='audio'){
   const audio=p.liveMode&&p.liveMode!=='simulated'?(p.liveLevel||0):(Math.max(0,Math.sin(t*4.8))**3*25+Math.max(0,Math.sin(t*9.6))*5),scale=mix(100,p.maxScale,clamp01(audio/p.maxAudio));
-  svg=svgText(160,91,'音频振幅',palette.muted,14)+svgText(430,91,'图层缩放',palette.purple,14)+line(288,164,325,164,palette.muted)+`<path d="m318 158 7 6-7 6" fill="none" stroke="${palette.muted}"/>`;
-  for(let i=0;i<13;i++){const height=8+Math.min(1,audio/p.maxAudio)*100*(.45+.55*Math.sin(i*.4)**2);svg+=`<rect data-audio-bar="${i}" x="${85+i*12}" y="${215-height}" width="7" height="${height}" rx="2" fill="${i%3?palette.green:'#5b937f'}"/>`}
+  svg=svgText(160,91,'音频频谱 · Spectrum',palette.muted,14)+svgText(430,91,'图层缩放',palette.purple,14)+line(288,164,325,164,palette.muted)+`<path d="m318 158 7 6-7 6" fill="none" stroke="${palette.muted}"/>`;
+  for(let i=0;i<13;i++){const live=p.liveMode&&p.liveMode!=='simulated';const level=live?(p.liveBands?.[i]||0):clamp01(audio/p.maxAudio)*(.2+.8*Math.sin(t*(2+i*.11)+i*.7)**2);const height=5+clamp01(level)*105;svg+=`<rect data-audio-bar="${i}" x="${85+i*12}" y="${215-height}" width="7" height="${height}" rx="2" fill="${i%3?palette.green:'#5b937f'}"/>`}
 
-  svg+=actor(430,172,{size:46,scale:scale/100})+svgText(160,275,fmt(audio),palette.green,23)+svgText(430,275,Math.round(scale)+' %',palette.purple,23);
+  svg+=actor(430,172,{size:36,scale:scale/100})+svgText(160,275,fmt(audio),palette.green,23)+svgText(430,275,Math.round(scale)+' %',palette.purple,23);
   label=p.liveMode&&p.liveMode!=='simulated'?'MICROPHONE / SMOOTH LEVEL':'SIMULATED AMPLITUDE';value=`${fmt(audio)} → ${fmt(scale)} %`;
  }else if(id==='control'){
   const angle=smooth(p.R/100)*p.angle;
@@ -570,15 +609,17 @@ function sceneModel(id,p,t,pathPoints){
 }
 function drawScene(){
  const svg=$('scene');if(!svg)return;
- const sceneParams=state.current==='audio'?{...params(),liveMode:mic.mode,liveLevel:mic.level,liveWave:mic.wave}:params();
+ const sceneParams=state.current==='audio'?{...params(),liveMode:mic.mode,liveLevel:mic.level,liveWave:mic.wave,liveBands:mic.bands}:state.current==='linear'?{...params(),mappingAxis:state.mappingAxis}:state.current==='follow'?{...params(),followState:followDemo}:params();
  const result=sceneModel(state.current,sceneParams,state.time,state.path);
  svg.innerHTML=`<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#2e2d3b" stroke-width=".65"/></pattern><radialGradient id="stageGlow"><stop stop-color="#a78ad7" stop-opacity=".06"/><stop offset="1" stop-color="#a78ad7" stop-opacity="0"/></radialGradient></defs><rect width="600" height="335" fill="url(#grid)"/><ellipse cx="300" cy="167" rx="240" ry="165" fill="url(#stageGlow)"/>${result.svg}`;
+ if(state.current==='text-box')fitTextBackground(svg,params());
  $('readoutLabel').textContent=result.label;$('readoutValue').textContent=result.value;
 }
 
 // Microphone stays local: the analyser is never connected to the speakers.
 const mic={mode:'simulated',status:'idle',stream:null,context:null,source:null,analyser:null,buffer:null,level:0,wave:[],token:0,message:'可使用麦克风实时收音，或观看模拟演示。'};
 Object.assign(mic,{deviceId:'',devices:[],floor:.012,calibration:[],calibrationTime:0,calibrating:false,gate:false});
+Object.assign(mic,{spectrum:null,bands:Array(13).fill(0),bandFloor:Array(13).fill(0),bandSum:Array(13).fill(0),bandSamples:0});
 function renderAudioControls(){return `<div class="audio-controls"><div class="audio-actions"><button data-action="mic" id="micStart">启用麦克风</button><button data-action="stop-mic" id="micStop" hidden>停止收音</button><button data-action="simulate" id="micSimulate">模拟演示</button><button data-action="calibrate" id="micCalibrate" hidden>校准静音</button></div><label class="mic-device-label" for="micDevice">收音设备 · Input <select id="micDevice"><option value="">系统默认（授权后可选择设备）</option>${mic.devices.map(d=>`<option value="${escapeHTML(d.deviceId)}" ${d.deviceId===mic.deviceId?'selected':''}>${escapeHTML(d.label||'麦克风')}</option>`).join('')}</select></label><p id="micStatus" role="status"></p></div>`}
 function syncAudioUI(){
  if(state.current!=='audio'||!$('micStatus'))return;
@@ -596,6 +637,7 @@ function stopMicrophone(message='已停止收音。点击“启用麦克风”�
  if(mic.context)mic.context.close().catch(()=>{});
  mic.stream=null;mic.source=null;mic.context=null;mic.analyser=null;mic.buffer=null;mic.level=0;mic.wave=[];mic.status='idle';
  mic.calibrating=false;mic.calibration=[];mic.gate=false;
+ mic.spectrum=null;mic.bands.fill(0);mic.bandFloor.fill(0);
  if(active||mic.mode!=='simulated'){mic.mode='input';mic.message=message}
 }
 async function startMicrophone(){
@@ -610,7 +652,8 @@ async function startMicrophone(){
   if(token!==mic.token)return;
   stream=await navigator.mediaDevices.getUserMedia({audio:{...(mic.deviceId?{deviceId:{exact:mic.deviceId}}:{}),echoCancellation:true,noiseSuppression:true,autoGainControl:false},video:false});
   if(token!==mic.token||state.current!=='audio'||state.mode!=='exp'||document.hidden){stream.getTracks().forEach(track=>track.stop());await context.close().catch(()=>{});return}
-  const analyser=context.createAnalyser();analyser.fftSize=2048;
+  const analyser=context.createAnalyser();analyser.fftSize=2048;analyser.smoothingTimeConstant=.5;
+  mic.spectrum=new Uint8Array(analyser.frequencyBinCount||1024);
   const source=context.createMediaStreamSource(stream);source.connect(analyser);
   Object.assign(mic,{stream,context,source,analyser,buffer:new Float32Array(analyser.fftSize),status:'live',message:'正在收音 · '+(stream.getAudioTracks()[0]?.label||'默认麦克风')+' · 不录制、不上传'});
   stream.getAudioTracks().forEach(track=>track.addEventListener('ended',()=>{if(token!==mic.token)return;stopMicrophone('输入设备已断开，请重新启用麦克风。');syncAudioUI();drawScene()}));
@@ -630,11 +673,14 @@ function sampleMicrophone(dt=1/60){
  const gain=state.params.audio.gain;
  const mean=mic.buffer.reduce((sum,x)=>sum+x,0)/mic.buffer.length;
  const rms=Math.sqrt(mic.buffer.reduce((sum,x)=>sum+(x-mean)*(x-mean),0)/mic.buffer.length);
+ const rawBands=readFrequencyBands();
  if(mic.calibrating){
+  rawBands.forEach((v,i)=>mic.bandSum[i]+=v);mic.bandSamples++;
   mic.calibration.push(rms);mic.calibrationTime+=dt;mic.level=0;
   if(mic.calibrationTime>=1.2){
    const samples=mic.calibration.slice().sort((a,b)=>a-b);
    mic.floor=Math.max(.006,samples[Math.floor(samples.length*.3)]*1.7+.003);
+   mic.bandFloor=mic.bandSum.map(v=>Math.min(.95,v/Math.max(1,mic.bandSamples)*1.05+.025));
    mic.calibrating=false;mic.message='正在收音 · '+(mic.stream?.getAudioTracks()[0]?.label||'所选设备')+' · 静音已校准';
    if(/todesk|virtual|虚拟/i.test(mic.stream?.getAudioTracks()[0]?.label||''))mic.message+=' · 当前是虚拟设备，可在上方切换实际麦克风';
    syncAudioUI();
@@ -645,12 +691,32 @@ function sampleMicrophone(dt=1/60){
  const tau=target>mic.level?.08:.18;
  mic.level+=(target-mic.level)*(1-Math.exp(-Math.max(0,dt)/tau));
  if(mic.level<.1)mic.level=0;
+ for(let i=0;i<13;i++){
+  const target=mic.gate?Math.min(1,Math.max(0,rawBands[i]-mic.bandFloor[i])/(1-mic.bandFloor[i])*Math.sqrt(gain/6)):0;
+  mic.bands[i]+=(target-mic.bands[i])*(1-Math.exp(-Math.max(0,dt)/(target>mic.bands[i]?.055:.2)));
+  if(mic.bands[i]<.003)mic.bands[i]=0;
+ }
  mic.wave=Array.from({length:128},(_,i)=>mic.buffer[Math.floor(i*(mic.buffer.length-1)/127)]*gain);
 }
 function calibrateMicrophone(){
  if(mic.status!=='live')return;
  mic.calibrating=true;mic.calibration=[];mic.calibrationTime=0;mic.level=0;mic.gate=false;
+ mic.bands.fill(0);mic.bandSum.fill(0);mic.bandSamples=0;
  mic.message='正在校准静音 · 请保持安静约 1 秒，然后开始说话。';syncAudioUI();
+}
+function frequencyBandLevels(bytes,sampleRate,fftSize){
+ const high=Math.min(8000,sampleRate/2),low=Math.min(80,high/2),binHz=sampleRate/fftSize;
+ return Array.from({length:13},(_,i)=>{
+  const start=Math.max(1,Math.min(bytes.length-1,Math.floor(low*Math.pow(high/low,i/13)/binHz)));
+  const end=Math.max(start+1,Math.min(bytes.length,Math.ceil(low*Math.pow(high/low,(i+1)/13)/binHz)));
+  let energy=0;for(let b=start;b<end;b++)energy+=(bytes[b]/255)**2;
+  return Math.sqrt(energy/(end-start));
+ });
+}
+function readFrequencyBands(){
+ if(!mic.spectrum||!mic.analyser?.getByteFrequencyData)return Array(13).fill(0);
+ mic.analyser.getByteFrequencyData(mic.spectrum);
+ return frequencyBandLevels(mic.spectrum,mic.context?.sampleRate||48000,mic.analyser.fftSize||2048);
 }
 async function refreshMicrophoneDevices(token){
  try{
@@ -660,6 +726,69 @@ async function refreshMicrophoneDevices(token){
   const el=$('micDevice');if(!el)return;
   el.innerHTML='<option value="">系统默认</option>'+mic.devices.map(d=>`<option value="${escapeHTML(d.deviceId)}">${escapeHTML(d.label||'麦克风')}</option>`).join('');el.value=mic.deviceId;
  }catch{}
+}
+
+const followDemo={manual:false,clock:0,position:[150,175],history:[]};
+function autoFollowPosition(t){t=Math.max(0,t);return [300-150*Math.cos(t*Math.PI/3),175+65*Math.sin(t*Math.PI*2/3)]}
+function resetFollow(){Object.assign(followDemo,{manual:false,clock:0,position:autoFollowPosition(0),history:[]});if($('followMode'))$('followMode').textContent='自动演示 · 可拖动领头方块'}
+function renderFollowControls(){return '<div class="demo-switch"><button data-action="follow-auto">自动演示</button><span id="followMode" class="follow-mode">'+(followDemo.manual?'实时跟随 · 松开后继续追随':'自动演示 · 可拖动领头方块')+'</span></div>'}
+function advanceFollow(dt){
+ followDemo.clock+=dt;
+ if(followDemo.manual){followDemo.history.push([followDemo.clock,...followDemo.position]);while(followDemo.history.length>2&&followDemo.history[1][0]<followDemo.clock-3)followDemo.history.shift()}
+}
+function historyPosition(history,time){
+ if(!history.length)return [150,175];
+ if(time<history[0][0])return history[0].slice(1);
+ for(let i=1;i<history.length;i++)if(history[i][0]>time){const a=history[i-1],b=history[i],u=(time-a[0])/(b[0]-a[0]);return [mix(a[1],b[1],u),mix(a[2],b[2],u)]}
+ return history[history.length-1].slice(1);
+}
+function followScene(p,t){
+ const demo=p.followState,time=demo?demo.clock:t;
+ const at=tt=>demo?.manual?historyPosition(demo.history,tt):autoFollowPosition(tt);
+ let svg=svgText(300,65,'领头先动 · 跟随层读取较早的位置',palette.muted,13);
+ for(let i=4;i>=1;i--){const [x,y]=at(time-i*p.delay);svg+=actor(x,y,{size:30,color:palette.purple,label:String(i),opacity:1-i*.12,id:'follower-'+i})}
+ const [x,y]=demo?.manual?demo.position:at(time);
+ svg+='<g data-follow-handle class="path-handle" tabindex="0" role="button" aria-label="领头方块 LEADER，拖动或方向键移动">'+actor(x,y,{size:38,color:palette.green,label:'L',id:'leader'})+'</g>'+svgText(x,y-29,'LEADER',palette.green,11)+svgText(300,299,'第 1 层 '+fmt(p.delay)+' s → 第 4 层 '+fmt(p.delay*4)+' s',palette.muted,13);
+ return {svg,label:'延迟跟随 · DELAY',value:fmt(p.delay)+' s / 层 · 4 个跟随层'};
+}
+function bindFollow(){
+ if(state.current!=='follow')return;const svg=$('scene');let dragging=false,offset=[0,0];
+ const coord=e=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())};
+ const begin=()=>{if(followDemo.manual)return;followDemo.history=[];for(let i=180;i>=0;i--){const t=followDemo.clock-i/60;followDemo.history.push([t,...autoFollowPosition(t)])}followDemo.position=autoFollowPosition(followDemo.clock);followDemo.manual=true};
+ const set=(x,y)=>{begin();followDemo.position=[Math.max(50,Math.min(550,x)),Math.max(110,Math.min(250,y))];followDemo.history.push([followDemo.clock,...followDemo.position]);drawScene();if($('followMode'))$('followMode').textContent='实时跟随 · 松开后继续追随'};
+ svg.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-follow-handle]'))return;begin();const p=coord(e);offset=[p.x-followDemo.position[0],p.y-followDemo.position[1]];dragging=true;svg.setPointerCapture(e.pointerId);state.playing=true;schedule();e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(!dragging)return;const p=coord(e);set(p.x-offset[0],p.y-offset[1])});
+ for(const n of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(n,()=>dragging=false);
+ svg.addEventListener('keydown',e=>{if(!e.target.closest('[data-follow-handle]')||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();begin();const step=e.shiftKey?20:5;set(followDemo.position[0]+(e.key==='ArrowRight'?step:e.key==='ArrowLeft'?-step:0),followDemo.position[1]+(e.key==='ArrowDown'?step:e.key==='ArrowUp'?-step:0));svg.querySelector('[data-follow-handle]').focus()});
+}
+function textBoxGeometry(r,p){
+ const x=r.x-p.padX,y=r.y-p.padY,w=r.width+2*p.padX,h=r.height+2*p.padY;
+ const radius=p.radiusMode==='auto'?Math.min(w,h)/2*p.radiusRatio/100:Math.min(p.radius,w/2,h/2);
+ const side=p.tailSide==='left'?-1:1,edge=x+w/2+side*w/2,cy=y+Math.max(radius,Math.min(h-radius,p.padY+14));
+ const a=Math.min(7,h/4),overlap=Math.max(1,radius-Math.sqrt(Math.max(0,radius*radius-a*a)));
+ const base=edge-side*Math.min(overlap,w/2);
+ const tail=[[base,cy-a],[edge+side*8,cy],[base,cy+a]];
+ return {x,y,w,h,radius,tail};
+}
+function textBoxScene(p){
+ const lines=String(p.text).replace(/\r\n?/g,'\n').split('\n');
+ const width=Math.max(0,...lines.map(s=>[...s].reduce((n,c)=>n+(/[\u0000-\u007f]/.test(c)?13:24),0)));
+ const r={x:0,y:p.text?-24:0,width,height:p.text?28+(lines.length-1)*34:0};
+ const g=textBoxGeometry(r,p),bubble=p.boxStyle==='bubble';
+ const fill=bubble?'#2DCD8D':'none',color=bubble?'#102820':'#ece8f5';
+ const s=Math.min(1,480/Math.max(1,g.w+(bubble?8:0)),200/Math.max(1,g.h));
+ const svg=`<g data-text-layout transform="translate(${300-(g.x+g.w/2)*s} ${177-(g.y+g.h/2)*s}) scale(${s})"><path data-text-tail d="M${g.tail.map(pt=>pt.join(',')).join(' L')} Z" fill="#2DCD8D" ${bubble?'':'display="none"'}/><rect data-text-bg x="${g.x}" y="${g.y}" width="${g.w}" height="${g.h}" rx="${g.radius}" fill="${fill}" stroke="${bubble?'none':palette.purple}" stroke-width="1.25"/><text data-box-text x="0" y="0" font-size="24" xml:space="preserve" fill="${color}">${lines.map((s,i)=>`<tspan x="0" y="${i*34}">${escapeHTML(s)}</tspan>`).join('')}</text></g>`;
+ return {svg,label:bubble?'聊天气泡 · CHAT BUBBLE':'文字边框 · TEXT FRAME',value:lines.length+' 行 · 留白 '+p.padX+' / '+p.padY+' px'};
+}
+function fitTextBackground(svg,p){
+ const text=svg.querySelector('[data-box-text]');if(!text?.getBBox)return;
+ const r=text.getBBox(),g=textBoxGeometry(r,p),bubble=p.boxStyle==='bubble';
+ const left=g.x-(bubble&&p.tailSide==='left'?8:0),width=g.w+(bubble?8:0);
+ const s=Math.min(1,480/Math.max(1,width),200/Math.max(1,g.h));
+ const set=(selector,attrs)=>{const el=svg.querySelector(selector);if(el)for(const [k,v]of Object.entries(attrs))el.setAttribute(k,v)};
+ set('[data-text-bg]',{x:g.x,y:g.y,width:g.w,height:g.h,rx:g.radius});
+ set('[data-text-tail]',{d:'M'+g.tail.map(pt=>pt.join(',')).join(' L')+' Z'});
+ set('[data-text-layout]',{transform:'translate('+(300-(left+width/2)*s)+' '+(177-(g.y+g.h/2)*s)+') scale('+s+')'});
 }
 
 initialize();</script>

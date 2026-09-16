@@ -206,27 +206,37 @@ const revisedNotes={
 };
 Object.entries(revisedNotes).forEach(([id,detail])=>recipesById[id].detail=detail);
 recipe('follow',{
- title:'延迟跟随',name:'延迟跟随',fn:'valueAtTime()',short:'delay',desc:'领头方块先移动，后面的方块依次重复它走过的位置。拖动 LEADER，观察延迟形成的拖尾。',target:'Position · 2D 位置',needs:'需要 LEADER 与跟随图层',
- params:[range('delay','每层延迟',.2,0,.6,.05,'s','第 1 个跟随层延迟一次，第 2 个延迟两次，以此类推。')],
+ title:'延迟跟随',name:'延迟跟随',fn:'valueAtTime()',short:'delay',desc:'领头方块先移动，六边形 1、菱形 2、三角形 3、圆形 4 依次缩小并跟随。每个对象都是独立图层，可以使用不同内容。',target:'Position · 2D 位置',needs:'需要 LEADER 与跟随图层',
+ params:[range('delay','每层延迟',.3,0,.6,.05,'s','第 1 个跟随层延迟一次，第 2 个延迟两次，以此类推。')],
  setup:['创建名为 LEADER 的二维图层，在 Position 上设置运动关键帧。','将 4 个二维跟随图层连续排列在 LEADER 下方；这些图层与 LEADER 均保持无父级。','将表达式粘贴到每个跟随图层的 Position / 位置。图层排序决定延迟倍数。'],
  code:p=>`leader = thisComp.layer("LEADER");\ndelay = ${p.delay};\nn = Math.max(1, index - leader.index);\nleader.transform.position.valueAtTime(time - n * delay);`,
- detail:'读取 LEADER 在较早时刻的位置，不是向它当前的位置缓动。网页拖动只用于观察；AE 中需要给 LEADER 设置动画，静止的领头层不会形成拖尾。',note:'1 个领头层 + 4 个跟随层。拖动领头方块切换到实时跟随；点击“自动演示”返回预设运动。',duration:()=>6
+ detail:'读取 LEADER 在较早时刻的位置，不是向它当前的位置缓动。网页拖动只用于观察；AE 中需要给 LEADER 设置动画，静止的领头层不会形成拖尾。',note:'1 个领头层 + 4 个跟随层。自动演示加速、减速交替；拖动切换实时跟随。AE 中运动快慢由 LEADER 的位置关键帧决定。',duration:()=>6
 });
 recipe('text-box',{
- title:'文字边框自适应',name:'文字边框自适应',fn:'sourceRectAtTime()',short:'text frame',desc:'文字变长，外框变宽；按 Enter 换行，外框自动增高。调整留白与圆角，也可以切换为聊天气泡。',target:'Rectangle Path · 矩形路径',needs:'需要 TEXT 与外框形状图层',
- params:[choice('previewType','复制属性','size',[['size','尺寸 · Size'],['position','位置 · Position'],['radius','圆角 · Roundness'],['tail','尖角 · Path']],'尺寸、位置、圆角分别粘贴到矩形路径；尖角仅用于聊天气泡的独立路径。'),{...textParam('text','预览文字','Hello John, 今天会下雨吗？','按 Enter 手动换行。AE 中编辑 TEXT 点文本并换行；网页文字不会写入表达式。'),multiline:true},choice('boxStyle','外框样式','bubble',[['frame','普通边框'],['bubble','聊天气泡']],'普通边框使用描边；聊天气泡使用绿色填充，尖角与矩形使用相同填充且不加描边。'),choice('tailSide','尖角方向','right',[['left','左侧'],['right','右侧']],'尖角跟随外框边缘，仅在聊天气泡中显示。'),range('padX','水平内边距',24,0,80,1,'px','文字左右各留出的距离。'),range('padY','垂直内边距',16,0,60,1,'px','文字上下各留出的距离。'),choice('radiusMode','圆角方式','fixed',[['fixed','固定圆角'],['auto','自适应圆角']],'固定圆角保持像素值；自适应按外框短边的一半乘以比例计算。'),range('radius','圆角半径',12,0,80,1,'px','固定圆角的半径，上限为外框短边的一半。'),range('radiusRatio','自适应比例',40,0,100,1,'%','100% 表示外框短边的一半。')],
- setup:['创建二维点文本图层，命名为 TEXT；输入文字并用 Enter 换行。再创建矩形形状图层，放在文字下方。','将外框图层的父级设为 TEXT；外框图层及其形状组的锚点、位置都设为 [0, 0]，缩放 100%，旋转 0°。','把“尺寸”“位置”“圆角”代码分别粘贴到同一个 Rectangle Path / 矩形路径的 Size、Position、Roundness。修改参数后，重新复制受影响的代码。','普通边框：添加描边并关闭填充。聊天气泡：使用绿色填充（#2DCD8D）和深色文字（#102820），关闭描边。','聊天气泡需要在外框图层内另建一个形状组，添加普通 Path / 路径，将“尖角”代码贴到 Path 属性；添加与矩形相同的填充，并保持该组变换为上述默认值。'],
+ title:'文字边框自适应',name:'文字边框自适应',fn:'sourceRectAtTime()',short:'text frame',desc:'文字变长，外框变宽；按Enter换行，外框自动增高。调整留白与圆角，也可以切换为聊天气泡。',target:'Rectangle Path · 矩形路径',needs:'需要TEXT与外框形状图层',
+ params:[choice('previewType','复制属性','size',[['size','尺寸 · Size'],['position','位置 · Position'],['radius','圆角 · Roundness'],['tail','尖角 · Path']],'尺寸、位置、圆角分别粘贴到矩形路径；尖角仅用于聊天气泡的独立路径。'),{...textParam('text','预览文字','Hello John, 今天会下雨吗？','按Enter手动换行。AE中编辑TEXT点文本并换行；网页文字不会写入表达式。'),multiline:true},choice('boxStyle','外框样式','bubble',[['frame','普通边框'],['bubble','聊天气泡']],'普通边框使用描边；聊天气泡使用绿色填充，尖角与矩形使用相同填充且不加描边。'),choice('tailSide','尖角方向','right',[['left','左侧'],['right','右侧']],'尖角跟随外框边缘，仅在聊天气泡中显示。'),choice('paddingMode','留白方式','font',[['font','随字号缩放'],['fixed','固定像素']],'随字号：24 px字号时使用下方留白值，其他字号按比例变化，并计入文字图层缩放。固定像素：使用外框图层坐标中的像素值。'),range('padX','水平内边距',24,0,80,1,'px','24 px字号下，文字左右各留出的距离；固定像素模式直接使用此值。'),range('padY','垂直内边距',16,0,60,1,'px','24 px字号下，文字上下各留出的距离；固定像素模式直接使用此值。'),choice('radiusMode','圆角方式','auto',[['fixed','固定圆角'],['auto','自适应圆角']],'固定圆角保持像素值；自适应按外框短边的一半乘以比例计算。'),range('radius','圆角半径',12,0,80,1,'px','固定圆角的半径，上限为外框短边的一半。'),range('radiusRatio','自适应比例',40,0,100,1,'%','100% 表示外框短边的一半。')],
+ setup:["创建点文本图层，命名为「TEXT」。","创建矩形形状图层，置于文字下方；展开内容，将「矩形1」命名为「BOX」，「矩形路径1」命名为「FRAME」。","将BOX组的锚点、位置设为0，缩放设为100%，旋转、倾斜设为0。将「尺寸」「位置」「圆角」代码分别粘贴到「内容→BOX→FRAME」的大小、位置、圆度。","在形状图层上继续添加普通路径Path。若新增的「形状1」位于BOX上方，请将整个尖角形状组拖入BOX，使其与FRAME同属BOX。确认层级后，将尖角代码粘贴到形状路径中，使用与外框相同的填充色，并关闭描边。","修改TEXT的文字或字号，外框自动更新。尖角随外框短边等比例变化；普通边框移除尖角并使用描边。"],
  code:p=>{
-  const rect='r = thisComp.layer("TEXT").sourceRectAtTime(time, false);';
-  const size=`${rect}\npadX = ${p.padX};\npadY = ${p.padY};`;
-  const radius=p.radiusMode==='auto'?`Math.min(w, h) / 2 * ${p.radiusRatio} / 100`:`Math.min(${p.radius}, w / 2, h / 2)`;
-  if(p.previewType==='size')return `${size}\n[r.width + padX * 2, r.height + padY * 2];`;
-  if(p.previewType==='position')return `${rect}\n[r.left + r.width / 2, r.top + r.height / 2];`;
-  const shape=`${size}\nw = r.width + padX * 2;\nh = r.height + padY * 2;\ncorner = ${radius};`;
-  if(p.previewType==='radius')return `${shape}\ncorner;`;
-  return `// 聊天气泡：粘贴到单独的 Path，使用同色填充，无描边\n${shape}\nside = ${p.tailSide==='left'?-1:1};\nedge = r.left + r.width / 2 + side * w / 2;\ny = r.top - padY + Math.max(corner, Math.min(h - corner, padY + 14));\na = Math.min(7, h / 4);\noverlap = Math.max(1, corner - Math.sqrt(Math.max(0, corner * corner - a * a)));\nbase = edge - side * Math.min(overlap, w / 2);\ncreatePath([[base, y - a], [edge + side * 8, y], [base, y + a]], [], [], true);`;
+  const bounds=`textLayer = thisComp.layer("TEXT");
+r = textLayer.sourceRectAtTime(time, false);
+// 把文字边界转换到外框图层坐标；BOX组变换保持默认
+function point(x, y) { return thisLayer.fromComp(textLayer.toComp([x, y])); }
+a = point(r.left, r.top);
+b = point(r.left + r.width, r.top);
+c = point(r.left + r.width, r.top + r.height);
+d = point(r.left, r.top + r.height);
+left = Math.min(a[0], b[0], c[0], d[0]);
+right = Math.max(a[0], b[0], c[0], d[0]);
+top = Math.min(a[1], b[1], c[1], d[1]);
+bottom = Math.max(a[1], b[1], c[1], d[1]);`;
+  if(p.previewType==='size')return `${bounds}\npadX = ${p.padX};\npadY = ${p.padY};${p.paddingMode==='fixed'?'':`\n// 按字号及文字相对外框的缩放换算留白\nk = textLayer.text.sourceText.style.fontSize / 24;\npadX *= k * length(point(0, 0), point(1, 0));\npadY *= k * length(point(0, 0), point(0, 1));`}\n[right - left + padX * 2, bottom - top + padY * 2];`;
+  if(p.previewType==='position')return `${bounds}\n[(left + right) / 2, (top + bottom) / 2];`;
+  const frame='frame = thisLayer.content("BOX").content("FRAME");\ns = frame.size;';
+  if(p.previewType==='radius')return `${frame}\n${p.radiusMode==='auto'?`Math.min(s[0], s[1]) / 2 * ${p.radiusRatio} / 100;`:`Math.min(${p.radius}, s[0] / 2, s[1] / 2);`}`;
+  return `// 尖角路径与FRAME必须放在同一个BOX组内\n${frame}\nc = frame.position;\ncorner = Math.min(frame.roundness, s[0] / 2, s[1] / 2);\nside = ${p.tailSide==='left'?-1:1};\nedge = c[0] + side * s[0] / 2;\ny = c[1];\nshortSide = Math.min(s[0], s[1]);\na = shortSide * 0.12;\ntip = shortSide * 0.16;\noverlap = Math.max(shortSide * 0.02, corner - Math.sqrt(Math.max(0, corner * corner - a * a)));\nbase = edge - side * Math.min(overlap, s[0] / 2);\ncreatePath([[base, y - a], [edge + side * tip, y], [base, y + a]], [], [], true);`;
  },
- detail:'多行点文本按实际字形边界计算：宽度取最长一行，高度覆盖所有可见文字。末尾空行和纯空白不一定增加 AE 的字形边界；要增加空间请调内边距。网页不自动折行，超长内容会整体缩小以适应预览。浏览器与 AE 字体测量可能略有差异。圆角不超过短边的一半，尖角由同色填充的独立路径与矩形叠合。',note:'Enter 换行 · 外框跟随文字宽度与行高。长文字只缩小预览，不改变参数。',duration:()=>6
+
+ detail:'多行点文本按实际字形边界计算：宽度取最长一行，高度覆盖所有可见文字。末尾空行和纯空白不一定增加AE的字形边界；要增加空间请调内边距。网页不自动折行，超长内容会整体缩小以适应预览。浏览器与AE字体测量可能略有差异。圆角与尖角直接读取FRAME，字号或缩放变化后不会分别计算出不同的外框。尖角与矩形同组，避免两组变换造成偏移。随字号模式以首字符字号为基准，建议整段文字使用相同字号。固定像素模式按外框图层坐标计算留白。二维文字相对外框旋转时采用包围四角的矩形。',note:'Enter换行 · 外框跟随文字宽度与行高。长文字只缩小预览，不改变参数。',duration:()=>6
 });
 
 
@@ -514,7 +524,7 @@ function sceneModel(id,p,t,pathPoints){
   const sx=mix(p.scaleMin,p.scaleMax,clamp01(p.x/1000)),sy=mix(p.scaleMin,p.scaleMax,clamp01(p.y/1000)),cx=65+p.x*.18,cy=90+p.y*.18;
   svg=svgText(155,62,'输入位置 · Position',palette.green,14)+svgText(435,62,'输出缩放 · Scale',palette.purple,14)
    +'<rect x="65" y="90" width="180" height="180" rx="5" fill="#ffffff02" stroke="#575365"/>'
-   +line(65,cy,245,cy,p.mappingAxis==='x'?palette.green:palette.faint,'3 5')+line(cx,90,cx,270,p.mappingAxis==='y'?palette.green:palette.faint,'3 5')
+   +'<g data-mapping-axes>'+line(65,180,245,180,p.mappingAxis==='x'?palette.green:palette.faint,'3 5')+line(155,90,155,270,p.mappingAxis==='y'?palette.green:palette.faint,'3 5')+'</g>'
    +svgText(65,82,'0',palette.muted,11)+svgText(245,82,'1000 X',palette.muted,11)+svgText(65,286,'1000 Y ↓',palette.muted,11,'start')
    +'<g data-mapping-handle class="path-handle" tabindex="0" role="button" aria-label="输入位置控制点，使用四个方向键移动" transform="translate('+cx+' '+cy+')"><circle r="19" fill="transparent"/><circle r="8" fill="'+palette.green+'" stroke="#191920" stroke-width="2"/></g>'
    +line(280,180,316,180,palette.muted)+'<path d="m309 174 7 6-7 6" fill="none" stroke="'+palette.muted+'"/>'
@@ -729,7 +739,12 @@ async function refreshMicrophoneDevices(token){
 }
 
 const followDemo={manual:false,clock:0,position:[150,175],history:[]};
-function autoFollowPosition(t){t=Math.max(0,t);return [300-150*Math.cos(t*Math.PI/3),175+65*Math.sin(t*Math.PI*2/3)]}
+function autoFollowPosition(t){
+ t=Math.max(0,t);
+ // 3.6 秒一圈；相位保持连续，交替加速和减速。
+ const phase=t*Math.PI*2/3.6,angle=phase-.72*Math.sin(phase);
+ return [300-125*Math.cos(angle),175+52*Math.sin(angle*2)];
+}
 function resetFollow(){Object.assign(followDemo,{manual:false,clock:0,position:autoFollowPosition(0),history:[]});if($('followMode'))$('followMode').textContent='自动演示 · 可拖动领头方块'}
 function renderFollowControls(){return '<div class="demo-switch"><button data-action="follow-auto">自动演示</button><span id="followMode" class="follow-mode">'+(followDemo.manual?'实时跟随 · 松开后继续追随':'自动演示 · 可拖动领头方块')+'</span></div>'}
 function advanceFollow(dt){
@@ -742,13 +757,19 @@ function historyPosition(history,time){
  for(let i=1;i<history.length;i++)if(history[i][0]>time){const a=history[i-1],b=history[i],u=(time-a[0])/(b[0]-a[0]);return [mix(a[1],b[1],u),mix(a[2],b[2],u)]}
  return history[history.length-1].slice(1);
 }
+function followObject(x,y,i){
+ const shapes=['<circle r="18"/>','<path d="M0 -23 L22 17 H-22 Z"/>','<path d="M0 -23 L23 0 0 23 -23 0 Z"/>','<path d="M-11 -19 H11 L22 0 11 19 H-11 L-22 0 Z"/>'];
+ const colors=['#b6a2ff','#efc783','#8ebfe9','#e4a3c4'],shapeIndex=4-i;
+ const scale=[1,.87,.78,.83][i-1];
+ return `<g data-actor="follower-${i}" transform="translate(${x} ${y})"><g transform="scale(${scale})"><g fill="${colors[shapeIndex]}" stroke="#ffffff44" stroke-width="1.5">${shapes[shapeIndex]}</g>${svgText(0,i===3?8:5,String(i),'#23212b',16)}</g></g>`;
+}
 function followScene(p,t){
  const demo=p.followState,time=demo?demo.clock:t;
  const at=tt=>demo?.manual?historyPosition(demo.history,tt):autoFollowPosition(tt);
- let svg=svgText(300,65,'领头先动 · 跟随层读取较早的位置',palette.muted,13);
- for(let i=4;i>=1;i--){const [x,y]=at(time-i*p.delay);svg+=actor(x,y,{size:30,color:palette.purple,label:String(i),opacity:1-i*.12,id:'follower-'+i})}
+ let svg=svgText(300,65,'不同形状 · 各自独立 · 延迟跟随同一路线',palette.muted,13);
+ for(let i=4;i>=1;i--){const [x,y]=at(time-i*p.delay);svg+=followObject(x,y,i)}
  const [x,y]=demo?.manual?demo.position:at(time);
- svg+='<g data-follow-handle class="path-handle" tabindex="0" role="button" aria-label="领头方块 LEADER，拖动或方向键移动">'+actor(x,y,{size:38,color:palette.green,label:'L',id:'leader'})+'</g>'+svgText(x,y-29,'LEADER',palette.green,11)+svgText(300,299,'第 1 层 '+fmt(p.delay)+' s → 第 4 层 '+fmt(p.delay*4)+' s',palette.muted,13);
+ svg+='<g data-follow-handle class="path-handle" tabindex="0" role="button" aria-label="领头方块 LEADER，拖动或方向键移动">'+actor(x,y,{size:48,color:palette.green,label:'L',id:'leader'})+'</g>'+svgText(x,y-35,'LEADER',palette.green,11)+svgText(300,299,'1 延迟 '+fmt(p.delay)+' s → 4 延迟 '+fmt(p.delay*4)+' s',palette.muted,13);
  return {svg,label:'延迟跟随 · DELAY',value:fmt(p.delay)+' s / 层 · 4 个跟随层'};
 }
 function bindFollow(){
@@ -764,11 +785,11 @@ function bindFollow(){
 function textBoxGeometry(r,p){
  const x=r.x-p.padX,y=r.y-p.padY,w=r.width+2*p.padX,h=r.height+2*p.padY;
  const radius=p.radiusMode==='auto'?Math.min(w,h)/2*p.radiusRatio/100:Math.min(p.radius,w/2,h/2);
- const side=p.tailSide==='left'?-1:1,edge=x+w/2+side*w/2,cy=y+Math.max(radius,Math.min(h-radius,p.padY+14));
- const a=Math.min(7,h/4),overlap=Math.max(1,radius-Math.sqrt(Math.max(0,radius*radius-a*a)));
+ const side=p.tailSide==='left'?-1:1,edge=x+w/2+side*w/2,cy=y+h/2;
+ const shortSide=Math.min(w,h),a=shortSide*.12,tip=shortSide*.16,overlap=Math.max(shortSide*.02,radius-Math.sqrt(Math.max(0,radius*radius-a*a)));
  const base=edge-side*Math.min(overlap,w/2);
- const tail=[[base,cy-a],[edge+side*8,cy],[base,cy+a]];
- return {x,y,w,h,radius,tail};
+ const tail=[[base,cy-a],[edge+side*tip,cy],[base,cy+a]];
+ return {x,y,w,h,radius,tail,tip};
 }
 function textBoxScene(p){
  const lines=String(p.text).replace(/\r\n?/g,'\n').split('\n');
@@ -776,14 +797,14 @@ function textBoxScene(p){
  const r={x:0,y:p.text?-24:0,width,height:p.text?28+(lines.length-1)*34:0};
  const g=textBoxGeometry(r,p),bubble=p.boxStyle==='bubble';
  const fill=bubble?'#2DCD8D':'none',color=bubble?'#102820':'#ece8f5';
- const s=Math.min(1,480/Math.max(1,g.w+(bubble?8:0)),200/Math.max(1,g.h));
+ const s=Math.min(1,480/Math.max(1,g.w+(bubble?g.tip:0)),200/Math.max(1,g.h));
  const svg=`<g data-text-layout transform="translate(${300-(g.x+g.w/2)*s} ${177-(g.y+g.h/2)*s}) scale(${s})"><path data-text-tail d="M${g.tail.map(pt=>pt.join(',')).join(' L')} Z" fill="#2DCD8D" ${bubble?'':'display="none"'}/><rect data-text-bg x="${g.x}" y="${g.y}" width="${g.w}" height="${g.h}" rx="${g.radius}" fill="${fill}" stroke="${bubble?'none':palette.purple}" stroke-width="1.25"/><text data-box-text x="0" y="0" font-size="24" xml:space="preserve" fill="${color}">${lines.map((s,i)=>`<tspan x="0" y="${i*34}">${escapeHTML(s)}</tspan>`).join('')}</text></g>`;
  return {svg,label:bubble?'聊天气泡 · CHAT BUBBLE':'文字边框 · TEXT FRAME',value:lines.length+' 行 · 留白 '+p.padX+' / '+p.padY+' px'};
 }
 function fitTextBackground(svg,p){
  const text=svg.querySelector('[data-box-text]');if(!text?.getBBox)return;
  const r=text.getBBox(),g=textBoxGeometry(r,p),bubble=p.boxStyle==='bubble';
- const left=g.x-(bubble&&p.tailSide==='left'?8:0),width=g.w+(bubble?8:0);
+ const left=g.x-(bubble&&p.tailSide==='left'?g.tip:0),width=g.w+(bubble?g.tip:0);
  const s=Math.min(1,480/Math.max(1,width),200/Math.max(1,g.h));
  const set=(selector,attrs)=>{const el=svg.querySelector(selector);if(el)for(const [k,v]of Object.entries(attrs))el.setAttribute(k,v)};
  set('[data-text-bg]',{x:g.x,y:g.y,width:g.w,height:g.h,rx:g.radius});

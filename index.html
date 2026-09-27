@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="22 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
-<title>AE 表达式手册 · v3 更新版</title>
+<meta name="description" content="23 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
+<title>AE 表达式手册 · v4</title>
 <style>:root{--bg:#17181d;--sidebar:#1b1c22;--panel:#202127;--stage:#16171d;--line:#33343e;--line-soft:#2a2b33;--text:#eeeef3;--muted:#a1a3b2;--dim:#7f8293;--accent:#b6a2ff;--accent-strong:#9c82ef;--accent-bg:#2d273e;--green:#8dd5bc;--code:#1a1b21;--radius:12px;font-size:16px;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;display:flex;height:100dvh;overflow:hidden;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}button,input,select,a{ -webkit-tap-highlight-color:transparent}button{color:inherit}button:disabled{cursor:default;opacity:.4}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button svg{width:18px;height:18px;flex:none}svg.icon{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}button{border:0;background:none}a{color:var(--accent)}[hidden]{display:none!important}::selection{background:#63508f;color:#fff}::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-thumb{background:#3f404c;border-radius:8px}::-webkit-scrollbar-thumb:hover{background:#5d5c70}::-webkit-scrollbar-track{background:transparent}
 .skip-link{position:fixed;left:10px;top:-80px;z-index:30;padding:10px 18px;background:var(--accent-bg)}.skip-link:focus{top:10px}.sidebar{width:252px;flex:none;background:var(--sidebar);border-right:1px solid var(--line-soft);display:flex;flex-direction:column;z-index:20}.brand{display:flex;gap:12px;align-items:center;padding:27px 22px 25px}.brand-mark{display:grid;place-items:center;width:40px;height:43px;border:1px solid #605478;border-radius:10px;color:#c1adff;background:#30273f;font-size:24px;font-weight:650;letter-spacing:-1px}.brand strong{display:block;font-size:17px;letter-spacing:1px;font-weight:600}.brand div>span{font:9px/2 Consolas,monospace;letter-spacing:1.5px;color:var(--dim)}.search-wrap{height:40px;margin:0 16px 23px;display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;padding:0 11px;background:#17181d}.search-wrap:focus-within{border-color:var(--accent-strong)}.search-wrap>svg{width:15px;height:15px;fill:none;stroke:var(--dim);stroke-width:1.8;flex:none}input[type=search]{min-width:0;width:100%;border:0;outline:none!important;background:none;color:var(--text);font-size:12px}input[type=search]::-webkit-search-cancel-button{display:none}input::placeholder{color:var(--dim)}.clear-search{font-size:19px;padding:0;line-height:1;color:var(--muted)}.nav-label{display:flex;justify-content:space-between;padding:0 23px 12px;font-size:12px;letter-spacing:.7px;color:var(--dim)}.nav-label span:last-child{font:12px Consolas,monospace;color:var(--muted)}nav{flex:1;overflow-y:auto;padding:0 12px 22px;scrollbar-gutter:stable}.nav-group{margin-bottom:12px}.group-button{display:flex;width:100%;align-items:center;gap:9px;padding:8px 9px;text-align:left;color:#b4b5c3;font-size:13px;font-weight:600;border-radius:6px}.group-button:hover{color:var(--text);background:#24252c}.group-button .icon{color:var(--dim);width:16px;height:16px}.group-button .group-count{margin-left:auto;color:var(--dim);font:11px Consolas,monospace}.chevron{color:var(--dim);font-size:12px;transition:transform .15s}.group-button[aria-expanded=false] .chevron{transform:rotate(-90deg)}.nav-items{margin-top:3px}.nav-item{width:100%;position:relative;display:flex;align-items:center;gap:10px;text-align:left;min-height:35px;border-radius:6px;padding:6px 12px 6px 34px;color:var(--muted);font-size:13px;line-height:1.5;transition:background .12s,color .12s}.nav-item:hover{color:var(--text);background:#252630}.nav-item[aria-current=page]{color:#d2c3ff;background:var(--accent-bg)}.nav-item[aria-current=page]::before{content:"";position:absolute;left:12px;width:3px;height:15px;background:var(--accent);border-radius:3px}.nav-item .nav-fn{margin-left:auto;color:#737585;font:10px Consolas,monospace;white-space:nowrap}.nav-item[aria-current=page] .nav-fn{color:#a18ccb}.nav-empty{padding:20px 10px;color:var(--muted);font-size:14px}.sidebar-footer{display:flex;justify-content:space-between;align-items:center;margin:0 21px;padding:18px 0;border-top:1px solid var(--line-soft);font-size:11px;color:var(--dim)}.sidebar-footer span:last-child{font:9px Consolas,monospace;letter-spacing:1px}.sidebar-footer i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin-right:5px}.workspace{flex:1;min-width:0;display:flex;flex-direction:column}.topbar{height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 36px;border-bottom:1px solid var(--line-soft)}.topbar-title{display:flex;align-items:center;gap:15px;font-size:13px;color:var(--muted)}.topbar-name{color:var(--text)}.topbar-divider{color:#545664}.mode-tabs{display:flex;gap:4px;padding:4px;background:#202127;border:1px solid var(--line-soft);border-radius:8px}.mode-tabs button{display:flex;align-items:center;gap:9px;padding:6px 13px;border-radius:5px;color:var(--muted);font-size:13px}.mode-tabs button[aria-selected=true]{color:var(--text);background:#36333f;box-shadow:0 1px 3px #0002}.mode-tabs button span{font:11px Consolas,monospace;color:var(--dim)}.mode-tabs button[aria-selected=true] span{color:var(--accent)}main{flex:1;min-height:0;overflow:auto;padding:32px 36px 25px;scrollbar-gutter:stable;outline:none}.page-inner{max-width:1440px;margin:0 auto}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--dim);font-size:12px;letter-spacing:.5px;margin-bottom:12px}.eyebrow .index{font:12px Consolas,monospace;color:var(--accent)}.title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.title-heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}h1{font-size:29px;letter-spacing:1px;font-weight:600;line-height:1.35;margin:0}.function-name{font:13px/1.8 Consolas,monospace;color:var(--accent)}.page-desc{margin:12px 0 21px;color:#b9bac7;font-size:15px;max-width:850px;line-height:1.75}.page-nav{display:flex;gap:6px;flex:none;padding-top:2px}.icon-button{width:33px;height:33px;border:1px solid var(--line);border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:22px}.icon-button:hover{background:#2c2b37;color:var(--text);border-color:#555064}.metadata{display:flex;gap:9px 20px;flex-wrap:wrap;margin-bottom:22px;color:var(--muted);font-size:12px}.meta-item{display:flex;align-items:center;gap:7px}.meta-item svg{width:14px;height:14px;color:var(--dim)}.property-tag{color:var(--green)}.recipe-workbench{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:22px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0}.panel-bar{height:51px;padding:0 19px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line-soft)}.panel-bar h2{font-size:14px;font-weight:500;display:flex;align-items:center;gap:9px;margin:0}.panel-bar h2 svg{color:var(--dim);width:16px;height:16px}.panel-bar small{font:10px Consolas,monospace;letter-spacing:.7px;color:var(--dim)}.live-badge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)}.live-badge i{height:5px;width:5px;background:currentColor;border-radius:50%}.stage{position:relative;background:var(--stage);aspect-ratio:600/335;min-height:240px;max-height:420px;overflow:hidden;touch-action:pan-y}.stage>svg{display:block;width:100%;height:100%;position:absolute;inset:0}.stage>svg text{font-family:"Segoe UI","Microsoft YaHei",sans-serif}.stage-label{position:absolute;top:13px;left:17px;font:10px Consolas,monospace;letter-spacing:1px;color:#6d6e7f;pointer-events:none}.stage-hint{position:absolute;right:16px;top:12px;font-size:11px;color:var(--dim);pointer-events:none}.stage-readout{border-top:1px solid var(--line-soft);display:flex;gap:14px;justify-content:space-between;padding:11px 18px;background:#1b1c23;color:var(--muted);font:11px/1.5 Consolas,"Microsoft YaHei",monospace;min-height:40px}.stage-readout span:last-child{color:var(--accent);text-align:right}.transport{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--line-soft);background:#202127}.transport .transport-btn{width:28px;height:28px;display:grid;place-items:center;color:var(--text);border-radius:5px}.transport .transport-btn:hover{background:#35323f}.transport input{min-width:40px;flex:1;width:0}.transport output{font:11px Consolas,monospace;color:var(--muted);white-space:nowrap}.loop-toggle{font-size:11px;color:var(--dim);white-space:nowrap;padding:4px 7px;border:1px solid var(--line);border-radius:4px}.loop-toggle[aria-pressed=true]{color:var(--accent);border-color:#5e4d83;background:#2c263a}.preview-note{padding:10px 17px 12px;color:var(--dim);font-size:11px;line-height:1.65;border-top:1px solid var(--line-soft);min-height:41px}.parameter-section{margin-top:19px}.section-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.section-bar h2{margin:0;font-size:14px;font-weight:500}.text-button{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:5px;padding:3px 0}.text-button:hover{color:var(--accent)}.text-button svg{width:13px;height:13px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px 21px}.control{min-width:0}.control.full{grid-column:1/-1}.control label{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;color:var(--muted);margin-bottom:6px}.control label span{font:10px Consolas,monospace;color:var(--dim)}.range-row{display:flex;align-items:center;gap:11px}.range-row input[type=range]{flex:1;width:0}.number-wrap{display:flex;align-items:center;gap:3px;border:1px solid var(--line);border-radius:5px;padding:3px 6px;background:#1b1c22}.number-wrap input{border:0;background:none;color:#d5c7ff;width:46px;padding:0;outline:none;font:12px Consolas,monospace;text-align:right;appearance:textfield}.number-wrap input::-webkit-inner-spin-button{display:none}.number-wrap span{font-size:10px;color:var(--dim)}input[type=range]{appearance:none;background:transparent;cursor:pointer;height:18px;margin:0;accent-color:var(--accent)}input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:4px;background:linear-gradient(to right,var(--accent-strong) var(--fill,50%),#3c3c49 var(--fill,50%))}input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;margin-top:-3.5px;border-radius:50%;background:#c8b4ff;box-shadow:0 0 0 3px #ac94f018}input[type=range]::-moz-range-track{height:3px;background:#45414e}input[type=range]::-moz-range-thumb{border:0;background:var(--accent);width:10px;height:10px}.control select,.control input[type=text]{width:100%;height:34px;border:1px solid var(--line);border-radius:6px;background:#1c1d23;color:var(--text);padding:4px 9px;font-size:13px}.copy-button{display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid #55476d;border-radius:6px;background:#332a44;color:#d6c9fc;font-size:12px}.copy-button:hover{background:#433457}.copy-button svg{width:14px;height:14px}.copy-button.copied{color:var(--green);border-color:#3e6b5e;background:#22372f}.code-scroll{max-height:410px;min-height:155px;overflow:auto;background:var(--code);padding:18px 0 20px}.code-scroll pre{font:12px/1.95 Consolas,"Cascadia Code",monospace;margin:0;tab-size:4}.code-line{display:block;white-space:pre;min-width:max-content;padding-right:20px;min-height:1.95em}.code-line::before{content:attr(data-line);display:inline-block;position:sticky;left:0;text-align:right;width:43px;padding-right:16px;margin-right:4px;color:#535767;background:var(--code);user-select:none}.token-comment{color:#788583}.token-string{color:#b7cf9e}.token-number{color:#e5be85}.token-key{color:#c0a4ec}.token-fn{color:#8fc7dc}.code-footer{border-top:1px solid var(--line-soft);padding:9px 18px;font-size:11px;color:var(--dim);display:flex;gap:8px;justify-content:space-between}.code-footer span:last-child{color:#a390c0}.setup-card{margin-top:18px;border:1px solid var(--line-soft);border-radius:10px;padding:17px 18px;background:#1d1e25}.setup-card h2{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13px;font-weight:500}.setup-card h2 svg{width:15px;height:15px;color:var(--dim)}.setup-card ol{margin:0;padding-left:21px;font-size:12px;line-height:1.85;color:var(--muted)}.setup-card li+li{margin-top:5px}.setup-card li::marker{color:#8d79b5}.detail-section{border-top:1px solid var(--line-soft);margin-top:25px}.detail-section summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;padding:17px 0;font-size:13px;color:var(--muted)}.detail-section summary::-webkit-details-marker{display:none}.detail-section summary::after{content:"+";color:var(--dim);font:19px Consolas,monospace}.detail-section[open] summary::after{content:"−"}.detail-body{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 0 20px;font-size:13px;color:var(--muted);line-height:1.8}.detail-body p{margin:0 0 8px}.detail-body strong{font-weight:500;color:var(--text)}.parameter-table{width:100%;border-collapse:collapse;font-size:12px}.parameter-table td{padding:6px 10px 6px 0;vertical-align:top;border-bottom:1px solid var(--line-soft)}.parameter-table td:first-child{color:var(--accent);font-family:Consolas,monospace;white-space:nowrap;width:30%}.page-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line-soft);padding-top:17px;margin-top:3px;color:var(--dim);font-size:11px}.page-footer a{color:var(--dim);text-decoration:none}.page-footer a:hover{color:var(--accent)}.search-context{display:flex;align-items:center;justify-content:space-between;margin:0 0 22px;border:1px solid #514266;background:#272232;border-radius:7px;padding:10px 14px;font-size:13px;color:#c0b1da}.search-context button{font-size:12px;color:var(--accent)}.empty-state{text-align:center;max-width:500px;margin:100px auto}.empty-state .empty-symbol{font-size:40px;color:var(--accent);margin-bottom:16px}.empty-state h1{font-size:22px}.empty-state p{color:var(--muted);font-size:14px}.empty-state button{margin-top:16px;border:1px solid #65557e;border-radius:6px;padding:8px 18px;color:var(--accent)}
@@ -41,6 +41,9 @@
 .follow-mode{font-size:12px;color:var(--muted);padding:5px 8px}.demo-switch{flex-wrap:wrap}[data-follow-handle]:hover rect:first-child,[data-follow-handle]:focus-visible rect:first-child{stroke:white;stroke-width:2}
 
 .control textarea{width:100%;min-height:90px;resize:vertical;box-sizing:border-box;border:1px solid var(--line);border-radius:6px;background:#1c1d23;color:var(--text);padding:10px 12px;font:13px/1.7 "Segoe UI","Microsoft YaHei",sans-serif}.text-example{margin-top:6px}.control input:disabled,.control select:disabled{opacity:.38;cursor:default}.demo-switch{flex-wrap:wrap}
+/* Version 4: compact controls, optional detail and quick-start guide. */
+.parameter-field{min-width:0}.parameter-field.full{grid-column:1/-1}.parameter-field .control{min-width:0}.advanced-controls{margin-top:16px;border-top:1px solid var(--line-soft)}.advanced-controls>summary,.layer-structure>summary{padding:12px 0;color:var(--muted);font-size:12px;cursor:pointer}.advanced-controls .controls{padding:0 0 12px}.layer-structure{margin-top:10px;border-top:1px solid var(--line-soft)}.layer-structure pre{font:12px/1.8 Consolas,"Microsoft YaHei",monospace;color:var(--muted);white-space:pre-wrap;margin:0 0 5px}.basics-nav{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;margin:0 0 16px;border:1px solid var(--line);border-radius:7px;text-align:left;font-size:13px;color:var(--muted)}.basics-nav .icon{width:15px;height:15px}.basics-nav:hover,.basics-nav[aria-current=page]{color:var(--accent);background:var(--accent-bg);border-color:#5e4d83}.basics-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.basics-grid .setup-card{margin-top:0;padding:22px}.basics-page .setup-card h2{font-size:15px}.basics-page p{color:var(--muted);font-size:13px;line-height:1.9}.basics-page .page-desc{font-size:15px}.basics-page pre{padding:12px 15px;background:var(--code);border-radius:6px;overflow:auto}.basics-page code{font:13px/1.8 Consolas,"Microsoft YaHei",monospace;color:var(--accent)}.basics-links{display:flex;flex-wrap:wrap;gap:12px}.basics-links button{padding:9px 14px;background:var(--accent-bg);color:var(--accent);border:1px solid #514464;border-radius:6px;font-size:13px}.basics-links button:hover{background:#40334f}.basics-footnote{margin-top:22px}.continuous-transport output{margin-left:auto}.number-wrap input{width:58px}.parameter-field input[type=text]{min-width:0}.parameter-field select{max-width:100%}.setup-card pre{tab-size:2}
+@media(max-width:760px){.basics-grid{grid-template-columns:1fr;gap:14px}.basics-grid .setup-card{padding:17px}.number-wrap input{width:44px}}
 </style>
 </head>
 <body>
@@ -49,12 +52,12 @@
 <aside class="sidebar" id="sidebar" aria-label="手册导航">
   <div class="brand"><span class="brand-mark" aria-hidden="true">Ae</span><div><strong>表达式手册</strong><span>EXPRESSION MANUAL</span></div><button id="closeNav" class="icon-button mobile-only" aria-label="关闭目录">×</button></div>
   <div class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" aria-label="搜索表达式或快捷键" placeholder="搜索名称、属性、效果" autocomplete="off"><button id="clearSearch" class="clear-search" aria-label="清空搜索" hidden>×</button></div>
-  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">22</span></div>
+  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">23</span></div>
   <nav id="nav" aria-label="分类目录"></nav>
-  <div class="sidebar-footer"><span><i></i> 离线手册</span><span>VERSION 3.1</span></div>
+  <div class="sidebar-footer"><span><i></i> 离线手册</span><span>VERSION 4.0</span></div>
 </aside>
 <div class="workspace">
-  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>22</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
+  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>23</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
   <main id="main" tabindex="-1" aria-labelledby="pageTitle"></main>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -144,7 +147,7 @@ for(const id of ['counter','counter-format']) recipe(id,{
 });
 recipe('random',{
  title:'随机种子',fn:'seedRandom() → random()',short:'seedRandom',desc:'分别观察随机位置与随机颜色。位置模式让方块移动；颜色模式固定方块位置，只更新颜色。',target:'Position / Fill Color',
- params:[choice('previewType','复制属性','position',[['position','位置表达式'],['color','颜色表达式']],'位置模式随机移动；颜色模式固定位置，只改变填充颜色。'),range('seed','随机种子',487,1,999,1,'','相同种子、图层索引和采样时刻产生相同结果。'),choice('fixed','更新方式','animated',[['fixed','固定随机结果'],['animated','按频率更新']],'固定模式下更新频率不参与计算。'),range('fps','更新频率',2,1,24,1,'次/s','选择按频率更新后生效。'),range('x','水平范围',140,0,160,5,'px','位置模式的X偏移范围。'),range('y','垂直范围',75,0,85,5,'px','位置模式的Y偏移范围。')],
+ params:[choice('previewType','复制属性','position',[['position','随机位置'],['color','随机颜色']],'位置模式随机移动；颜色模式固定位置，只改变填充颜色。'),range('seed','随机种子',487,1,999,1,'','相同种子、图层索引和采样时刻产生相同结果。'),choice('fixed','更新方式','animated',[['fixed','固定随机结果'],['animated','按频率更新']],'固定模式下更新频率不参与计算。'),range('fps','更新频率',2,1,24,1,'次/s','选择按频率更新后生效。'),range('x','水平范围',140,0,160,5,'px','位置模式的X偏移范围。'),range('y','垂直范围',75,0,85,5,'px','位置模式的Y偏移范围。')],
  setup:['位置表达式贴到二维图层的 Position；颜色表达式贴到形状图层的 Fill Color。','复制 5 个形状图层，并给两种属性设置相同种子和更新频率。','选择“固定随机结果”锁定布局，或选择“按频率更新”观察逐次变化。'],
  code:p=>`seed = ${p.seed};\n${p.fixed==='fixed'?'frame = 0;':`fps = ${p.fps};\nframe = Math.floor(time * fps);`}\nseedRandom(seed + index * 1009 + frame * 7919, true);\n`+(p.previewType==='color'?'[random(), random(), random(), 1];':`value + [random(-${p.x}, ${p.x}), random(-${p.y}, ${p.y})];`),
  detail:'位置与颜色需要分别粘贴到对应属性。相同设置可重复得到同一组结果；浏览器与AE的随机序列不同。',note:'位置模式保持颜色不变，只演示随机移动；颜色模式固定方块位置，只演示颜色更新。固定模式不随时间变化。',duration:()=>6
@@ -246,13 +249,98 @@ oneLineHeight = fontLocal * 7 / 6 + padYLocal * 2;`;
 });
 
 
+// First-round changes are composed before the public recipe catalogue.
+recipe('linear',{
+ note:'直接横向或纵向拖动，靠近中心自动吸附。切换linear或ease，预览与代码同步更新。',
+});
+recipesById.linear.params[0].explain='切换线性或缓动映射，同时更新预览与代码。';
+recipesById.linear.params[0].label='映射方式';
+recipe('sin',{
+ desc:'无需关键帧，持续左右或上下悬浮。可让多个对象错开节奏，形成波浪般的运动。',
+ note:'幅度控制距离，频率控制快慢。开启错峰后，按图层顺序错开相位。',
+ detail:'偏移叠加在原位置及关键帧动画上。多对象错峰以图层索引计算相位；调整图层顺序会改变节奏。适用于未分离维度的二维位置。',
+});
+recipesById.sin.params.push(choice('wave','对象节奏','single',[['single','单个对象'],['stagger','多个对象错峰']]),range('phaseStep','每层相位差',45,0,180,5,'°','开启错峰时生效；相邻图层错开此角度。'));
+recipesById.sin.code=p=>`amplitude = ${p.amplitude};\nfrequency = ${p.frequency};\nphase = ${p.wave==='stagger'?`(index - 1) * ${p.phaseStep} * Math.PI / 180`:'0'};\noffset = Math.sin(time * 2 * Math.PI * frequency + phase) * amplitude;\nvalue + ${p.axis==='x'?'[offset, 0]':'[0, offset]'};`;
+recipe('time',{note:'持续旋转；负速度反向。点击重播可回到0秒。'});
+recipe('timecode',{
+ desc:'让文本显示当前时间码，帧率跟随当前合成，显示格式跟随项目设置。',
+ setup:['新建文本图层，将代码粘贴到源文本。','在合成设置中调整帧率，在项目设置中选择时间显示格式。'],
+ detail:'默认使用当前合成的帧率及显示开始时间；显示格式由项目设置决定。网页只演示从0开始的整数帧率时间码。'
+});
+recipe('cursor',{
+ title:'打字机',name:'打字机',fn:'Source Text · substring()',short:'typewriter',
+ desc:'按指定速度逐字显示文本，可选择闪烁光标、开始延迟和结束停留。',
+ params:[textParam('text','预览文字','Hello, motion.','AE读取文本图层原文字。'),range('speed','打字速度',12,2,40,1,'字/s'),choice('showCursor','显示光标','yes',[['yes','显示'],['no','隐藏']]),textParam('cursorChar','光标字符','|'),range('blinkSpeed','闪烁频率',2,.5,5,.5,'Hz'),range('startDelay','开始延迟',.4,0,2,.1,'s'),range('endDelay','光标停留',.5,0,3,.1,'s')],
+ code:p=>`txt = value.toString();\nspeed = ${p.speed};\nstartDelay = ${p.startDelay};\nelapsed = Math.max(0, time - inPoint);\ntypingTime = Math.max(0, elapsed - startDelay);\ncount = Math.min(txt.length, Math.floor(typingTime * speed));\n`+(p.showCursor==='no'?'txt.substring(0, count);':`blinkSpeed = ${p.blinkSpeed};\nendDelay = ${p.endDelay};\nshowCursor = typingTime < txt.length / speed + endDelay;\nblink = Math.floor(elapsed * blinkSpeed * 2) % 2 == 0;\ncursor = showCursor ? (blink ? ${JSON.stringify(p.cursorChar).replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029')} : " ") : "";\ntxt.substring(0, count) + cursor;`),
+ detail:'修改AE文本图层的内容即可复用。速度按字符串字符单位计算；复杂表情可能被分段显示。光标字符可自定义。',
+ note:'在AE中修改原文字，表达式自动读取；隐藏光标后只保留逐字效果。',
+ duration:p=>Math.max(3,p.text.length/p.speed+p.startDelay+(p.showCursor==='yes'?p.endDelay:0)+1)
+});
+recipe('counter',{
+ title:'数字动画',name:'数字动画',short:'counter',desc:'让数字从起点变化到终点，可添加千位分隔、补零、小数和前后缀。',
+ params:[range('start','起始数值',0,-200000,200000,1),range('end','结束数值',1000,-200000,200000,1),durationParam(),choice('separator','千位分隔','no',[['no','关闭'],['yes','开启']]),range('decimals','小数位数',0,0,3,1,'位'),range('minDigits','整数最少位数',1,1,8,1,'位','不足时在整数前补0，不会截断较长数值。'),textParam('prefix','前缀','','例如￥。'),textParam('suffix','后缀','','例如%、人、次。')],
+ code:p=>`start = ${p.start};\nend = ${p.end};\nduration = ${p.duration};\nnum = linear(time - inPoint, 0, duration, start, end);\nstr = num.toFixed(${p.decimals});\nnegative = Number(str) < 0;\nif (str.charAt(0) == "-") str = str.substring(1);\nparts = str.split(".");\nwhile (parts[0].length < ${p.minDigits}) parts[0] = "0" + parts[0];\n${p.separator==='yes'?'parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",");\n':''}result = (negative ? "-" : "") + parts.join(".");\n${JSON.stringify(p.prefix)} + result + ${JSON.stringify(p.suffix)};`,
+ detail:'起始值大于结束值时为倒计数。补零只影响整数部分；小数保留指定精度。需要稳定的数字宽度时，选择支持等宽数字的字体。',
+ note:'调整格式会同步更新复制代码；动画结束后保持最终数值。'
+});
+recipe('lookAt',{
+ fn:'Math.atan2() / lookAt()',target:'Rotation / Orientation',needs:'需要TARGET图层',
+ desc:'二维箭头用旋转朝向目标；三维图层用方向让Z轴指向目标。切换模式查看对应代码。',
+ note:'拖动TARGET改变方向；三维模式可调整目标深度。示例要求当前图层无父级。',
+ detail:'二维模式假设素材原本朝右，方向偏差可用角度修正调整。三维模式使图层Z轴指向目标，以立体示意展示关系。',
+ code:p=>p.previewType==='2d'?`target = thisComp.layer("TARGET");\na = thisLayer.toComp(thisLayer.anchorPoint);\nb = target.toComp(target.anchorPoint);\nradiansToDegrees(Math.atan2(b[1] - a[1], b[0] - a[0])) + ${p.angleOffset};`:`target = thisComp.layer("TARGET");\na = thisLayer.toWorld(thisLayer.anchorPoint);\nb = target.toWorld(target.anchorPoint);\nlookAt(a, b);`
+});
+recipesById.lookAt.params.unshift(choice('previewType','方向模式','2d',[['2d','二维旋转'],['3d','三维方向']]));
+recipesById.lookAt.params.push(range('angleOffset','角度修正',0,-180,180,5,'°','二维素材默认朝右；素材朝向不同时调整。'),range('targetZ','目标深度',90,-100,100,1,'','仅用于三维示意，不写入代码。'));
+recipe('fade',{
+ title:'自动淡入淡出',name:'自动淡入淡出',fn:'inPoint / outPoint + ease()',short:'fade',target:'Opacity · 不透明度',needs:'无需关键帧',
+ desc:'按图层入点和出点自动淡入淡出。拖动下方时间条的两端，观察动画随图层时长变化。',
+ params:[range('fadeIn','淡入时长',.4,.05,2,.05,'s'),range('fadeOut','淡出时长',.4,.05,2,.05,'s'),range('inTime','演示入点',1,0,6.5,.1,'s','只用于网页演示；AE读取图层入点。'),range('outTime','演示出点',5,.5,7,.1,'s','只用于网页演示；AE读取图层出点。')],
+ setup:['将代码粘贴到图层的不透明度。','调整图层入点、出点，淡入淡出会自动跟随。'],
+ code:p=>`duration = Math.max(thisComp.frameDuration, outPoint - inPoint);\nfadeIn = Math.min(${p.fadeIn}, duration / 2);\nfadeOut = Math.min(${p.fadeOut}, duration / 2);\na = ease(time, inPoint, inPoint + fadeIn, 0, 1);\nb = ease(time, outPoint - fadeOut, outPoint, 1, 0);\nvalue * Math.min(a, b);`,
+ note:'图层较短时，淡入和淡出各最多占一半时长。',detail:'拖动时间条两端只改变示例入点、出点。复制代码使用AE图层的实际入点、出点，并保留原透明度作为上限。适用于正常正向播放的图层。',duration:()=>7
+});
+recipe('anchor',{
+ title:'文字锚点自适应',name:'文字锚点自适应',fn:'sourceRectAtTime() → Anchor Point',short:'anchor',target:'Anchor Point · 2D锚点',needs:'需要文本图层',
+ desc:'文字变长或变短，锚点仍跟随指定对齐位置。切换旋转或缩放，观察变化中心。',
+ params:[textParam('text','预览文字','Hello, motion.'),choice('align','锚点对齐','center',[['top-left','左上'],['top','上中'],['top-right','右上'],['left','左中'],['center','居中'],['right','右中'],['bottom-left','左下'],['bottom','下中'],['bottom-right','右下']]),choice('motion','演示动画','rotate',[['rotate','围绕锚点旋转'],['scale','围绕锚点缩放']],'仅控制网页演示。')],
+ setup:['创建二维点文本图层，将代码粘贴到锚点。','按需调整图层位置，再给缩放或旋转设置动画。'],
+ code:p=>{const xy={ 'top-left':[0,0],top:[.5,0],'top-right':[1,0],left:[0,.5],center:[.5,.5],right:[1,.5],'bottom-left':[0,1],bottom:[.5,1],'bottom-right':[1,1]}[p.align];return `r = sourceRectAtTime(time, false);\n[r.left + r.width * ${xy[0]}, r.top + r.height * ${xy[1]}];`;},
+ note:'绿色十字为锚点。更换锚点会影响画面位置，设置后可调整Position。',detail:'适用于二维点文本。表达式只控制锚点；预览中的旋转和缩放用于演示，需在AE中另外制作。',duration:()=>6
+});
+recipe('stagger',{
+ title:'批量错峰入场',name:'批量错峰入场',fn:'index + inPoint + ease()',short:'stagger',target:'Position / Opacity',needs:'需要CTRL与入场图层',
+ desc:'多个对象在各自位置依次上移、淡入。调整每层间隔，统一改变入场节奏。',
+ params:[choice('previewType','复制属性','position',[['position','位置表达式'],['opacity','不透明度表达式']]),range('delay','每层间隔',.15,0,.6,.05,'s'),range('duration','入场时长',.6,.1,2,.05,'s'),range('distance','上移距离',45,0,100,1,'px')],
+ setup:['创建空对象，命名为CTRL；将入场图层连续排列在其下方。','先摆好每个对象的位置，再分别粘贴位置和不透明度表达式。','动画从CTRL入点开始，顺序由图层排列决定。'],
+ code:p=>`ctrl = thisComp.layer("CTRL");\nn = Math.max(0, index - ctrl.index - 1);\nstart = ctrl.inPoint + n * ${p.delay};\np = ease(time, start, start + ${p.duration}, 0, 1);\n`+(p.previewType==='opacity'?'value * p;':`value + [0, ${p.distance} * (1 - p)];`),
+ note:'对象保留各自位置；修改间隔后，请同步更新两条表达式。',detail:'位置代码用于未分离维度的二维位置。每层从自己的原位置下方进入，序号从CTRL下方第一层开始计算；中间插入其他图层也会占用序号。',duration:p=>4*p.delay+p.duration+1.2
+});
+recipe('path-motion',{
+ title:'沿路径运动',name:'沿路径运动',fn:'pointOnPath() / tangentOnPath()',short:'path motion',target:'Position / Rotation',needs:'需要PATH形状图层',
+ desc:'对象沿曲线移动，并跟随路径方向旋转。拖动控制点改变路线，调整时长控制速度。',
+ params:[choice('previewType','复制属性','position',[['position','位置表达式'],['rotation','旋转表达式']]),range('duration','单程时长',3,.5,8,.1,'s'),choice('mode','播放方式','pingpong',[['pingpong','往返'],['once','单次']]),range('ratio','曲线弯曲',.333,0,.6,.001,'','只改变示例曲线；AE读取实际路径。'),range('angleOffset','角度修正',0,-180,180,5,'°','素材默认朝右；用于旋转表达式。')],
+ setup:['创建二维形状图层PATH，用钢笔绘制开放曲线。将「形状1」命名为ROUTE，「路径1」命名为CURVE，组变换保持默认。','创建朝右的二维箭头图层，保持无父级。','把位置和旋转代码分别粘贴到箭头的Position和Rotation。'],
+ code:p=>`pathLayer = thisComp.layer("PATH");\nroute = pathLayer.content("ROUTE").content("CURVE").path;\nt = Math.max(0, time - inPoint) / ${p.duration};\n${p.mode==='pingpong'?'phase = t % 2;\nu = phase <= 1 ? phase : 2 - phase;\ndirection = phase < 1 ? 1 : -1;':'u = Math.min(t, 1);\ndirection = 1;'}\n`+(p.previewType==='position'?`p = pathLayer.toComp(route.pointOnPath(u));\n[p[0], p[1]];`:`v = pathLayer.toCompVec(route.tangentOnPath(u));\nradiansToDegrees(Math.atan2(v[1] * direction, v[0] * direction)) + ${p.angleOffset};`),
+ note:'拖动P1、P2、P3修改示例路径；AE中使用PATH里的实际曲线。',detail:'沿路径按弧长百分比前进。往返时自动转向；素材朝向不同时调整角度修正。路径组保持默认变换，箭头保持无父级。',duration:p=>p.mode==='once'?p.duration+1:p.duration*2
+});
+
+// Remove accidental spaces around Chinese and Latin names from user instructions.
+for(const r of Object.values(recipesById)){
+ const tidy=s=>typeof s==='string'?s.replace(/([\u3400-\u9fff]) +(?=[A-Za-z])/g,'$1').replace(/([A-Za-z]) +(?=[\u3400-\u9fff])/g,'$1'):s;
+ for(const k of ['desc','detail','note','needs'])r[k]=tidy(r[k]);
+ if(r.note==='预览重播仅用于观察，不会给表达式额外添加循环。')r.note='';
+ if(Array.isArray(r.setup))r.setup=r.setup.map(tidy);
+}
+
 const groups = [
- {id:'motion',name:'基础与运动',icon:'motion',ids:['value','wiggle','time','sin','linear']},
+ {id:'motion',name:'基础与运动',icon:'motion',ids:['wiggle','time','sin','linear','fade']},
  {id:'looping',name:'弹性与循环',icon:'loop',ids:['elastic','loop','posterize']},
- {id:'text',name:'文本与数字',icon:'text',ids:['typewriter','cursor','counter','counter-format','timecode','text-box']},
+ {id:'text',name:'文本与数字',icon:'text',ids:['cursor','counter','timecode','text-box','anchor']},
  {id:'random',name:'随机与颜色',icon:'random',ids:['random','blink']},
- {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','distance','follow']},
- {id:'control',name:'控制器与路径',icon:'sliders',ids:['audio','control','path']}
+ {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','distance','follow','stagger']},
+ {id:'control',name:'控制器与路径',icon:'sliders',ids:['audio','control','path','path-motion']}
 ];
 const recipes = groups.flatMap(g=>g.ids.map(id=>Object.assign(recipesById[id],{group:g})));
 const shortcuts = originalDB.shortcuts.map((g,i)=>({id:'keys-'+i,name:g.category,list:g.list.map(item=>({...item,key:item.desc==='选中的关键帧移动 10 帧'?'Alt + Shift + ← / →':item.key}))}));
@@ -285,6 +373,7 @@ function renderNav(){
   return `<section class="nav-group"><button class="group-button" data-group="${g.id}" aria-expanded="${!collapsed}" aria-controls="group-${g.id}">${icon(g.icon)}<span>${g.name}</span><span class="group-count">${items.length}</span><span class="chevron" aria-hidden="true">${icon("down")}</span></button><div class="nav-items" id="group-${g.id}" ${collapsed?'hidden':''}>${items.map(r=>`<button class="nav-item" data-recipe="${r.id}" ${state.current===r.id?'aria-current="page"':''} title="${escapeHTML(r.fn)}"><span>${r.title}</span><span class="nav-fn">${r.short}</span></button>`).join('')}</div></section>`;
  }).join(''):visible.map(g=>`<section class="nav-group"><button class="group-button key-nav" data-key-group="${g.id}" ${state.keyGroup===g.id?'aria-current="page"':''}>${icon('keyboard')}<span>${g.name}</span><span class="group-count">${g.list.length}</span></button></section>`).join('');
  if(!visible.length)$('nav').innerHTML='<div class="nav-empty">没有匹配内容<br>试试“位置”或“循环”</div>';
+ if(exp){if(state.basics)document.querySelectorAll('#nav [aria-current]').forEach(el=>el.removeAttribute('aria-current'));$('nav').insertAdjacentHTML('afterbegin',`<button class="basics-nav" data-basics ${state.basics?'aria-current="page"':''}>${icon('info')}快速入门</button>`);}
 }
 function searchContext(count){return state.query[state.mode]?`<div class="search-context"><span>“${escapeHTML(state.query[state.mode])}” · 找到 ${count} 项</span><button data-action="clear">清空搜索</button></div>`:''}
 function emptyContent(){stopMicrophone();cancelAnimationFrame(state.frame);$('main').innerHTML=`<div class="empty-state"><div class="empty-symbol">⌕</div><h1 id="pageTitle">没有找到匹配内容</h1><p>试试函数名、应用属性或效果，例如 wiggle、位置、循环。</p><button data-action="clear">清空搜索</button></div>`;}
@@ -293,25 +382,25 @@ function renderControl(p){
  return `<div class="control ${p.type==='text'?'full':''}"><label for="${id}">${p.label}<span>${p.key}</span></label>${p.type==='range'?`<div class="range-row"><input id="${id}" type="range" title="双击滑块圆点恢复默认值 ${p.value}${p.unit || ''}" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}" style="--fill:${(v-p.min)/(p.max-p.min)*100}%"><div class="number-wrap"><input type="number" aria-label="${p.label}数值" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div></div>`:p.type==='select'?`<select id="${id}" data-param="${p.key}">${p.options.map(([val,label])=>`<option value="${val}" ${String(v)===String(val)?'selected':''}>${label}</option>`).join('')}</select>`:p.multiline?`<textarea id="${id}" data-param="${p.key}" rows="3" maxlength="600" placeholder="输入文字，按 Enter 换行">${escapeHTML(v)}</textarea><button class="text-button text-example" data-action="text-example">填入两行聊天示例</button>`:`<input id="${id}" type="text" data-param="${p.key}" value="${escapeHTML(v)}" maxlength="60">`}</div>`;
 }
 function renderRecipe(){
+ if(state.basics){renderBasics();return}
  if(state.current!=='audio')stopMicrophone();
  cancelAnimationFrame(state.frame);state.last=0;
  const r=current(),visible=matchingRecipes(); if(!visible.length){emptyContent();return}
- const index=recipes.indexOf(r), manual=manualIds.has(r.id)||r.id==='follow';
+ const manual=manualIds.has(r.id)||r.id==='follow';
  $('main').innerHTML=`<div class="page-inner">${searchContext(visible.length)}
- <div class="eyebrow"><span>${r.group.name}</span><span> / </span><span class="index">${String(index+1).padStart(2,'0')}</span><span>OF ${recipes.length}</span></div>
+ <div class="eyebrow"><span>${r.group.name}</span></div>
  <div class="title-row"><div class="title-heading"><h1 id="pageTitle">${r.title}</h1><span class="function-name">${escapeHTML(r.fn)}</span></div><div class="page-nav"><button class="icon-button" data-action="prev" aria-label="上一个表达式" title="上一个表达式" ${visible.indexOf(r)<=0?'disabled':''}>${icon('left')}</button><button class="icon-button" data-action="next" aria-label="下一个表达式" title="下一个表达式" ${visible.indexOf(r)>=visible.length-1?'disabled':''}>${icon('chevron')}</button></div></div>
  <p class="page-desc">${r.desc}</p><div class="metadata"><span class="meta-item property-tag">${icon('layers')}${r.target}</span><span class="meta-item">${icon('key')}${r.needs}</span></div>
  <div class="recipe-workbench"><div class="preview-column"><section class="panel preview-panel" aria-labelledby="previewTitle"><div class="panel-bar"><h2 id="previewTitle">${icon('box')}效果预览</h2><span class="live-badge" id="playStatus"><i></i>${manual?'交互演示':state.playing?'播放中':'已暂停'}</span></div>
- ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="0 0 600 335" role="${['path','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg><span class="stage-label">${r.id==='path'?'PATH CONTROLS':'COMPOSITION / PREVIEW'}</span><span class="stage-hint">${r.id==='follow'?'拖动LEADER':r.id==='control'?'拖动左侧滑杆':r.id==='linear'?'横向或纵向拖动 · 中心吸附':r.id==='path'?'拖动控制点':['lookAt','distance'].includes(r.id)?'拖动TARGET点':r.id==='wiggle'?'十字标记 = 原始位置':r.id==='random'?(params().previewType==='color'?'固定位置 · 只变颜色':'固定颜色 · 只变位置'):manual?'调整下方参数':'实时预览'}</span></div>
- <div class="stage-readout"><span id="readoutLabel"></span><span id="readoutValue"></span></div>
+ ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="0 0 600 335" role="${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg></div>
  ${manual?'':`<div class="transport"><button class="transport-btn" data-action="play" id="playButton" aria-label="${state.playing?'暂停演示':'播放演示'}" title="${state.playing?'暂停演示':'播放演示'}">${icon(state.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击恢复到 0 秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${state.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${state.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`}
- <div class="preview-note">${r.note}</div></section>
- <section class="parameter-section" aria-labelledby="parameterTitle"><div class="section-bar"><h2 id="parameterTitle">调整参数</h2><button class="text-button" data-action="reset">${icon('replay')}恢复默认</button></div><div class="controls">${r.id==='linear'?r.params.filter(p=>p.key!=='previewType').map(renderControl).join(''):r.params.filter(p=>p.key!=='previewType').sort((a,b)=>Number(b.type==='text')-Number(a.type==='text')).map(renderControl).join('')}</div></section></div>
+ </section>
+ <section class="parameter-section" aria-labelledby="parameterTitle"><div class="section-bar"><h2 id="parameterTitle">调整参数</h2><button class="text-button" data-action="reset">${icon('replay')}恢复默认</button></div>${renderParameterFields(r)}</section></div>
  <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box'].includes(r.id)?renderVariants(r):''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
  <section class="setup-card"><h2>${icon('info')}在 AE 中使用</h2><ol>${r.setup.map(s=>`<li>${escapeHTML(s)}</li>`).join('')}</ol></section></div></div>
- <details class="detail-section"><summary>参数解释与使用注意</summary><div class="detail-body"><table class="parameter-table"><tbody>${r.params.map(p=>`<tr><td>${p.key}</td><td>${p.explain||p.label}</td></tr>`).join('')}</tbody></table><div><p><strong>使用提示</strong></p><p>${escapeHTML(r.detail||'')}</p><p>${r.id==='path'?'形状组自身的变换应保持默认。重叠控制点会产生退化曲线，请拉开控制点。':'涉及具体图层和效果时，请先按“在 AE 中使用”完成准备。'}</p></div></div></details>
+ <details class="detail-section"><summary>参数解释与使用注意</summary><div class="detail-body"><table class="parameter-table"><tbody>${r.params.map(p=>`<tr><td>${p.key}</td><td>${p.explain||p.label}</td></tr>`).join('')}</tbody></table><div>${r.note?`<p>${escapeHTML(r.note)}</p>`:""}<p><strong>使用提示</strong></p><p>${escapeHTML(r.detail||'')}</p><p>${r.id==='path'?'形状组自身的变换应保持默认。重叠控制点会产生退化曲线，请拉开控制点。':'涉及具体图层和效果时，请先按“在 AE 中使用”完成准备。'}</p></div></div></details>
  <footer class="page-footer"><span>${recipes.length} 个表达式 · 参数修改即时生效</span><a href="${referenceURL}" target="_blank" rel="noopener noreferrer">Adobe 表达式参考 ↗</a></footer></div>`;
- updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();syncAudioUI();if(r.id==='time')document.querySelector('.function-name').textContent='time × '+params().speed;schedule();
+ updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();bindFade();syncAudioUI();if(r.id==='time')document.querySelector('.function-name').textContent='time × '+params().speed;schedule();
 }
 function highlight(code){
  const rx=/(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b(?:if|else|for|true|false|var|const|let)\b|\b[A-Za-z_$][\w$]*(?=\s*\())/g;
@@ -335,6 +424,7 @@ function updateCode(){const el=$('code');if(!el)return;el.innerHTML=current().co
  if(state.current==='elastic')$('codeHint').textContent=params().previewType==='position'?'位置 · 向上回弹':'缩放 · 双向弹性';
  if(state.current==='follow')$('codeHint').textContent=params().previewType==='opacity'?'粘贴到Opacity · 不透明度':'粘贴到Position · 位置';
  if(state.current==='sin')$('codeHint').textContent=params().axis==='x'?'粘贴到Position · X轴悬浮':'粘贴到Position · Y轴悬浮';
+ syncRecipeUI();
 }
 function renderShortcuts(){
  stopMicrophone();
@@ -343,9 +433,13 @@ function renderShortcuts(){
  $('main').innerHTML=`<div class="page-inner">${searchContext(count)}<div class="eyebrow">KEYBOARD REFERENCE</div><h1 id="pageTitle">常用快捷键</h1><p class="page-desc">按操作查找，直接回到创作。搜索支持功能名称与按键组合。</p><div class="shortcut-summary"><span>${count} 项快捷键 · ${groups.length} 个分类</span><span>Windows · 默认键位</span></div>${groups.map(g=>`<section class="shortcut-section" id="${g.id}"><h2>${g.name}<span>${g.list.length}</span></h2><div class="shortcut-list">${g.list.map(k=>`<div class="key-row"><span class="key-description">${escapeHTML(k.desc)}</span><span class="key-combo">${k.key.split(' + ').map(part=>`<kbd>${escapeHTML(part)}</kbd>`).join('<span class="key-plus">+</span>')}</span></div>`).join('')}</div></section>`).join('')}<footer class="page-footer"><span>快捷键可在 AE 中自定义，实际以当前设置为准。</span><a href="${shortcutURL}" target="_blank" rel="noopener noreferrer">Adobe 快捷键参考 ↗</a></footer></div>`;
 }
 function selectRecipe(id,{focus=false}={}){
+ if(id==='basics'||id==='value'){state.basics=true;state.time=0;try{history.replaceState(null,'','#basics')}catch{}renderNav();renderBasics();$('main').scrollTop=0;closeNav();return}
+ if(id==='typewriter'){id='cursor';state.params.cursor.showCursor='no'}
+ if(id==='counter-format'){id='counter';state.params.counter.separator='yes';state.params.counter.end=128000}
  if(id==='ease'){id='linear';state.params.linear.previewType='ease'}
  if(id==='color'){id='random';state.params.random.previewType='color'}
- if(!recipesById[id])return;
+ if(!recipes.some(r=>r.id===id))return;
+ state.basics=false;
  state.current=id;if(id==='follow'){resetFollow();state.playing=true}state.time=0;state.collapsed[current().group.id]=false;
  try{history.replaceState(null,'','#'+id)}catch{}
  renderNav();renderRecipe();$('main').scrollTop=0;if(focus)$('main').focus({preventScroll:true});closeNav();
@@ -356,6 +450,7 @@ function setMode(mode){
  $('topbarContext').textContent=mode==='exp'?'表达式':'快捷键';renderNav();mode==='exp'?renderRecipe():renderShortcuts();$('main').scrollTop=0;
 }
 function handleSearch(){
+ state.basics=false;
  state.query[state.mode]=$('search').value;
  if(state.mode==='exp'){const visible=matchingRecipes();if(visible.length&&!visible.some(r=>r.id===state.current)){state.current=visible[0].id;state.time=0}renderRecipe()}else renderShortcuts();
  renderNav();$('main').scrollTop=0;
@@ -377,14 +472,14 @@ function updateTransport(){
  const d=duration();$('timeline').max=d;$('timeline').value=Math.min(state.time,d);$('timeline').style.setProperty('--fill',(state.time/d*100)+'%');$('timeReadout').textContent=state.time.toFixed(2)+' s';
  if($('playButton').getAttribute('aria-label')!==(state.playing?'暂停演示':'播放演示'))$('playButton').innerHTML=icon(state.playing?'pause':'play');$('playButton').setAttribute('aria-label',state.playing?'暂停演示':'播放演示');$('playButton').title=state.playing?'暂停演示':'播放演示';$('playStatus').innerHTML='<i></i>'+(state.playing?'播放中':'已暂停');$('repeatButton').setAttribute('aria-pressed',state.repeat);
 }
-function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(state.mode==='exp'&&(state.playing||mic.status==='live')&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
+function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(!state.basics&&state.mode==='exp'&&(state.playing||mic.status==='live')&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
 function tick(now){
  if(state.current==='audio'&&mic.mode!=='simulated'&&mic.status!=='live')return;
  if(state.mode!=='exp'||(!state.playing&&mic.status!=='live')||document.hidden)return;
  if(mic.status==='live')sampleMicrophone(state.last?Math.min((now-state.last)/1000,.1):1/60);
  if(state.current==='follow')advanceFollow(state.last?Math.min((now-state.last)/1000,.1):0);
  if(state.last)state.time+=Math.min((now-state.last)/1000,.1);state.last=now;
- const d=duration();if(state.current!=='follow'&&state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
+ const d=duration();if(!isContinuous()&&state.current!=='follow'&&state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
  drawScene();updateTransport();if(state.playing||mic.status==='live')state.frame=requestAnimationFrame(tick);
 }
 function onParameter(input){
@@ -393,6 +488,12 @@ function onParameter(input){
  if(p.type==='range'){if(value===''||!Number.isFinite(Number(value)))return;value=Math.max(p.min,Math.min(p.max,Number(value)));value=Number((Math.round((value-p.min)/p.step)*p.step+p.min).toFixed(4));}
  if(p.key==='fps'&&current().id==='timecode')value=Number(value);
  params()[p.key]=value;
+ if(state.current==='fade'){
+  if(p.key==='inTime')params().outTime=Math.max(params().outTime,Number(value)+.5);
+  if(p.key==='outTime')params().inTime=Math.min(params().inTime,Number(value)-.5);
+  for(const key of ['inTime','outTime'])document.querySelectorAll('[data-param="'+key+'"]').forEach(el=>{el.value=params()[key];if(el.type==='range')el.style.setProperty('--fill',(params()[key]-Number(el.min))/(Number(el.max)-Number(el.min))*100+'%')});
+ }
+ if(state.current==='text-box'&&params().boxStyle==='frame'&&params().previewType==='tail')params().previewType='size';
  if(state.current==='linear'&&['x','y'].includes(p.key)){
   const other=p.key==='x'?'y':'x';params()[other]=500;
   document.querySelectorAll('[data-param="'+other+'"]').forEach(el=>{el.value=500;if(el.type==='range')el.style.setProperty('--fill','50%')});
@@ -401,7 +502,7 @@ function onParameter(input){
  syncVariants();
  if(state.current==='time')document.querySelector('.function-name').textContent='time × '+params().speed;
  document.querySelectorAll('[data-param="'+p.key+'"]').forEach(el=>{if(el!==input)el.value=value;if(el.type==='range')el.style.setProperty('--fill',(value-p.min)/(p.max-p.min)*100+'%')});
- state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
+ if(!isContinuous())state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
 }
 function action(name){
  if(name==='text-example'){onParameter({dataset:{param:'text'},value:'Hello John, 今天会下雨吗？\n今天不会下雨。'});return}
@@ -414,13 +515,13 @@ function action(name){
  if(name==='copy'){copyCode();return}
  if(name==='prev'||name==='next'){const list=matchingRecipes(),i=list.findIndex(r=>r.id===state.current);const r=list[i+(name==='next'?1:-1)];if(r)selectRecipe(r.id);return}
  if(name==='reset'){if(state.current==='follow')resetFollow();if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
- if(name==='play'){state.playing=!state.playing;if(state.time>=duration())state.time=0}
+ if(name==='play'){state.playing=!state.playing;if(!isContinuous()&&state.time>=duration())state.time=0}
  if(name==='replay'){state.time=0;state.playing=true}
  if(name==='repeat')state.repeat=!state.repeat;
  updateTransport();drawScene();schedule();
 }
 function initialize(){
- const hash=location.hash.slice(1);if(hash==='ease'){state.current='linear';state.params.linear.previewType='ease'}else if(hash==='color'){state.current='random';state.params.random.previewType='color'}else if(recipesById[hash])state.current=hash;
+ const hash=location.hash.slice(1);if(['basics','value'].includes(hash))state.basics=true;else if(hash==='typewriter'){state.current='cursor';state.params.cursor.showCursor='no'}else if(hash==='counter-format'){state.current='counter';state.params.counter.separator='yes';state.params.counter.end=128000}else if(hash==='ease'){state.current='linear';state.params.linear.previewType='ease'}else if(hash==='color'){state.current='random';state.params.random.previewType='color'}else if(recipes.some(r=>r.id===hash))state.current=hash;
  groups.forEach(g=>state.collapsed[g.id]=g.id!==current().group.id);
  $('nav').addEventListener('click',e=>{const r=e.target.closest('[data-recipe]');if(r){selectRecipe(r.dataset.recipe);return}const g=e.target.closest('[data-group]');if(g){state.collapsed[g.dataset.group]=!state.collapsed[g.dataset.group];renderNav();document.querySelector('[data-group="'+g.dataset.group+'"]').focus({preventScroll:true});return}const k=e.target.closest('[data-key-group]');if(k){state.keyGroup=k.dataset.keyGroup;renderNav();$(state.keyGroup)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'});closeNav()}});
  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
@@ -434,12 +535,14 @@ function initialize(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('sidebar').classList.contains('open')){closeNav();$('openNav').focus()}if(e.key==='Tab'&&$('sidebar').classList.contains('open')){const elements=[...$('sidebar').querySelectorAll('input,button,a')].filter(x=>!x.disabled&&x.getClientRects().length);const first=elements[0],last=elements.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
  window.addEventListener('pagehide',()=>stopMicrophone());
  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopMicrophone();syncAudioUI()}state.last=0;document.hidden?cancelAnimationFrame(state.frame):schedule()});
- window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(recipesById[id]){if(state.mode!=='exp')setMode('exp');state.query.exp='';$('search').value='';selectRecipe(id)}});
+ window.addEventListener('hashchange',()=>{const id=location.hash.slice(1);if(recipesById[id]||id==='basics'){if(state.mode!=='exp')setMode('exp');state.query.exp='';$('search').value='';selectRecipe(id)}});
+ $('nav').addEventListener('click',e=>{if(e.target.closest('[data-basics]'))selectRecipe('basics')});
+ $('main').addEventListener('click',e=>{const go=e.target.closest('[data-go]');if(go)selectRecipe(go.dataset.go)});
  matchMedia('(max-width:760px)').addEventListener('change',syncDrawer);syncDrawer();
  renderNav();renderRecipe();
 }
 function bindPath(){
- if(state.current!=='path')return;const svg=$('scene');let dragging=-1;
+ if(!['path','path-motion'].includes(state.current))return;const svg=$('scene');let dragging=-1;
  const coord=e=>{const point=svg.createSVGPoint();point.x=e.clientX;point.y=e.clientY;return point.matrixTransform(svg.getScreenCTM().inverse())};
  svg.addEventListener('pointerdown',e=>{const handle=e.target.closest('[data-point]');if(!handle)return;dragging=Number(handle.dataset.point);svg.setPointerCapture(e.pointerId);e.preventDefault()});
  svg.addEventListener('pointermove',e=>{if(dragging<0)return;const p=coord(e);state.path[dragging]=[Math.max(45,Math.min(555,p.x)),Math.max(65,Math.min(285,p.y))];drawScene()});
@@ -466,7 +569,7 @@ function setTargetCoordinates(x,y){
 }
 function bindTarget(){
  if(!['lookAt','distance'].includes(state.current))return;const svg=$('scene');let dragging=false,offset=[0,0];
- const position=e=>{const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse())};
+ const position=e=>{const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const p=pt.matrixTransform(svg.getScreenCTM().inverse());return state.current==='lookAt'&&params().previewType==='3d'?unprojectTarget(p,params().targetZ):p};
  svg.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-target]'))return;const pt=position(e);offset=[params().targetX-pt.x,params().targetY-pt.y];dragging=true;svg.setPointerCapture(e.pointerId);e.preventDefault()});
  svg.addEventListener('pointermove',e=>{if(!dragging)return;const pt=position(e);setTargetCoordinates(pt.x+offset[0],pt.y+offset[1])});
  const stop=()=>{dragging=false};svg.addEventListener('pointerup',stop);svg.addEventListener('pointercancel',stop);svg.addEventListener('lostpointercapture',stop);
@@ -514,6 +617,7 @@ function track(y,label,color=palette.muted){return svgText(75,y-33,label,color,1
 function ring(cx,cy,r=83){let s=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${palette.faint}"/>`;for(let i=0;i<12;i++){const a=i*Math.PI/6;s+=line(cx+Math.cos(a)*(r-4),cy+Math.sin(a)*(r-4),cx+Math.cos(a)*(r+3),cy+Math.sin(a)*(r+3))}return s}
 function fractionTrack(p,y=270){return `<rect x="100" y="${y}" width="400" height="3" rx="2" fill="#383440"/><rect x="100" y="${y}" width="${Math.max(0,400*clamp01(p))}" height="3" rx="2" fill="${palette.purple}"/>`}
 function sceneModel(id,p,t,pathPoints){
+ const upgraded=roundOneScene(id,p,t,pathPoints);if(upgraded)return upgraded;
  let svg='',label='',value='';
  if(id==='wiggle'){
   const pos=tt=>[300+sampleNoise(tt*p.freq,147)*p.amp,170+sampleNoise(tt*p.freq,542)*p.amp];
@@ -531,10 +635,10 @@ function sceneModel(id,p,t,pathPoints){
  }else if(id==='sin'){
   const offset=Math.sin(t*2*Math.PI*p.frequency)*p.amplitude;
   if(p.axis==='x'){
-   svg=line(100,170,500,170,palette.line,'5 6')+line(300,70,300,280,palette.faint,'3 6')+ghost(300,170)+line(300-p.amplitude,265,300+p.amplitude,265,palette.green)+line(300-p.amplitude,259,300-p.amplitude,271,palette.green)+line(300+p.amplitude,259,300+p.amplitude,271,palette.green)+svgText(300,292,'±'+p.amplitude+' px',palette.green,13)+actor(300+offset,170,{id:'sin'})+svgText(300,315,'Y保持不变 · 仅改变X',palette.muted,13);
+   svg=line(100,170,500,170,palette.line,'5 6')+line(300,70,300,280,palette.faint,'3 6')+ghost(300,170)+line(300-p.amplitude,265,300+p.amplitude,265,palette.green)+line(300-p.amplitude,259,300-p.amplitude,271,palette.green)+line(300+p.amplitude,259,300+p.amplitude,271,palette.green)+svgText(300,292,'±'+p.amplitude+' px',palette.green,13)+actor(300+offset,170,{id:'sin'});
    label='X OFFSET';
   }else{
-   svg=line(100,170,500,170,palette.line,'5 6')+line(300,70,300,280,palette.faint,'3 6')+ghost(300,170)+line(445,170-p.amplitude,445,170+p.amplitude,palette.green)+line(439,170-p.amplitude,451,170-p.amplitude,palette.green)+line(439,170+p.amplitude,451,170+p.amplitude,palette.green)+svgText(460,175,'±'+p.amplitude,palette.green,13,'start')+actor(300,170+offset,{id:'sin'})+svgText(300,299,'X保持不变 · 仅改变Y',palette.muted,13);
+   svg=line(100,170,500,170,palette.line,'5 6')+line(300,70,300,280,palette.faint,'3 6')+ghost(300,170)+line(445,170-p.amplitude,445,170+p.amplitude,palette.green)+line(439,170-p.amplitude,451,170-p.amplitude,palette.green)+line(439,170+p.amplitude,451,170+p.amplitude,palette.green)+svgText(460,175,'±'+p.amplitude,palette.green,13,'start')+actor(300,170+offset,{id:'sin'});
    label='Y OFFSET';
   }
   value=`${fmt(offset)} px · ${p.frequency} Hz`;
@@ -543,8 +647,8 @@ function sceneModel(id,p,t,pathPoints){
  }else if(id==='text-box'){
   return textBoxScene(p);
  }else if(id==='linear'){
-  const centered=p.x===500&&p.y===500,axis=centered?'center':Math.abs(p.x-500)>=Math.abs(p.y-500)?'x':'y',x=axis==='y'?500:p.x,y=axis==='x'?500:p.y,sx=mix(p.scaleMin,p.scaleMax,clamp01(x/1000)),sy=mix(p.scaleMin,p.scaleMax,clamp01(y/1000)),cx=65+x*.18,cy=90+y*.18;
-  svg=svgText(155,62,'输入位置 · Position',palette.green,14)+svgText(435,62,'输出缩放 · Scale',palette.purple,14)
+  const centered=p.x===500&&p.y===500,axis=centered?'center':Math.abs(p.x-500)>=Math.abs(p.y-500)?'x':'y',x=axis==='y'?500:p.x,y=axis==='x'?500:p.y,map=p.previewType==='ease'?smooth:clamp01,sx=mix(p.scaleMin,p.scaleMax,map(x/1000)),sy=mix(p.scaleMin,p.scaleMax,map(y/1000)),cx=65+x*.18,cy=90+y*.18;
+  svg=''
    +'<rect x="65" y="90" width="180" height="180" rx="5" fill="#ffffff02" stroke="#575365"/>'
    +'<g data-mapping-axes>'+line(65,180,245,180,axis==='x'||centered?palette.green:palette.faint,'3 5')+line(155,90,155,270,axis==='y'||centered?palette.green:palette.faint,'3 5')+'</g>'
    +svgText(65,82,'0',palette.muted,11)+svgText(245,82,'1000 X',palette.muted,11)+svgText(65,286,'1000 Y ↓',palette.muted,11,'start')
@@ -566,7 +670,7 @@ function sceneModel(id,p,t,pathPoints){
   }
  }else if(id==='loop'){
   const phase=t/2;const progress=t<=2?phase:p.mode==='cycle'?phase%1:(Math.floor(phase)%2?1-phase%1:phase%1);
-  svg=track(170,p.mode==='cycle'?'CYCLE · 终点 → 跳回起点':'PINGPONG · 正向 → 反向',palette.purple)+ghost(100,170,40)+ghost(500,170,40)+actor(100+progress*400,170,{size:44,label:'',id:'loop'})+svgText(100,220,'起点',palette.muted,13)+svgText(500,220,'终点',palette.muted,13)+svgText(300,278,t<=2?'原关键帧 · 0–2 s':'表达式循环 · 2 s 之后',palette.green,13);
+  svg=track(170,'',palette.purple)+ghost(100,170,40)+ghost(500,170,40)+actor(100+progress*400,170,{size:44,label:'',id:'loop'});
   label='LOOP / '+p.mode.toUpperCase();value=`${Math.round(progress*100)} % · ${t<=2?'原动画':'循环中'}`;
  }else if(id==='posterize'){
   const original=tt=>{const phase=(tt%4)/2;return phase<=1?phase:2-phase},quantized=Math.floor(t*p.fps)/p.fps;
@@ -587,24 +691,24 @@ function sceneModel(id,p,t,pathPoints){
   svg=svgText(300,125,'HH : MM : SS : FF',palette.muted,14)+svgText(300,198,code,palette.purple,48)+svgText(300,232,`${p.fps} FPS · NON-DROP FRAME`,palette.muted,12)+fractionTrack((t%1));
   label='CURRENT TIME';value=`第 ${total} 帧 · ${p.fps} fps`;
  }else if(id==='typewriter'||id==='cursor'){
-  const elapsed=Math.max(0,t-(p.startDelay||0)),count=Math.min(p.text.length,Math.floor(elapsed*p.speed)),showCursor=id==='cursor'&&elapsed-p.text.length/p.speed<p.endDelay,blink=showCursor&&Math.floor(t*p.blinkSpeed*2)%2===0;
+  const elapsed=Math.max(0,t-(p.startDelay||0)),count=Math.min(p.text.length,Math.floor(elapsed*p.speed)),showCursor=id==='cursor'&&p.showCursor!=='no'&&elapsed-p.text.length/p.speed<p.endDelay,blink=showCursor&&Math.floor(t*p.blinkSpeed*2)%2===0;
   const shown=p.text.substring(0,count),cursorChar=id==='cursor'?(p.cursorChar??'|'):'',emWidth=Array.from(p.text+cursorChar).reduce((sum,c)=>sum+(/[^\x00-\xff]/.test(c)?1:.64),0),fontSize=Math.min(34,410/Math.max(1,emWidth));
-  svg=`<rect x="70" y="116" width="460" height="112" rx="9" fill="#22212b" stroke="#3d374b"/>`+svgText(97,148,'SOURCE TEXT',palette.muted,11,'start')+`<text x="${id==='cursor'?95:300}" y="191" text-anchor="${id==='cursor'?'start':'middle'}" fill="#e8e2f5" font-size="${fontSize}" font-family="Consolas, monospace" xml:space="preserve">${escapeHTML(shown)}<tspan data-cursor="true" fill="${palette.purple}">${blink?escapeHTML(cursorChar):''}</tspan></text>`+fractionTrack(p.text.length?count/p.text.length:1,267);
+  svg=`<rect x="70" y="116" width="460" height="112" rx="9" fill="#22212b" stroke="#3d374b"/>`+`<text x="${id==='cursor'?95:300}" y="191" text-anchor="${id==='cursor'?'start':'middle'}" fill="#e8e2f5" font-size="${fontSize}" font-family="Consolas, monospace" xml:space="preserve">${escapeHTML(shown)}<tspan data-cursor="true" fill="${palette.purple}">${blink?escapeHTML(cursorChar):''}</tspan></text>`+fractionTrack(p.text.length?count/p.text.length:1,267);
   label='CHARACTERS';value=`${count} / ${p.text.length} · ${p.speed} 字/s`;
  }else if(id==='counter'||id==='counter-format'){
   const progress=clamp01(t/p.duration),number=Math.round(mix(p.start,p.end,progress)),digits=id==='counter-format'&&p.numberFormat==='padded'?String(number).padStart(6,'0'):String(number),valueText=id==='counter-format'?digits.replace(/\B(?=(\d{3})+(?!\d))/g,','):digits;
-  svg=svgText(300,120,id==='counter'?'COUNT UP':'NUMBER FORMAT',palette.muted,12)+svgText(300,201,valueText,palette.purple,65)+svgText(100,260,String(p.start),palette.muted,13,'start')+svgText(500,260,String(p.end),palette.muted,13,'end')+fractionTrack(progress,278);
+  svg=svgText(300,201,valueText,palette.purple,65)+svgText(100,260,String(p.start),palette.muted,13,'start')+svgText(500,260,String(p.end),palette.muted,13,'end')+fractionTrack(progress,278);
   label='SOURCE TEXT';value=`${Math.round(progress*100)} % · ${p.duration} s`;
  }else if(id==='random'){
   const frame=p.fixed==='fixed'?0:Math.floor(t*p.fps);
   if(p.previewType==='color'){
    for(let i=0;i<5;i++){const seed=p.seed+(i+1)*1009+frame*7919,rgb=[0,1,2].map(c=>Math.floor(80+seeded(seed+c*819+91)*175));svg+=actor(116+i*92,170,{size:48,label:String(i+1),color:'rgb('+rgb.join(',')+')',id:'random-'+i})}
-   svg+=svgText(300,270,p.fixed==='fixed'?'方块位置固定 · 颜色结果固定':p.fps+'次/s · 仅颜色更新',palette.muted,12);
+   
    label='SEED / COLOR';
   }else{
    svg=`<rect x="${300-p.x}" y="${172-p.y}" width="${p.x*2}" height="${p.y*2}" fill="none" stroke="#575065" stroke-dasharray="5 5" opacity=".18"/>`;
    for(let i=0;i<5;i++){const seed=p.seed+(i+1)*1009+frame*7919,x=300+(seeded(seed)*2-1)*p.x,y=172+(seeded(seed+37)*2-1)*p.y;svg+=actor(x,y,{size:34,label:String(i+1),color:['#8bcdb5','#b6a0f0','#e1ba84','#8ebfe9','#e4a3c4'][i],id:'random-'+i})}
-   svg+=svgText(300,290,p.fixed==='fixed'?'颜色固定 · 位置结果固定':p.fps+'次/s · 仅位置更新',palette.muted,12);
+   
    label='SEED / POSITION';
   }
   value=`SEED ${p.seed} · 5个图层 · ${p.fixed==='fixed'?'固定':'采样 '+frame}`;
@@ -648,11 +752,16 @@ function sceneModel(id,p,t,pathPoints){
 }
 function drawScene(){
  const svg=$('scene');if(!svg)return;
+ const focused=document.activeElement;
+ const focusKey=focused&&svg.contains?.(focused)?['data-point','data-fade-edge'].find(key=>focused.hasAttribute(key)):null;
+ const focusValue=focusKey?focused.getAttribute(focusKey):null;
  const sceneParams=state.current==='audio'?{...params(),liveMode:mic.mode,liveLevel:mic.level,liveWave:mic.wave,liveBands:mic.bands}:state.current==='follow'?{...params(),followState:followDemo}:params();
  const result=sceneModel(state.current,sceneParams,state.time,state.path);
  svg.innerHTML=`<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#2e2d3b" stroke-width=".65"/></pattern><radialGradient id="stageGlow"><stop stop-color="#a78ad7" stop-opacity=".06"/><stop offset="1" stop-color="#a78ad7" stop-opacity="0"/></radialGradient></defs><rect width="600" height="335" fill="url(#grid)"/><ellipse cx="300" cy="167" rx="240" ry="165" fill="url(#stageGlow)"/>${result.svg}`;
  if(state.current==='text-box')fitTextBackground(svg,params());
- $('readoutLabel').textContent=result.label;$('readoutValue').textContent=result.value;
+ if(state.current==='anchor')fitAnchorDemo(svg,params(),state.time);
+ if(focusKey)svg.querySelector('['+focusKey+'="'+focusValue+'"]').focus({preventScroll:true});
+ // 预览读数已从界面移除；场景仍保留结果数据供内部绘制使用。
 }
 
 // Microphone stays local: the analyser is never connected to the speakers.
@@ -774,10 +883,11 @@ function autoFollowPosition(t){
  const phase=t*Math.PI*2/3.6,angle=phase-.72*Math.sin(phase);
  return [300-125*Math.cos(angle),175+52*Math.sin(angle*2)];
 }
-function resetFollow(){Object.assign(followDemo,{manual:false,clock:0,position:autoFollowPosition(0),history:[]});if($('followMode'))$('followMode').textContent='自动演示 · 可拖动领头方块'}
-function renderFollowControls(){return '<div class="demo-switch"><button data-action="follow-auto">自动演示</button><span id="followMode" class="follow-mode">'+(followDemo.manual?'实时跟随 · 松开后继续追随':'自动演示 · 可拖动领头方块')+'</span></div>'}
+function resetFollow(){Object.assign(followDemo,{manual:false,clock:0,position:autoFollowPosition(0),history:[]});if($('followMode'))$('followMode').textContent='拖动L自由演示'}
+function renderFollowControls(){return '<div class="demo-switch"><button data-action="follow-auto">自动演示</button><span id="followMode" class="follow-mode">'+(followDemo.manual?'自由拖动':'拖动L自由演示')+'</span></div>'}
 function advanceFollow(dt){
  followDemo.clock+=dt;
+ if(!followDemo.manual){const cycle=.6+3.6+4*params().delay+.45;if(followDemo.clock>=cycle){followDemo.clock=0;followDemo.history=[];followDemo.position=autoFollowPosition(0)}}
  if(followDemo.manual){followDemo.history.push([followDemo.clock,...followDemo.position]);while(followDemo.history.length>2&&followDemo.history[1][0]<followDemo.clock-3)followDemo.history.shift()}
 }
 function historyPosition(history,time){
@@ -793,19 +903,19 @@ function followObject(x,y,i,opacity=1){
  return `<g data-actor="follower-${i}" opacity="${opacity}" transform="translate(${x} ${y})"><g transform="scale(${scale})"><g fill="${colors[shapeIndex]}" stroke="#ffffff44" stroke-width="1.5">${shapes[shapeIndex]}</g>${svgText(0,i===3?8:5,String(i),'#23212b',16)}</g></g>`;
 }
 function followScene(p,t){
- const demo=p.followState,time=demo?demo.clock:t;
- const at=tt=>demo?.manual?historyPosition(demo.history,tt):autoFollowPosition(tt);
- let svg=svgText(300,65,'不同形状 · 按顺序淡入并跟随',palette.muted,13);
- for(let i=4;i>=1;i--){const [x,y]=at(time-i*p.delay),opacity=smooth((time-i*p.delay)/p.fadeDuration);svg+=followObject(x,y,i,opacity)}
+ const demo=p.followState,manual=Boolean(demo?.manual),time=(demo?demo.clock:t)-(manual?0:.6);
+ const at=tt=>demo?.manual?historyPosition(demo.history,tt):autoFollowPosition(Math.min(3.6,tt));
+ let svg='';
+ for(let i=4;i>=1;i--){const [x,y]=at(time-i*p.delay),opacity=smooth((time-i*p.delay)/p.fadeDuration)*(manual?1:1-smooth((time-i*p.delay-3.6)/.2));svg+=followObject(x,y,i,opacity)}
  const [x,y]=demo?.manual?demo.position:at(time);
- svg+='<g data-follow-handle class="path-handle" tabindex="0" role="button" aria-label="领头方块 LEADER，拖动或方向键移动">'+actor(x,y,{size:48,color:palette.green,label:'L',id:'leader'})+'</g>'+svgText(x,y-35,'LEADER',palette.green,11)+svgText(300,299,'1 延迟 '+fmt(p.delay)+' s → 4 延迟 '+fmt(p.delay*4)+' s',palette.muted,13);
+ svg+='<g data-follow-handle class="path-handle" tabindex="0" role="button" aria-label="领头方块 LEADER，拖动或方向键移动">'+actor(x,y,{size:48,color:palette.green,label:'L',id:'leader',opacity:manual?1:1-smooth((time-3.6)/.2)})+'</g>';
  return {svg,label:'运动跟随 · MOTION FOLLOW',value:fmt(p.delay)+' s / 层 · 淡入 '+fmt(p.fadeDuration)+' s'};
 }
 function bindFollow(){
  if(state.current!=='follow')return;const svg=$('scene');let dragging=false,offset=[0,0];
  const coord=e=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())};
- const begin=()=>{if(followDemo.manual)return;followDemo.history=[];for(let i=180;i>=0;i--){const t=followDemo.clock-i/60;followDemo.history.push([t,...autoFollowPosition(t)])}followDemo.position=autoFollowPosition(followDemo.clock);followDemo.manual=true};
- const set=(x,y)=>{begin();followDemo.position=[Math.max(50,Math.min(550,x)),Math.max(110,Math.min(250,y))];followDemo.history.push([followDemo.clock,...followDemo.position]);drawScene();if($('followMode'))$('followMode').textContent='实时跟随 · 松开后继续追随'};
+ const begin=()=>{if(followDemo.manual)return;followDemo.history=[];for(let i=180;i>=0;i--){const t=followDemo.clock-i/60;followDemo.history.push([t,...autoFollowPosition(Math.min(3.6,t-.6))])}followDemo.position=autoFollowPosition(Math.min(3.6,followDemo.clock-.6));followDemo.manual=true};
+ const set=(x,y)=>{begin();followDemo.position=[Math.max(50,Math.min(550,x)),Math.max(110,Math.min(250,y))];followDemo.history.push([followDemo.clock,...followDemo.position]);drawScene();if($('followMode'))$('followMode').textContent='自由拖动'};
  svg.addEventListener('pointerdown',e=>{if(!e.target.closest('[data-follow-handle]'))return;begin();const p=coord(e);offset=[p.x-followDemo.position[0],p.y-followDemo.position[1]];dragging=true;svg.setPointerCapture(e.pointerId);state.playing=true;schedule();e.preventDefault()});
  svg.addEventListener('pointermove',e=>{if(!dragging)return;const p=coord(e);set(p.x-offset[0],p.y-offset[1])});
  for(const n of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(n,()=>dragging=false);
@@ -840,6 +950,140 @@ function fitTextBackground(svg,p){
  set('[data-text-bg]',{x:g.x,y:g.y,width:g.w,height:g.h,rx:g.radius});
  set('[data-text-tail]',{d:'M'+g.tail.map(pt=>pt.join(',')).join(' L')+' Z'});
  set('[data-text-layout]',{transform:'translate('+(300-(left+width/2)*s)+' '+(177-(g.y+g.h/2)*s)+') scale('+s+')'});
+}
+
+function isContinuous(id=state.current){return id==='sin'||id==='time'}
+function renderParameterFields(r){
+ const advanced=r.id==='text-box'?['paddingMode','opticalY']:[];
+ const fields=r.params.filter(p=>p.key!=='previewType');
+ const render=p=>`<div data-control="${p.key}" class="parameter-field ${p.key==='text'?'full':''}">${renderControl(p)}</div>`;
+ return `<div class="controls">${fields.filter(p=>!advanced.includes(p.key)).map(render).join('')}</div>`+(advanced.length?`<details class="advanced-controls"><summary>高级设置</summary><div class="controls">${fields.filter(p=>advanced.includes(p.key)).map(render).join('')}</div></details>`:'');
+}
+function setupFor(r){
+ if(r.id==='lookAt')return params().previewType==='3d'?['创建三维图层TARGET，并启用当前图层的3D开关。','当前图层保持无父级，关闭自动定向。','把代码粘贴到当前图层的Orientation（方向），移动TARGET观察结果。']:['创建二维目标图层，命名为TARGET。','当前图层保持无父级，关闭自动定向。','把代码粘贴到当前图层的Rotation（旋转）；素材原本朝右，方向不同时调整角度修正。'];
+ if(r.id==='text-box'&&params().boxStyle==='frame')return [r.setup[0],r.setup[1],r.setup[2],'关闭填充、添加描边。修改TEXT的文字或字号，外框自动更新。'];
+ return r.setup;
+}
+function syncRecipeUI(){
+ const r=current(),p=params(),hide=(key,yes)=>{const el=document.querySelector('[data-control="'+key+'"]');if(el)el.hidden=yes};
+ if(r.id==='cursor')for(const key of ['cursorChar','blinkSpeed','endDelay'])hide(key,p.showCursor==='no');
+ if(r.id==='sin')hide('phaseStep',p.wave!=='stagger');
+ if(r.id==='lookAt'){hide('targetZ',p.previewType!=='3d');hide('angleOffset',p.previewType!=='2d');}
+ if(r.id==='random'){hide('x',p.previewType==='color');hide('y',p.previewType==='color');hide('fps',p.fixed==='fixed');}
+ if(r.id==='text-box'){
+  hide('tailSide',p.boxStyle!=='bubble');hide('radius',p.radiusMode!=='fixed');hide('radiusRatio',p.radiusMode!=='auto');
+  const tail=document.querySelector('[data-variant="tail"]');if(tail)tail.hidden=p.boxStyle!=='bubble';
+ }
+ const setup=document.querySelector('.setup-card ol');if(setup)setup.innerHTML=setupFor(r).map(s=>'<li>'+escapeHTML(s)+'</li>').join('');
+ const structure=document.querySelector('.setup-card .layer-structure');if(structure)structure.remove();
+ if(r.id==='text-box'&&document.querySelector('.setup-card'))document.querySelector('.setup-card').insertAdjacentHTML('beforeend',`<details class="layer-structure"><summary>查看图层层级</summary><pre>TEXT\n外框形状图层\n└─内容\n  └─BOX\n    ├─FRAME${p.boxStyle==='bubble'?'\n    ├─形状1\n    │ └─路径1（尖角）':''}\n    └─${p.boxStyle==='bubble'?'填充':'描边'}</pre></details>`);
+ const hints={lookAt:p.previewType==='3d'?'粘贴到Orientation · 方向':'粘贴到Rotation · 旋转',fade:'粘贴到Opacity · 不透明度',anchor:'粘贴到Anchor Point · 锚点',stagger:p.previewType==='opacity'?'粘贴到Opacity · 不透明度':'粘贴到Position · 位置','path-motion':p.previewType==='rotation'?'粘贴到Rotation · 旋转':'粘贴到Position · 位置'};
+ if(hints[r.id])$('codeHint').textContent=hints[r.id];
+ if(r.id==='lookAt')document.querySelector('.property-tag').innerHTML=icon('layers')+(p.previewType==='3d'?'Orientation · 3D方向':'Rotation · 2D旋转');
+ const transport=document.querySelector('.transport');if(transport){transport.classList.toggle('continuous-transport',isContinuous());$('timeline').hidden=isContinuous();$('repeatButton').hidden=isContinuous();}
+}
+function renderBasics(){
+ stopMicrophone();cancelAnimationFrame(state.frame);state.last=0;
+ $('main').innerHTML=`<div class="page-inner basics-page"><div class="eyebrow">开始使用</div><h1 id="pageTitle">快速入门</h1><p class="page-desc">先确认属性，再复制代码。不同属性的表达式需要分别粘贴。</p>
+ <div class="basics-grid"><section class="setup-card"><h2>三步使用</h2><ol><li>选择效果，按页面说明创建图层并准确命名。</li><li>找到指定属性，Windows按住Alt、Mac按住Option点击秒表。</li><li>粘贴代码。修改网页参数后，需要重新复制到AE。</li></ol></section>
+ <section class="setup-card"><h2>看清粘贴位置</h2><p>图层的位置、矩形路径的位置是不同属性。复制前请按完整路径展开。</p><p><code>内容→BOX→FRAME→位置</code></p><p>TEXT、BOX等名称按说明输入，名称前后不加空格，也不包含引号或「」。</p></section>
+ <section class="setup-card"><h2>value保留什么？</h2><p>value表示这个属性在当前时刻的原始值，包含已有关键帧。</p><pre><code>value;</code></pre><p>保持原动画。给二维位置增加偏移，可以写：</p><pre><code>value + [0, 20];</code></pre><p>在原动画基础上向下偏移20像素。</p></section>
+ <section class="setup-card"><h2>数值与数组</h2><p>旋转、不透明度通常使用一个数值；二维位置和缩放使用两个数值。</p><pre><code>[x, y]</code></pre><p>左右两项分别对应X、Y。位置已分离维度时，单轴属性需要单个数值，不能直接粘贴二维数组。</p></section></div>
+ <section class="setup-card basics-start"><h2>从一个效果开始</h2><div class="basics-links"><button data-go="wiggle">自然抖动 →</button><button data-go="cursor">打字机 →</button><button data-go="fade">自动淡入淡出 →</button></div></section>
+ <p class="basics-footnote">网页用于观察效果；涉及随机数、字体与音频时，以AE中的实际结果为准。</p></div>`;
+}
+function numberText(p,t){
+ const n=mix(p.start,p.end,clamp01(t/p.duration)),str=n.toFixed(p.decimals),negative=Number(str)<0;
+ const parts=str.replace(/^-/,'').split('.');parts[0]=parts[0].padStart(p.minDigits,'0');
+ if(p.separator==='yes')parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');
+ return p.prefix+(negative?'-':'')+parts.join('.')+p.suffix;
+}
+function roundOneScene(id,p,t,pathPoints){
+ if(id==='counter'){
+  const shown=numberText(p,t),size=Math.min(65,440/Math.max(1,[...shown].reduce((n,c)=>n+(/[^\x00-\xff]/.test(c)?1:.63),0)));
+  return {svg:svgText(300,195,shown,palette.purple,size)+svgText(100,260,String(p.start),palette.muted,13,'start')+svgText(500,260,String(p.end),palette.muted,13,'end')+fractionTrack(t/p.duration,278),label:'',value:shown};
+ }
+ if(id==='sin'&&p.wave==='stagger'){
+  let svg='';for(let i=0;i<5;i++){const offset=Math.sin(t*2*Math.PI*p.frequency+i*p.phaseStep*Math.PI/180)*p.amplitude;
+   const x=p.axis==='x'?300:100+i*100,y=p.axis==='x'?75+i*47:170;
+   svg+=ghost(x,y,30)+actor(x+(p.axis==='x'?offset:0),y+(p.axis==='y'?offset:0),{size:30,label:String(i+1),color:i===0?palette.green:palette.purple,id:'wave-'+i});
+  }return {svg,label:'',value:String(p.phaseStep)};
+ }
+ if(id==='fade'){
+  const length=Math.max(.001,p.outTime-p.inTime),a=smooth((t-p.inTime)/Math.min(p.fadeIn,length/2)),b=smooth((p.outTime-t)/Math.min(p.fadeOut,length/2)),opacity=Math.min(a,b),x=s=>70+s/7*460;
+  let svg=ghost(300,135,70)+actor(300,135,{size:70,label:'Ae',opacity,id:'fade'})+line(70,260,530,260,palette.line);
+  svg+=`<rect x="${x(p.inTime)}" y="243" width="${Math.max(1,x(p.outTime)-x(p.inTime))}" height="34" rx="5" fill="#b6a0f030"/>`;
+  for(const [key,name] of [['inTime','入点'],['outTime','出点']])svg+=`<g data-fade-edge="${key}" class="path-handle" tabindex="0" role="slider" aria-label="演示${name}" aria-valuemin="${key==='inTime'?0:p.inTime+.5}" aria-valuemax="${key==='inTime'?p.outTime-.5:7}" aria-valuenow="${p[key]}" transform="translate(${x(p[key])} 260)"><rect x="-14" y="-22" width="28" height="44" fill="transparent"/><rect x="-3" y="-17" width="6" height="34" rx="3" fill="${palette.green}"/>${svgText(0,39,name+' '+p[key].toFixed(1)+'s',palette.green,12)}</g>`;
+  svg+=line(x(clamp01(t/7)*7),231,x(clamp01(t/7)*7),279,palette.purple)+svgText(70,222,'0s',palette.muted,11)+svgText(530,222,'7s',palette.muted,11);
+  return {svg,label:'',value:(opacity*100).toFixed(1)};
+ }
+ if(id==='anchor')return {svg:anchorMarkup(p,t),label:'',value:p.align};
+ if(id==='stagger'){
+  let svg='';for(let i=0;i<5;i++){const progress=smooth((t-i*p.delay)/p.duration),x=90+i*105;svg+=ghost(x,164,62)+actor(x,164+p.distance*(1-progress),{size:62,opacity:progress,label:String(i+1),color:i===0?palette.green:palette.purple,id:'stagger-'+i});}
+  return {svg,label:'',value:t.toFixed(2)};
+ }
+ if(id==='path-motion'){
+  const base=sceneModel('path',p,t,pathPoints),phase=Math.max(0,t)/p.duration%2,u=p.mode==='once'?clamp01(t/p.duration):phase<=1?phase:2-phase,direction=p.mode==='pingpong'&&phase>=1?-1:1;
+  const point=sampleRoute(pathPoints,p.ratio,u),angle=Math.atan2(point.dy*direction,point.dx*direction)*180/Math.PI+p.angleOffset;
+  return {svg:base.svg+`<g data-path-traveler pointer-events="none" transform="translate(${point.x} ${point.y}) rotate(${angle})"><path d="M19 0 -12 -12 -6 0 -12 12Z" fill="${palette.amber}" stroke="#f6dda8" stroke-width="1.5"/></g>`,label:'',value:u.toFixed(3)};
+ }
+ if(id==='lookAt')return lookAtScene(p);
+ return null;
+}
+function anchorFactors(align){return {'top-left':[0,0],top:[.5,0],'top-right':[1,0],left:[0,.5],center:[.5,.5],right:[1,.5],'bottom-left':[0,1],bottom:[.5,1],'bottom-right':[1,1]}[align]}
+function anchorTransform(p,t,r){
+ const [fx,fy]=anchorFactors(p.align),ax=r.x+r.width*fx,ay=r.y+r.height*fy;
+ const fit=Math.min(1,(fx===.5?410:205)/Math.max(1,r.width),105/Math.max(1,r.height)),rotation=p.motion==='rotate'?Math.sin(t*Math.PI/3)*22:0,scale=p.motion==='scale'?.78+.22*Math.cos(t*Math.PI/3):1;
+ return {ax,ay,transform:`translate(300 165) rotate(${rotation}) scale(${fit*scale}) translate(${-ax} ${-ay})`};
+}
+function anchorMarkup(p,t){
+ const r={x:0,y:-26,width:[...p.text].reduce((n,c)=>n+(/[^\x00-\xff]/.test(c)?28:16),0),height:32},layout=anchorTransform(p,t,r);
+ return `<g data-anchor-layout transform="${layout.transform}"><rect data-anchor-bounds x="${r.x}" y="${r.y}" width="${r.width}" height="${r.height}" fill="none" stroke="${palette.line}" stroke-dasharray="4 4"/><text data-anchor-text x="0" y="0" font-size="28" fill="${palette.purple}" xml:space="preserve">${escapeHTML(p.text)}</text></g><g data-anchor-pin>${cross(300,165,palette.green)}<circle cx="300" cy="165" r="4" fill="${palette.green}"/></g>`;
+}
+function fitAnchorDemo(svg,p,t){const text=svg.querySelector('[data-anchor-text]');if(!text?.getBBox)return;const r=text.getBBox();svg.querySelector('[data-anchor-layout]').setAttribute('transform',anchorTransform(p,t,r).transform);const box=svg.querySelector('[data-anchor-bounds]');for(const key of ['x','y','width','height'])box.setAttribute(key,r[key]);}
+function bindFade(){
+ if(state.current!=='fade')return;const svg=$('scene');let key=null,grab=0;
+ const coordinate=e=>{const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return (p.matrixTransform(svg.getScreenCTM().inverse()).x-70)/460*7};
+ const set=value=>onParameter({dataset:{param:key},value:Math.max(key==='inTime'?0:params().inTime+.5,Math.min(key==='inTime'?params().outTime-.5:7,value)).toFixed(1)});
+ svg.addEventListener('pointerdown',e=>{const handle=e.target.closest('[data-fade-edge]');if(!handle)return;key=handle.dataset.fadeEdge;grab=coordinate(e)-params()[key];svg.setPointerCapture(e.pointerId);e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(key)set(coordinate(e)-grab)});
+ for(const event of ['pointerup','pointercancel','lostpointercapture'])svg.addEventListener(event,()=>key=null);
+ svg.addEventListener('keydown',e=>{const handle=e.target.closest('[data-fade-edge]');if(!handle||!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();key=handle.dataset.fadeEdge;const selected=key;set(params()[key]+(e.key==='ArrowRight'?.1:-.1));key=null;svg.querySelector('[data-fade-edge="'+selected+'"]').focus()});
+}
+// Arc-length lookup mirrors AE's percentage-based pointOnPath sampling.
+let routeCache=null;
+function sampleRoute(points,ratio,u){
+ const key=JSON.stringify([points,ratio]);
+ if(!routeCache||routeCache.key!==key){
+  const handles=points.map((pt,i)=>{const prev=points[Math.max(0,i-1)],next=points[Math.min(2,i+1)],dx=next[0]-prev[0],dy=next[1]-prev[1],len=Math.hypot(dx,dy),before=i===0?Math.hypot(pt[0]-next[0],pt[1]-next[1]):Math.hypot(pt[0]-prev[0],pt[1]-prev[1]),after=i===2?before:Math.hypot(pt[0]-next[0],pt[1]-next[1]),h=Math.min(before,after)*ratio,ax=len?dx/len*h:0,ay=len?dy/len*h:0;return {incoming:i===0?pt:[pt[0]-ax,pt[1]-ay],outgoing:i===2?pt:[pt[0]+ax,pt[1]+ay]}});
+  const samples=[{x:points[0][0],y:points[0][1],length:0}];let length=0;
+  for(let segment=0;segment<2;segment++)for(let j=1;j<=160;j++){
+   const v=j/160,w=1-v,a=points[segment],b=handles[segment].outgoing,c=handles[segment+1].incoming,d=points[segment+1],x=w*w*w*a[0]+3*w*w*v*b[0]+3*w*v*v*c[0]+v*v*v*d[0],y=w*w*w*a[1]+3*w*w*v*b[1]+3*w*v*v*c[1]+v*v*v*d[1],prev=samples[samples.length-1];
+   length+=Math.hypot(x-prev.x,y-prev.y);samples.push({x,y,length});
+  }routeCache={key,samples,length};
+ }
+ const {samples,length}=routeCache,target=clamp01(u)*length;let i=1;while(i<samples.length-1&&samples[i].length<target)i++;
+ const a=samples[i-1],b=samples[i],f=b.length>a.length?(target-a.length)/(b.length-a.length):0;
+ return {x:mix(a.x,b.x,f),y:mix(a.y,b.y,f),dx:b.x-a.x,dy:b.y-a.y};
+}
+function projectTarget(x,y,z){return {x:300+.55*(x-300)+.28*z,y:170+.55*(y-170)-.4*z}}
+function unprojectTarget(pt,z){return {x:300+(pt.x-300-.28*z)/.55,y:170+(pt.y-170+.4*z)/.55}}
+function lookAtScene(p){
+ let svg='',target,origin;
+ if(p.previewType==='3d'){
+  const project=v=>projectTarget(...v),a=[220,190,0],b=[p.targetX,p.targetY,p.targetZ],n=b.map((v,i)=>v-a[i]),length=Math.hypot(...n)||1,normal=n.map(v=>v/length),reference=Math.abs(normal[2])>.9?[0,1,0]:[0,0,1],cross3=(u,v)=>[u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0]],raw=cross3(reference,normal),mag=Math.hypot(...raw)||1,side=raw.map(v=>v/mag),up=cross3(normal,side);
+  origin=project(a);target=project(b);
+  const plane=[[100,85,0],[490,85,0],[490,285,0],[100,285,0]].map(project);
+  svg+=`<polygon points="${plane.map(v=>v.x+','+v.y).join(' ')}" fill="#ffffff02" stroke="${palette.faint}"/>`;
+  for(const [v,name,color]of [[[85,0,0],'X',palette.muted],[[0,85,0],'Y',palette.muted],[[0,0,85],'Z',palette.green]]){const q=project(a.map((x,i)=>x+v[i]));svg+=line(origin.x,origin.y,q.x,q.y,color)+svgText(q.x+10,q.y,name,color,11);}
+  const corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>project(a.map((v,i)=>v+side[i]*38*x+up[i]*38*y)));
+  svg+=`<polygon data-oriented-plane points="${corners.map(v=>v.x+','+v.y).join(' ')}" fill="#b6a0f04a" stroke="${palette.purple}" stroke-width="2"/>`+line(origin.x,origin.y,target.x,target.y,palette.green,'4 4')+svgText(300,285,'Z轴指向TARGET',palette.muted,12);
+ }else{
+  origin={x:220,y:190};target={x:p.targetX,y:p.targetY};const angle=Math.atan2(target.y-origin.y,target.x-origin.x)*180/Math.PI+p.angleOffset;
+  svg=ring(origin.x,origin.y,59)+line(origin.x,origin.y,target.x,target.y,palette.green,'5 4')+`<g data-look-arrow transform="translate(${origin.x} ${origin.y}) rotate(${angle})"><path d="M-22 -17 30 0 -22 17 -13 0Z" fill="${palette.purple}"/></g>`;
+ }
+ svg+=`<g data-target class="path-handle" role="button" tabindex="0" aria-label="目标TARGET，可拖动或按方向键移动" transform="translate(${target.x} ${target.y})"><circle r="19" fill="transparent"/><circle r="8" fill="${palette.green}"/>${svgText(0,-18,'TARGET',palette.green,12)}</g>`;
+ return {svg,label:'',value:p.previewType};
 }
 
 initialize();</script>

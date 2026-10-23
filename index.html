@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="23 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
-<title>AE 表达式手册 · v4</title>
+<meta name="description" content="22 个 AE 表达式的交互演示、参数调整与可复制代码，附 53 项常用快捷键。支持离线使用。">
+<title>AE 表达式手册 · v5</title>
 <style>:root{--bg:#17181d;--sidebar:#1b1c22;--panel:#202127;--stage:#16171d;--line:#33343e;--line-soft:#2a2b33;--text:#eeeef3;--muted:#a1a3b2;--dim:#7f8293;--accent:#b6a2ff;--accent-strong:#9c82ef;--accent-bg:#2d273e;--green:#8dd5bc;--code:#1a1b21;--radius:12px;font-size:16px;color-scheme:dark}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;display:flex;height:100dvh;overflow:hidden;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}button,input,select,a{ -webkit-tap-highlight-color:transparent}button{color:inherit}button:disabled{cursor:default;opacity:.4}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button svg{width:18px;height:18px;flex:none}svg.icon{fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}button{border:0;background:none}a{color:var(--accent)}[hidden]{display:none!important}::selection{background:#63508f;color:#fff}::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-thumb{background:#3f404c;border-radius:8px}::-webkit-scrollbar-thumb:hover{background:#5d5c70}::-webkit-scrollbar-track{background:transparent}
 .skip-link{position:fixed;left:10px;top:-80px;z-index:30;padding:10px 18px;background:var(--accent-bg)}.skip-link:focus{top:10px}.sidebar{width:252px;flex:none;background:var(--sidebar);border-right:1px solid var(--line-soft);display:flex;flex-direction:column;z-index:20}.brand{display:flex;gap:12px;align-items:center;padding:27px 22px 25px}.brand-mark{display:grid;place-items:center;width:40px;height:43px;border:1px solid #605478;border-radius:10px;color:#c1adff;background:#30273f;font-size:24px;font-weight:650;letter-spacing:-1px}.brand strong{display:block;font-size:17px;letter-spacing:1px;font-weight:600}.brand div>span{font:9px/2 Consolas,monospace;letter-spacing:1.5px;color:var(--dim)}.search-wrap{height:40px;margin:0 16px 23px;display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:8px;padding:0 11px;background:#17181d}.search-wrap:focus-within{border-color:var(--accent-strong)}.search-wrap>svg{width:15px;height:15px;fill:none;stroke:var(--dim);stroke-width:1.8;flex:none}input[type=search]{min-width:0;width:100%;border:0;outline:none!important;background:none;color:var(--text);font-size:12px}input[type=search]::-webkit-search-cancel-button{display:none}input::placeholder{color:var(--dim)}.clear-search{font-size:19px;padding:0;line-height:1;color:var(--muted)}.nav-label{display:flex;justify-content:space-between;padding:0 23px 12px;font-size:12px;letter-spacing:.7px;color:var(--dim)}.nav-label span:last-child{font:12px Consolas,monospace;color:var(--muted)}nav{flex:1;overflow-y:auto;padding:0 12px 22px;scrollbar-gutter:stable}.nav-group{margin-bottom:12px}.group-button{display:flex;width:100%;align-items:center;gap:9px;padding:8px 9px;text-align:left;color:#b4b5c3;font-size:13px;font-weight:600;border-radius:6px}.group-button:hover{color:var(--text);background:#24252c}.group-button .icon{color:var(--dim);width:16px;height:16px}.group-button .group-count{margin-left:auto;color:var(--dim);font:11px Consolas,monospace}.chevron{color:var(--dim);font-size:12px;transition:transform .15s}.group-button[aria-expanded=false] .chevron{transform:rotate(-90deg)}.nav-items{margin-top:3px}.nav-item{width:100%;position:relative;display:flex;align-items:center;gap:10px;text-align:left;min-height:35px;border-radius:6px;padding:6px 12px 6px 34px;color:var(--muted);font-size:13px;line-height:1.5;transition:background .12s,color .12s}.nav-item:hover{color:var(--text);background:#252630}.nav-item[aria-current=page]{color:#d2c3ff;background:var(--accent-bg)}.nav-item[aria-current=page]::before{content:"";position:absolute;left:12px;width:3px;height:15px;background:var(--accent);border-radius:3px}.nav-item .nav-fn{margin-left:auto;color:#737585;font:10px Consolas,monospace;white-space:nowrap}.nav-item[aria-current=page] .nav-fn{color:#a18ccb}.nav-empty{padding:20px 10px;color:var(--muted);font-size:14px}.sidebar-footer{display:flex;justify-content:space-between;align-items:center;margin:0 21px;padding:18px 0;border-top:1px solid var(--line-soft);font-size:11px;color:var(--dim)}.sidebar-footer span:last-child{font:9px Consolas,monospace;letter-spacing:1px}.sidebar-footer i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin-right:5px}.workspace{flex:1;min-width:0;display:flex;flex-direction:column}.topbar{height:72px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 36px;border-bottom:1px solid var(--line-soft)}.topbar-title{display:flex;align-items:center;gap:15px;font-size:13px;color:var(--muted)}.topbar-name{color:var(--text)}.topbar-divider{color:#545664}.mode-tabs{display:flex;gap:4px;padding:4px;background:#202127;border:1px solid var(--line-soft);border-radius:8px}.mode-tabs button{display:flex;align-items:center;gap:9px;padding:6px 13px;border-radius:5px;color:var(--muted);font-size:13px}.mode-tabs button[aria-selected=true]{color:var(--text);background:#36333f;box-shadow:0 1px 3px #0002}.mode-tabs button span{font:11px Consolas,monospace;color:var(--dim)}.mode-tabs button[aria-selected=true] span{color:var(--accent)}main{flex:1;min-height:0;overflow:auto;padding:32px 36px 25px;scrollbar-gutter:stable;outline:none}.page-inner{max-width:1440px;margin:0 auto}.eyebrow{display:flex;align-items:center;gap:8px;color:var(--dim);font-size:12px;letter-spacing:.5px;margin-bottom:12px}.eyebrow .index{font:12px Consolas,monospace;color:var(--accent)}.title-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.title-heading{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}h1{font-size:29px;letter-spacing:1px;font-weight:600;line-height:1.35;margin:0}.function-name{font:13px/1.8 Consolas,monospace;color:var(--accent)}.page-desc{margin:12px 0 21px;color:#b9bac7;font-size:15px;max-width:850px;line-height:1.75}.page-nav{display:flex;gap:6px;flex:none;padding-top:2px}.icon-button{width:33px;height:33px;border:1px solid var(--line);border-radius:7px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);font-size:22px}.icon-button:hover{background:#2c2b37;color:var(--text);border-color:#555064}.metadata{display:flex;gap:9px 20px;flex-wrap:wrap;margin-bottom:22px;color:var(--muted);font-size:12px}.meta-item{display:flex;align-items:center;gap:7px}.meta-item svg{width:14px;height:14px;color:var(--dim)}.property-tag{color:var(--green)}.recipe-workbench{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);gap:22px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0}.panel-bar{height:51px;padding:0 19px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line-soft)}.panel-bar h2{font-size:14px;font-weight:500;display:flex;align-items:center;gap:9px;margin:0}.panel-bar h2 svg{color:var(--dim);width:16px;height:16px}.panel-bar small{font:10px Consolas,monospace;letter-spacing:.7px;color:var(--dim)}.live-badge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)}.live-badge i{height:5px;width:5px;background:currentColor;border-radius:50%}.stage{position:relative;background:var(--stage);aspect-ratio:600/335;min-height:240px;max-height:420px;overflow:hidden;touch-action:pan-y}.stage>svg{display:block;width:100%;height:100%;position:absolute;inset:0}.stage>svg text{font-family:"Segoe UI","Microsoft YaHei",sans-serif}.stage-label{position:absolute;top:13px;left:17px;font:10px Consolas,monospace;letter-spacing:1px;color:#6d6e7f;pointer-events:none}.stage-hint{position:absolute;right:16px;top:12px;font-size:11px;color:var(--dim);pointer-events:none}.stage-readout{border-top:1px solid var(--line-soft);display:flex;gap:14px;justify-content:space-between;padding:11px 18px;background:#1b1c23;color:var(--muted);font:11px/1.5 Consolas,"Microsoft YaHei",monospace;min-height:40px}.stage-readout span:last-child{color:var(--accent);text-align:right}.transport{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--line-soft);background:#202127}.transport .transport-btn{width:28px;height:28px;display:grid;place-items:center;color:var(--text);border-radius:5px}.transport .transport-btn:hover{background:#35323f}.transport input{min-width:40px;flex:1;width:0}.transport output{font:11px Consolas,monospace;color:var(--muted);white-space:nowrap}.loop-toggle{font-size:11px;color:var(--dim);white-space:nowrap;padding:4px 7px;border:1px solid var(--line);border-radius:4px}.loop-toggle[aria-pressed=true]{color:var(--accent);border-color:#5e4d83;background:#2c263a}.preview-note{padding:10px 17px 12px;color:var(--dim);font-size:11px;line-height:1.65;border-top:1px solid var(--line-soft);min-height:41px}.parameter-section{margin-top:19px}.section-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}.section-bar h2{margin:0;font-size:14px;font-weight:500}.text-button{font-size:12px;color:var(--dim);display:flex;align-items:center;gap:5px;padding:3px 0}.text-button:hover{color:var(--accent)}.text-button svg{width:13px;height:13px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px 21px}.control{min-width:0}.control.full{grid-column:1/-1}.control label{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:12px;color:var(--muted);margin-bottom:6px}.control label span{font:10px Consolas,monospace;color:var(--dim)}.range-row{display:flex;align-items:center;gap:11px}.range-row input[type=range]{flex:1;width:0}.number-wrap{display:flex;align-items:center;gap:3px;border:1px solid var(--line);border-radius:5px;padding:3px 6px;background:#1b1c22}.number-wrap input{border:0;background:none;color:#d5c7ff;width:46px;padding:0;outline:none;font:12px Consolas,monospace;text-align:right;appearance:textfield}.number-wrap input::-webkit-inner-spin-button{display:none}.number-wrap span{font-size:10px;color:var(--dim)}input[type=range]{appearance:none;background:transparent;cursor:pointer;height:18px;margin:0;accent-color:var(--accent)}input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:4px;background:linear-gradient(to right,var(--accent-strong) var(--fill,50%),#3c3c49 var(--fill,50%))}input[type=range]::-webkit-slider-thumb{appearance:none;width:10px;height:10px;margin-top:-3.5px;border-radius:50%;background:#c8b4ff;box-shadow:0 0 0 3px #ac94f018}input[type=range]::-moz-range-track{height:3px;background:#45414e}input[type=range]::-moz-range-thumb{border:0;background:var(--accent);width:10px;height:10px}.control select,.control input[type=text]{width:100%;height:34px;border:1px solid var(--line);border-radius:6px;background:#1c1d23;color:var(--text);padding:4px 9px;font-size:13px}.copy-button{display:flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid #55476d;border-radius:6px;background:#332a44;color:#d6c9fc;font-size:12px}.copy-button:hover{background:#433457}.copy-button svg{width:14px;height:14px}.copy-button.copied{color:var(--green);border-color:#3e6b5e;background:#22372f}.code-scroll{max-height:410px;min-height:155px;overflow:auto;background:var(--code);padding:18px 0 20px}.code-scroll pre{font:12px/1.95 Consolas,"Cascadia Code",monospace;margin:0;tab-size:4}.code-line{display:block;white-space:pre;min-width:max-content;padding-right:20px;min-height:1.95em}.code-line::before{content:attr(data-line);display:inline-block;position:sticky;left:0;text-align:right;width:43px;padding-right:16px;margin-right:4px;color:#535767;background:var(--code);user-select:none}.token-comment{color:#788583}.token-string{color:#b7cf9e}.token-number{color:#e5be85}.token-key{color:#c0a4ec}.token-fn{color:#8fc7dc}.code-footer{border-top:1px solid var(--line-soft);padding:9px 18px;font-size:11px;color:var(--dim);display:flex;gap:8px;justify-content:space-between}.code-footer span:last-child{color:#a390c0}.setup-card{margin-top:18px;border:1px solid var(--line-soft);border-radius:10px;padding:17px 18px;background:#1d1e25}.setup-card h2{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:13px;font-weight:500}.setup-card h2 svg{width:15px;height:15px;color:var(--dim)}.setup-card ol{margin:0;padding-left:21px;font-size:12px;line-height:1.85;color:var(--muted)}.setup-card li+li{margin-top:5px}.setup-card li::marker{color:#8d79b5}.detail-section{border-top:1px solid var(--line-soft);margin-top:25px}.detail-section summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;padding:17px 0;font-size:13px;color:var(--muted)}.detail-section summary::-webkit-details-marker{display:none}.detail-section summary::after{content:"+";color:var(--dim);font:19px Consolas,monospace}.detail-section[open] summary::after{content:"−"}.detail-body{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:0 0 20px;font-size:13px;color:var(--muted);line-height:1.8}.detail-body p{margin:0 0 8px}.detail-body strong{font-weight:500;color:var(--text)}.parameter-table{width:100%;border-collapse:collapse;font-size:12px}.parameter-table td{padding:6px 10px 6px 0;vertical-align:top;border-bottom:1px solid var(--line-soft)}.parameter-table td:first-child{color:var(--accent);font-family:Consolas,monospace;white-space:nowrap;width:30%}.page-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid var(--line-soft);padding-top:17px;margin-top:3px;color:var(--dim);font-size:11px}.page-footer a{color:var(--dim);text-decoration:none}.page-footer a:hover{color:var(--accent)}.search-context{display:flex;align-items:center;justify-content:space-between;margin:0 0 22px;border:1px solid #514266;background:#272232;border-radius:7px;padding:10px 14px;font-size:13px;color:#c0b1da}.search-context button{font-size:12px;color:var(--accent)}.empty-state{text-align:center;max-width:500px;margin:100px auto}.empty-state .empty-symbol{font-size:40px;color:var(--accent);margin-bottom:16px}.empty-state h1{font-size:22px}.empty-state p{color:var(--muted);font-size:14px}.empty-state button{margin-top:16px;border:1px solid #65557e;border-radius:6px;padding:8px 18px;color:var(--accent)}
@@ -44,20 +44,72 @@
 /* Version 4: compact controls, optional detail and quick-start guide. */
 .parameter-field{min-width:0}.parameter-field.full{grid-column:1/-1}.parameter-field .control{min-width:0}.advanced-controls{margin-top:16px;border-top:1px solid var(--line-soft)}.advanced-controls>summary,.layer-structure>summary{padding:12px 0;color:var(--muted);font-size:12px;cursor:pointer}.advanced-controls .controls{padding:0 0 12px}.layer-structure{margin-top:10px;border-top:1px solid var(--line-soft)}.layer-structure pre{font:12px/1.8 Consolas,"Microsoft YaHei",monospace;color:var(--muted);white-space:pre-wrap;margin:0 0 5px}.basics-nav{display:flex;align-items:center;gap:9px;width:100%;padding:10px 12px;margin:0 0 16px;border:1px solid var(--line);border-radius:7px;text-align:left;font-size:13px;color:var(--muted)}.basics-nav .icon{width:15px;height:15px}.basics-nav:hover,.basics-nav[aria-current=page]{color:var(--accent);background:var(--accent-bg);border-color:#5e4d83}.basics-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.basics-grid .setup-card{margin-top:0;padding:22px}.basics-page .setup-card h2{font-size:15px}.basics-page p{color:var(--muted);font-size:13px;line-height:1.9}.basics-page .page-desc{font-size:15px}.basics-page pre{padding:12px 15px;background:var(--code);border-radius:6px;overflow:auto}.basics-page code{font:13px/1.8 Consolas,"Microsoft YaHei",monospace;color:var(--accent)}.basics-links{display:flex;flex-wrap:wrap;gap:12px}.basics-links button{padding:9px 14px;background:var(--accent-bg);color:var(--accent);border:1px solid #514464;border-radius:6px;font-size:13px}.basics-links button:hover{background:#40334f}.basics-footnote{margin-top:22px}.continuous-transport output{margin-left:auto}.number-wrap input{width:58px}.parameter-field input[type=text]{min-width:0}.parameter-field select{max-width:100%}.setup-card pre{tab-size:2}
 @media(max-width:760px){.basics-grid{grid-template-columns:1fr;gap:14px}.basics-grid .setup-card{padding:17px}.number-wrap input{width:44px}}
+
+.metadata{align-items:center}.metadata .function-name{margin:0;font-size:12px;line-height:1.5;overflow-wrap:anywhere}.subdued-desc{color:var(--dim)}
+
+/* v5: quieter headers and a consistent editorial grid. */
+body{font-family:Arial,Helvetica,"Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+.brand{align-items:center;gap:12px;padding:28px 20px 26px}
+.brand-mark{width:44px;height:44px;flex:none;border:0;border-radius:12px;background:#07045a;color:#aaa4ff;font:600 29px/1 Arial,Helvetica,sans-serif;letter-spacing:-1.6px;padding-right:2px}
+.brand-type{min-width:0}.brand strong{font-size:17px;line-height:1.3;font-weight:600;letter-spacing:0}
+.brand div>span{margin-top:7px;font:9px/1 Arial,Helvetica,sans-serif;letter-spacing:1.3px;color:#9294a4;white-space:nowrap}
+h1{font-size:32px;letter-spacing:-.02em;line-height:1.25;font-weight:600}
+.page-desc{font-size:14px;color:#9598a7;line-height:1.75;max-width:76ch;margin:14px 0 20px}
+.page-nav{padding-top:0}.metadata{gap:10px 24px;margin-bottom:25px}
+.output-switch{border-bottom:1px solid var(--line-soft);background:#1e1f26}
+.path-pulse-controls{display:flex;justify-content:space-between;align-items:center;padding:13px 19px;border-top:1px solid var(--line-soft)}
+.path-pulse-controls .text-button{color:var(--muted);padding:3px 0}.path-pulse-controls .text-button:hover{color:var(--accent)}
+.pulse-loop{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.pulse-loop i{width:29px;height:17px;background:#454551;border-radius:10px;padding:3px;transition:background .15s}
+.pulse-loop i::after{content:"";display:block;width:11px;height:11px;border-radius:50%;background:#b1b2bf;transition:transform .15s}
+.pulse-loop[aria-checked=true] i{background:#66558e}.pulse-loop[aria-checked=true] i::after{transform:translateX(12px);background:#e1d7ff}
+.swiss-intro{max-width:1230px;padding-top:8px}.intro-header{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:end;padding-bottom:34px}
+.intro-header h1{font-size:40px;line-height:1.2;letter-spacing:-.025em}.intro-header p{font-size:15px;line-height:1.6;color:var(--muted);margin:0 0 2px}
+.intro-workflow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;border-top:1px solid #686574;border-bottom:1px solid var(--line);padding:26px 0 28px}
+.step-mark{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px;color:var(--dim)}
+.step-mark>span{font:12px/1 Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:.05em}.step-mark svg{width:20px;height:20px}
+.swiss-intro h2{font-size:20px;line-height:1.4;font-weight:500;letter-spacing:-.02em;margin:0 0 13px}
+.swiss-intro p{font-size:13px;line-height:1.8;color:var(--muted);margin:0 0 13px}
+.swiss-intro .intro-header p{font-size:15px;margin:0 0 2px}
+.swiss-intro .secondary{color:var(--dim)}.swiss-intro kbd{font:11px/1.4 Arial,sans-serif;background:#272831;border:1px solid var(--line);border-radius:3px;padding:2px 5px;margin:0 4px}
+.intro-reference{display:grid;grid-template-columns:1fr 1fr;column-gap:50px}
+.intro-section{min-width:0;padding:30px 0 20px;border-bottom:1px solid var(--line)}
+.section-label{display:block;font-size:11px;letter-spacing:.06em;color:var(--dim);margin-bottom:15px}
+.intro-section pre{margin:18px 0;padding:16px 18px;background:#1d1e26;border:1px solid var(--line-soft);border-radius:4px;overflow:auto}
+.intro-section code{font:13px/1.6 Consolas,monospace;color:var(--accent)}
+.property-route{display:flex;flex-wrap:wrap;align-items:center;gap:9px;padding:17px 0;margin:3px 0 11px;font-size:12px;line-height:1.5}
+.property-route b{font-weight:400;color:var(--dim)}.property-route span{color:var(--muted)}.property-route strong{font-weight:500;color:var(--accent)}
+.value-examples{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:10px 0 18px}
+.value-examples code{display:block;font-size:24px;line-height:1.5;margin-bottom:7px}.value-examples span{font-size:12px;color:var(--muted)}
+.intro-links{display:flex;flex-direction:column}.intro-links button{display:flex;justify-content:space-between;align-items:center;color:var(--muted);text-align:left;padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:13px}.intro-links button:last-child{border:0}.intro-links button span{color:var(--dim)}.intro-links button:hover,.intro-links button:hover span{color:var(--accent)}
+.swiss-intro .basics-footnote{font-size:11px;color:var(--dim);padding-top:18px;margin:0}
+@media(min-width:1600px){.page-desc{font-size:15px}h1{font-size:35px}}
+@media(max-width:900px){.intro-header{grid-template-columns:1fr;gap:14px}.intro-workflow{gap:22px}.intro-reference{column-gap:30px}}
+@media(max-width:600px){h1{font-size:27px}.page-desc{font-size:13px}.swiss-intro{padding-top:0}.intro-header{padding-bottom:25px}.intro-header h1{font-size:32px}.intro-workflow{grid-template-columns:1fr;gap:0;padding:8px 0}.intro-workflow article{display:grid;grid-template-columns:28px 1fr;column-gap:17px;padding:21px 0;border-bottom:1px solid var(--line-soft)}.intro-workflow article:last-child{border:0}.step-mark{grid-column:1;grid-row:1/3;align-items:start;padding-top:6px;margin:0}.step-mark svg{display:none}.intro-workflow h2,.intro-workflow p{grid-column:2}.intro-workflow h2{font-size:18px;margin-bottom:9px}.intro-workflow p{margin:0}.intro-reference{grid-template-columns:1fr}.intro-section{padding:25px 0 20px}.path-pulse-controls{padding:12px 15px}}
+@media(prefers-reduced-motion:reduce){.pulse-loop i,.pulse-loop i::after{transition:none}}
+
+.recipe-text-box .stage{aspect-ratio:600/260;min-height:200px;max-height:300px}
+.recipe-text-box .code-scroll{max-height:clamp(190px,28vh,280px)}
+@media(max-width:760px){.recipe-text-box .stage{min-height:190px}.recipe-text-box .code-scroll{max-height:240px}}
+
+/* Short introductions use the available width and wrap naturally on narrow screens. */
+.page-desc{max-width:100%;text-wrap:pretty}
+
+.numeric-field{display:flex;align-items:center;gap:10px;height:34px;border:1px solid var(--line);border-radius:6px;background:#1c1d23;padding:4px 10px}.numeric-field input{min-width:0;width:100%;color:var(--text);border:0;outline:none;background:none;font:13px Consolas,monospace}.numeric-field:focus-within{border-color:var(--accent)}.numeric-field>span{flex:none;font-size:11px;color:var(--dim)}
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">跳到内容</a>
 <button class="scrim" id="scrim" aria-label="关闭目录" tabindex="-1" hidden></button>
 <aside class="sidebar" id="sidebar" aria-label="手册导航">
-  <div class="brand"><span class="brand-mark" aria-hidden="true">Ae</span><div><strong>表达式手册</strong><span>EXPRESSION MANUAL</span></div><button id="closeNav" class="icon-button mobile-only" aria-label="关闭目录">×</button></div>
+  <div class="brand"><span class="brand-mark" aria-hidden="true">Ae</span><div class="brand-type"><strong>表达式手册</strong><span>EXPRESSION MANUAL</span></div><button id="closeNav" class="icon-button mobile-only" aria-label="关闭目录">×</button></div>
   <div class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" aria-label="搜索表达式或快捷键" placeholder="搜索名称、属性、效果" autocomplete="off"><button id="clearSearch" class="clear-search" aria-label="清空搜索" hidden>×</button></div>
-  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">23</span></div>
+  <div class="nav-label"><span id="navLabel">表达式目录</span><span id="navCount">22</span></div>
   <nav id="nav" aria-label="分类目录"></nav>
-  <div class="sidebar-footer"><span><i></i> 离线手册</span><span>VERSION 4.0</span></div>
+  <div class="sidebar-footer"><span><i></i> 离线手册</span><span>VERSION 5.0</span></div>
 </aside>
 <div class="workspace">
-  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>23</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
+  <header class="topbar"><div class="topbar-title"><button id="openNav" class="icon-button mobile-only" aria-label="打开目录" aria-expanded="false" aria-controls="sidebar">☰</button><span class="topbar-name">动效工具箱</span><span class="topbar-divider">/</span><span id="topbarContext">表达式</span></div><div class="mode-tabs" role="tablist" aria-label="手册模式"><button id="tabExp" role="tab" aria-selected="true" aria-controls="main" data-mode="exp">表达式 <span>22</span></button><button id="tabKeys" role="tab" aria-selected="false" aria-controls="main" data-mode="keys" tabindex="-1">快捷键 <span>53</span></button></div></header>
   <main id="main" tabindex="-1" aria-labelledby="pageTitle"></main>
 </div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -271,14 +323,14 @@ recipe('timecode',{
 recipe('cursor',{
  title:'打字机',name:'打字机',fn:'Source Text · substring()',short:'typewriter',
  desc:'按指定速度逐字显示文本，可选择闪烁光标、开始延迟和结束停留。',
- params:[textParam('text','预览文字','Hello, motion.','AE读取文本图层原文字。'),range('speed','打字速度',12,2,40,1,'字/s'),choice('showCursor','显示光标','yes',[['yes','显示'],['no','隐藏']]),textParam('cursorChar','光标字符','|'),range('blinkSpeed','闪烁频率',2,.5,5,.5,'Hz'),range('startDelay','开始延迟',.4,0,2,.1,'s'),range('endDelay','光标停留',.5,0,3,.1,'s')],
- code:p=>`txt = value.toString();\nspeed = ${p.speed};\nstartDelay = ${p.startDelay};\nelapsed = Math.max(0, time - inPoint);\ntypingTime = Math.max(0, elapsed - startDelay);\ncount = Math.min(txt.length, Math.floor(typingTime * speed));\n`+(p.showCursor==='no'?'txt.substring(0, count);':`blinkSpeed = ${p.blinkSpeed};\nendDelay = ${p.endDelay};\nshowCursor = typingTime < txt.length / speed + endDelay;\nblink = Math.floor(elapsed * blinkSpeed * 2) % 2 == 0;\ncursor = showCursor ? (blink ? ${JSON.stringify(p.cursorChar).replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029')} : " ") : "";\ntxt.substring(0, count) + cursor;`),
+ params:[textParam('text','预览文字','Hello, motion.','AE读取文本图层原文字。'),range('speed','打字速度',12,2,40,1,'字/s'),choice('showCursor','显示光标','yes',[['yes','显示'],['no','隐藏']]),textParam('cursorChar','光标字符','│'),range('blinkSpeed','闪烁频率',2,.5,5,.5,'Hz'),range('startDelay','开始延迟',.4,0,2,.1,'s'),range('endDelay','光标停留',.5,0,3,.1,'s')],
+ code:p=>`txt = value.toString();\nspeed = ${p.speed};\nstartDelay = ${p.showCursor==='no'?0:p.startDelay};\nelapsed = Math.max(0, time - inPoint);\ntypingTime = Math.max(0, elapsed - startDelay);\ncount = Math.min(txt.length, Math.floor(typingTime * speed));\n`+(p.showCursor==='no'?'txt.substring(0, count);':`blinkSpeed = ${p.blinkSpeed};\nendDelay = ${p.endDelay};\nshowCursor = typingTime < txt.length / speed + endDelay;\nblink = Math.floor(elapsed * blinkSpeed * 2) % 2 == 0;\ncursor = showCursor ? (blink ? ${JSON.stringify(p.cursorChar).replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029')} : " ") : "";\ntxt.substring(0, count) + cursor;`),
  detail:'修改AE文本图层的内容即可复用。速度按字符串字符单位计算；复杂表情可能被分段显示。光标字符可自定义。',
  note:'在AE中修改原文字，表达式自动读取；隐藏光标后只保留逐字效果。',
- duration:p=>Math.max(3,p.text.length/p.speed+p.startDelay+(p.showCursor==='yes'?p.endDelay:0)+1)
+ duration:p=>Math.max(3,p.text.length/p.speed+(p.showCursor==='no'?0:p.startDelay)+(p.showCursor==='yes'?p.endDelay:0)+1)
 });
 recipe('counter',{
- title:'数字动画',name:'数字动画',short:'counter',desc:'让数字从起点变化到终点，可添加千位分隔、补零、小数和前后缀。',
+ title:'数字增长',name:'数字增长',short:'counter',desc:'让数字从起点变化到终点，可添加千位分隔、补零、小数和前后缀。',
  params:[range('start','起始数值',0,-200000,200000,1),range('end','结束数值',1000,-200000,200000,1),durationParam(),choice('separator','千位分隔','no',[['no','关闭'],['yes','开启']]),range('decimals','小数位数',0,0,3,1,'位'),range('minDigits','整数最少位数',1,1,8,1,'位','不足时在整数前补0，不会截断较长数值。'),textParam('prefix','前缀','','例如￥。'),textParam('suffix','后缀','','例如%、人、次。')],
  code:p=>`start = ${p.start};\nend = ${p.end};\nduration = ${p.duration};\nnum = linear(time - inPoint, 0, duration, start, end);\nstr = num.toFixed(${p.decimals});\nnegative = Number(str) < 0;\nif (str.charAt(0) == "-") str = str.substring(1);\nparts = str.split(".");\nwhile (parts[0].length < ${p.minDigits}) parts[0] = "0" + parts[0];\n${p.separator==='yes'?'parts[0] = parts[0].replace(/\\B(?=(\\d{3})+(?!\\d))/g, ",");\n':''}result = (negative ? "-" : "") + parts.join(".");\n${JSON.stringify(p.prefix)} + result + ${JSON.stringify(p.suffix)};`,
  detail:'起始值大于结束值时为倒计数。补零只影响整数部分；小数保留指定精度。需要稳定的数字宽度时，选择支持等宽数字的字体。',
@@ -334,12 +386,112 @@ for(const r of Object.values(recipesById)){
  if(Array.isArray(r.setup))r.setup=r.setup.map(tidy);
 }
 
+// Combine target direction and distance scaling in one interaction.
+const targetDirectionCode=recipesById.lookAt.code;
+recipe('lookAt',{
+ title:'朝向目标',short:'target',target:'Rotation / Scale',
+ desc:'拖动TARGET，同时观察朝向和距离缩放。切换属性，复制对应代码。',
+ params:[...recipesById.lookAt.params,choice('output','复制属性','direction',[['direction','朝向'],['scale','缩放 · S']]),...recipesById.distance.params.filter(p=>['near','far'].includes(p.key))],
+ code:p=>p.output==='scale'?(p.previewType==='3d'?`target = thisComp.layer("TARGET");\na = thisLayer.toWorld(thisLayer.anchorPoint);\nb = target.toWorld(target.anchorPoint);\nd = length(a, b);\ns = linear(d, 0, 800, ${p.near}, ${p.far});\n[s, s, s];`:recipesById.distance.code(p)):targetDirectionCode(p),
+ note:'朝向与缩放分别粘贴到对应属性。近处、远处缩放分别对应0、800像素的距离；三维模式使用世界空间距离。',
+ detail:'二维素材默认朝右，可调整角度修正；三维模式控制图层Z轴朝向目标。当前图层保持无父级，关闭自动定向。预览坐标按1:2示意显示。'
+});
+for(const [id,values] of [['counter',{start:0,end:100,duration:2,separator:'no',decimals:2,minDigits:1,prefix:'¥',suffix:''}],['fade',{fadeIn:.4,fadeOut:.4,inTime:2,outTime:5}]]){
+ for(const p of recipesById[id].params)if(Object.hasOwn(values,p.key))p.value=values[p.key];
+}
+recipe('path',{
+ desc:'拖动三个控制点塑造曲线，松手观察一次快速回弹。开启循环可重复观看。',
+ note:'回弹只用于网页演示，复制的路径表达式保持不变。在AE中，为P1、P2、P3的位置制作动画即可驱动路径。'
+});
+
+// FRAME properties use BOX-local coordinates, rather than layer coordinates.
+const textFramePointCode=`textLayer = thisComp.layer("TEXT");
+box = thisLayer.content("BOX").transform;
+function point(x, y) {
+    var p = thisLayer.fromComp(textLayer.toComp([x, y]));
+    var pos = box.position, anchor = box.anchorPoint;
+    var s = box.scale, a = -box.rotation * Math.PI / 180;
+    var dx = p[0] - pos[0], dy = p[1] - pos[1];
+    var sx = Math.abs(s[0]) < 0.00001 ? 0.00001 : s[0];
+    var sy = Math.abs(s[1]) < 0.00001 ? 0.00001 : s[1];
+    return [
+        (dx * Math.cos(a) - dy * Math.sin(a)) * 100 / sx + anchor[0],
+        (dx * Math.sin(a) + dy * Math.cos(a)) * 100 / sy + anchor[1]
+    ];
+}`;
+const oldTextFrameCode=recipesById['text-box'].code;
+const textFrameLabels={size:'大小',position:'位置',radius:'圆度',tail:'尖角'};
+recipesById['text-box'].code=p=>{
+ let code=oldTextFrameCode(p);
+ const layerPoint='function point(x, y) { return thisLayer.fromComp(textLayer.toComp([x, y])); }';
+ if(code.includes(layerPoint)){
+  code=code.replace('textLayer = thisComp.layer("TEXT");',textFramePointCode).replace('// 把文字边界转换到外框图层坐标；BOX组变换保持默认\n','').replace(layerPoint,'');
+ }
+ const destination=p.previewType==='tail'?'BOX内的尖角路径':'内容→BOX→FRAME→'+textFrameLabels[p.previewType];
+ return '// 粘贴到：'+destination+'\n'+code;
+};
+recipe('text-box',{
+ desc:'修改文字或换行，外框自动贴合。可切换普通边框与聊天气泡。',
+ setup:[
+  '新建二维点文本TEXT，在下方创建矩形形状图层。',
+  '将「矩形1」改名为BOX，「矩形路径1」改名为FRAME；BOX倾斜保持0。',
+  '将「大小」「位置」「圆度」代码分别贴到「内容→BOX→FRAME」的同名属性。',
+  '聊天气泡：新增普通路径Path，将尖角组拖入BOX后再贴「尖角」代码；同色填充，关闭描边。'
+ ],
+ note:'位置代码粘贴到FRAME的位置。修改文字或换行，外框会自动居中更新。',
+ detail:'支持二维点文本，可绑定TEXT为父级。代码已换算BOX的位置、锚点、缩放与旋转；BOX与尖角组的倾斜保持0，尖角组其余变换保持默认。BOX缩放不得为0。不要把FRAME的位置代码贴到图层或BOX的位置。末尾空行不一定增加文字边界；混合字号以首字符字号计算留白。'
+});
+const frameVariant=recipesById['text-box'].params.find(p=>p.key==='previewType');
+frameVariant.options=[['size','大小 · Size'],['position','位置 · Position'],['radius','圆度 · Roundness'],['tail','尖角 · Path']];
+frameVariant.explain='大小、位置、圆度分别粘贴到FRAME的同名属性；尖角粘贴到BOX内的普通路径。';
+
+const conciseCopy={
+ wiggle:{desc:'围绕原位置随机抖动，频率控制快慢，幅度控制范围。',setup:['将代码贴到图层的位置（Position）。','调整频率与幅度。'],note:'虚线为幅度范围；网页与AE的随机结果可能不同。'},
+ time:{desc:'按设定速度持续旋转，负值反向。',setup:['将代码贴到旋转（Rotation）。','动画从合成0秒开始，负速度反向。'],note:'负速度反向；重播回到0秒。'},
+ sin:{desc:'沿X轴或Y轴往复悬浮，支持多对象错峰。',setup:['贴到未分离维度的二维位置（Position）。','修改幅度和频率，保留原有关键帧。'],note:'幅度控制距离，频率控制快慢，相位控制错峰。'},
+ linear:{desc:'横向拖动改变宽度，纵向拖动改变高度。',setup:['新建无父级的二维控制图层INPUT。','将代码贴到另一二维图层的缩放（Scale）。','移动INPUT：X控制宽度，Y控制高度，输入范围0–1000。'],note:'拖动时自动吸附中心；方向键微调，双击复位。'},
+ fade:{desc:'随图层入点淡入、出点淡出。',setup:['将代码贴到不透明度（Opacity）。','调整图层入点、出点即可。'],note:'短图层的淡入、淡出各不超过一半时长。'},
+ elastic:{desc:'在关键帧结束后添加衰减回弹。',setup:['在同一属性设置起止关键帧。','结束关键帧使用线性插值或保留非零入速度。','将代码贴到该属性；结束速度为0时回弹较弱。'],note:'网页演示下落或缩放回弹；AE效果取决于关键帧结束速度。'},
+ loop:{desc:'重复关键帧动画，可循环或往返播放。',setup:['设置至少2个关键帧，将代码贴到同一属性。','循环从最后一个关键帧后开始。'],note:'前2秒为原动画，之后循环；不适用于源文本或路径。'},
+ posterize:{desc:'降低动画采样帧率，呈现逐格变化。',setup:['在位置、缩放或旋转上设置线性关键帧。','将代码贴到同一属性，调整采样帧率。'],note:'上下对比相同动画；静止属性不会自动产生运动。'},
+ cursor:{desc:'逐字显示文字，可选闪烁光标。',setup:['先输入原文字，再将代码贴到源文本（Source Text）。','动画从图层入点开始。'],note:'AE读取图层原文字；隐藏光标时无开始延迟。'},
+ counter:{desc:'数字逐渐增长，可设置小数、补零与前后缀。',setup:['新建文本图层，将代码贴到源文本（Source Text）。','设置起止值、时长与格式，结束后保持最终值。'],note:'起始值大于结束值时为倒计数。'},
+ timecode:{desc:'显示当前时间码：时、分、秒、帧。',setup:['将代码贴到文本图层的源文本。','帧率在合成设置修改，显示格式在项目设置修改。'],note:'网页仅示意时间码，实际显示以AE设置为准。'},
+ 'text-box':{desc:'文字变化或换行时，外框自动贴合。',note:'位置代码粘贴到FRAME的位置。'},
+ anchor:{desc:'文字改变时，锚点保持指定对齐位置。',setup:['将代码贴到二维点文本的锚点。','调整位置，再制作旋转或缩放动画。'],note:'绿色十字为锚点；改变锚点后可调整图层位置。'},
+ random:{desc:'按种子随机改变位置或颜色。',setup:['随机位置贴到位置（Position），随机颜色贴到填充颜色（Fill Color）。','复制多个图层，使用相同种子和更新频率。','选择固定结果或按频率更新。'],note:'随机颜色固定位置，随机位置固定颜色；固定结果不随时间更新。'},
+ blink:{desc:'按设定频率随机改变不透明度。',setup:['将代码贴到不透明度（Opacity）。','设置更新频率与不透明度下限。'],note:'网页与AE使用的随机序列可能不同。'},
+ lookAt:{desc:'拖动目标，同时改变朝向与大小。',note:'距离0–800对应近处到远处缩放；三维模式使用世界距离。'},
+ follow:{desc:'多个对象依次淡入，延迟跟随领头对象。',setup:['为二维领头图层LEADER的位置设置关键帧。','将跟随图层连续排列在LEADER下方，全部保持无父级。','给每个跟随图层分别粘贴位置、不透明度代码。'],note:'位置与不透明度代码需同时使用。'},
+ stagger:{desc:'多个对象在各自位置依次上移、淡入。',setup:['新建空对象CTRL，将入场图层连续放在其下方。','摆好各图层位置，分别粘贴位置、不透明度代码。','动画从CTRL入点开始，顺序由图层排列决定。'],note:'修改间隔后，同步更新位置与不透明度代码。'},
+ audio:{desc:'将音频强弱转换为图层大小变化。',setup:['选中音频层：动画→关键帧辅助→将音频转换为关键帧。','将生成层命名为Audio Amplitude，双声道滑块改名为AMP。','将代码贴到二维图层的缩放（Scale）。'],note:'麦克风仅在本页处理，不录制、不上传；离开页面即停止。'},
+ control:{desc:'拖动滑块，控制图层旋转角度。',setup:['添加滑块控制（Slider Control），改名为R。','将代码贴到旋转（Rotation），调整R数值。'],note:'滑块0–100对应0至最大角度，使用缓动映射。'},
+ path:{desc:'拖动三点控制曲线，可预览弹动。',setup:['新建二维空对象P1、P2、P3。','新建二维形状图层，添加贝塞尔路径，组变换保持默认。','将代码贴到路径（Path），移动空对象控制曲线。'],note:'弹动仅为网页演示；AE需另给控制点制作动画。'},
+ 'path-motion':{desc:'对象沿路径移动，并跟随路径转向。',setup:['新建二维形状图层PATH，绘制开放曲线。','将形状组命名为ROUTE、路径命名为CURVE，组变换保持默认。','新建朝右、无父级的二维箭头，分别粘贴位置和旋转代码。'],note:'网页控制点仅修改示例；AE使用PATH中的实际曲线。'}
+};
+for(const [id,copy] of Object.entries(conciseCopy))recipe(id,copy);
+
+recipe('timecode',{
+ desc:'按设定起止时间计时，结束后保持。',
+ params:[
+  {...range('startTime','开始时间',0,0,86400,.01,'秒','时间码的起始值，单位为秒。'),type:'number'},
+  {...range('endTime','结束时间',10,0,86400,.01,'秒','时间码的最终值；小于开始时间时倒计时。'),type:'number'},
+  {...range('duration','计时时长',10,.1,86400,.1,'秒','从开始值到结束值所用的时长；等于两者差值的绝对值时为正常速度。'),type:'number'},
+  choice('fps','时间码帧率',30,[[24,'24帧/秒'],[25,'25帧/秒'],[30,'30帧/秒'],[50,'50帧/秒'],[60,'60帧/秒']],'请与AE合成帧率一致；不改变合成本身的帧率。')
+ ],
+ setup:['将代码贴到文本图层的源文本。','设置起止时间（秒）、计时时长与帧率，结束后保持终值。'],
+ note:'结束时间小于开始时间时倒计时；帧率请与合成一致。',
+ detail:'从图层入点开始。起止时间单位为秒，计时时长决定从起点到终点所用的秒数；设置为两者差值的绝对值时正常计时。固定显示“时:分:秒:帧”，支持所列整数帧率。网页重播仅控制预览。',
+ code:p=>`startTime = ${p.startTime};\nendTime = ${p.endTime};\nduration = ${p.duration};\nfps = ${p.fps};\nseconds = linear(time - inPoint, 0, duration, startTime, endTime);\nframes = Math.max(0, Math.floor(seconds * fps + 0.000001));\nfunction pad(n) { return ("0" + n).slice(-2); }\nh = Math.floor(frames / (fps * 3600));\nm = Math.floor(frames / (fps * 60)) % 60;\ns = Math.floor(frames / fps) % 60;\nf = frames % fps;\npad(h) + ":" + pad(m) + ":" + pad(s) + ":" + pad(f);`,
+ duration:p=>p.duration+1
+});
+
 const groups = [
  {id:'motion',name:'基础与运动',icon:'motion',ids:['wiggle','time','sin','linear','fade']},
  {id:'looping',name:'弹性与循环',icon:'loop',ids:['elastic','loop','posterize']},
  {id:'text',name:'文本与数字',icon:'text',ids:['cursor','counter','timecode','text-box','anchor']},
  {id:'random',name:'随机与颜色',icon:'random',ids:['random','blink']},
- {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','distance','follow','stagger']},
+ {id:'relation',name:'图层关系',icon:'layers',ids:['lookAt','follow','stagger']},
  {id:'control',name:'控制器与路径',icon:'sliders',ids:['audio','control','path','path-motion']}
 ];
 const recipes = groups.flatMap(g=>g.ids.map(id=>Object.assign(recipesById[id],{group:g})));
@@ -370,37 +522,37 @@ function renderNav(){
  $('nav').innerHTML=exp?groups.map(g=>{
   const items=visible.filter(r=>r.group.id===g.id); if(!items.length)return '';
   const collapsed=!state.query.exp&&state.collapsed[g.id];
-  return `<section class="nav-group"><button class="group-button" data-group="${g.id}" aria-expanded="${!collapsed}" aria-controls="group-${g.id}">${icon(g.icon)}<span>${g.name}</span><span class="group-count">${items.length}</span><span class="chevron" aria-hidden="true">${icon("down")}</span></button><div class="nav-items" id="group-${g.id}" ${collapsed?'hidden':''}>${items.map(r=>`<button class="nav-item" data-recipe="${r.id}" ${state.current===r.id?'aria-current="page"':''} title="${escapeHTML(r.fn)}"><span>${r.title}</span><span class="nav-fn">${r.short}</span></button>`).join('')}</div></section>`;
+  return `<section class="nav-group"><button class="group-button" data-group="${g.id}" aria-expanded="${!collapsed}" aria-controls="group-${g.id}">${icon(g.icon)}<span>${g.name}</span><span class="group-count">${items.length}</span><span class="chevron" aria-hidden="true">${icon("down")}</span></button><div class="nav-items" id="group-${g.id}" ${collapsed?'hidden':''}>${items.map(r=>`<button class="nav-item" data-recipe="${r.id}" ${state.current===r.id?'aria-current="page"':''} title="${escapeHTML(r.fn)}"><span>${r.title}</span></button>`).join('')}</div></section>`;
  }).join(''):visible.map(g=>`<section class="nav-group"><button class="group-button key-nav" data-key-group="${g.id}" ${state.keyGroup===g.id?'aria-current="page"':''}>${icon('keyboard')}<span>${g.name}</span><span class="group-count">${g.list.length}</span></button></section>`).join('');
  if(!visible.length)$('nav').innerHTML='<div class="nav-empty">没有匹配内容<br>试试“位置”或“循环”</div>';
- if(exp){if(state.basics)document.querySelectorAll('#nav [aria-current]').forEach(el=>el.removeAttribute('aria-current'));$('nav').insertAdjacentHTML('afterbegin',`<button class="basics-nav" data-basics ${state.basics?'aria-current="page"':''}>${icon('info')}快速入门</button>`);}
+ if(exp){if(state.basics)document.querySelectorAll('#nav [aria-current]').forEach(el=>el.removeAttribute('aria-current'));$('nav').insertAdjacentHTML('afterbegin',`<button class="basics-nav" data-basics ${state.basics?'aria-current="page"':''}>${icon('info')}表达式入门</button>`);}
 }
 function searchContext(count){return state.query[state.mode]?`<div class="search-context"><span>“${escapeHTML(state.query[state.mode])}” · 找到 ${count} 项</span><button data-action="clear">清空搜索</button></div>`:''}
 function emptyContent(){stopMicrophone();cancelAnimationFrame(state.frame);$('main').innerHTML=`<div class="empty-state"><div class="empty-symbol">⌕</div><h1 id="pageTitle">没有找到匹配内容</h1><p>试试函数名、应用属性或效果，例如 wiggle、位置、循环。</p><button data-action="clear">清空搜索</button></div>`;}
 function renderControl(p){
  const v=params()[p.key], id='param-'+p.key;
- return `<div class="control ${p.type==='text'?'full':''}"><label for="${id}">${p.label}<span>${p.key}</span></label>${p.type==='range'?`<div class="range-row"><input id="${id}" type="range" title="双击滑块圆点恢复默认值 ${p.value}${p.unit || ''}" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}" style="--fill:${(v-p.min)/(p.max-p.min)*100}%"><div class="number-wrap"><input type="number" aria-label="${p.label}数值" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div></div>`:p.type==='select'?`<select id="${id}" data-param="${p.key}">${p.options.map(([val,label])=>`<option value="${val}" ${String(v)===String(val)?'selected':''}>${label}</option>`).join('')}</select>`:p.multiline?`<textarea id="${id}" data-param="${p.key}" rows="3" maxlength="600" placeholder="输入文字，按 Enter 换行">${escapeHTML(v)}</textarea><button class="text-button text-example" data-action="text-example">填入两行聊天示例</button>`:`<input id="${id}" type="text" data-param="${p.key}" value="${escapeHTML(v)}" maxlength="60">`}</div>`;
+ return `<div class="control ${p.type==='text'?'full':''}"><label for="${id}">${p.label}<span>${p.key}</span></label>${p.type==='number'?`<div class="numeric-field"><input id="${id}" type="number" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div>`:p.type==='range'?`<div class="range-row"><input id="${id}" type="range" title="双击滑块圆点恢复默认值 ${p.value}${p.unit || ''}" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}" style="--fill:${(v-p.min)/(p.max-p.min)*100}%"><div class="number-wrap"><input type="number" aria-label="${p.label}数值" data-param="${p.key}" min="${p.min}" max="${p.max}" step="${p.step}" value="${v}"><span>${p.unit}</span></div></div>`:p.type==='select'?`<select id="${id}" data-param="${p.key}">${p.options.map(([val,label])=>`<option value="${val}" ${String(v)===String(val)?'selected':''}>${label}</option>`).join('')}</select>`:p.multiline?`<textarea id="${id}" data-param="${p.key}" rows="3" maxlength="600" placeholder="输入文字，按 Enter 换行">${escapeHTML(v)}</textarea><button class="text-button text-example" data-action="text-example">填入两行聊天示例</button>`:`<input id="${id}" type="text" data-param="${p.key}" value="${escapeHTML(v)}" maxlength="60">`}</div>`;
 }
 function renderRecipe(){
  if(state.basics){renderBasics();return}
  if(state.current!=='audio')stopMicrophone();
  cancelAnimationFrame(state.frame);state.last=0;
  const r=current(),visible=matchingRecipes(); if(!visible.length){emptyContent();return}
- const manual=manualIds.has(r.id)||r.id==='follow';
- $('main').innerHTML=`<div class="page-inner">${searchContext(visible.length)}
- <div class="eyebrow"><span>${r.group.name}</span></div>
- <div class="title-row"><div class="title-heading"><h1 id="pageTitle">${r.title}</h1><span class="function-name">${escapeHTML(r.fn)}</span></div><div class="page-nav"><button class="icon-button" data-action="prev" aria-label="上一个表达式" title="上一个表达式" ${visible.indexOf(r)<=0?'disabled':''}>${icon('left')}</button><button class="icon-button" data-action="next" aria-label="下一个表达式" title="下一个表达式" ${visible.indexOf(r)>=visible.length-1?'disabled':''}>${icon('chevron')}</button></div></div>
- <p class="page-desc">${r.desc}</p><div class="metadata"><span class="meta-item property-tag">${icon('layers')}${r.target}</span><span class="meta-item">${icon('key')}${r.needs}</span></div>
+ const manual=manualIds.has(r.id)||r.id==='follow';if(r.id==='path'&&pathDemo.fresh){pathDemo.fresh=false;startPathPulse(false)}
+ $('main').innerHTML=`<div class="page-inner recipe-${r.id}">${searchContext(visible.length)}
+
+ <div class="title-row"><div class="title-heading"><h1 id="pageTitle">${r.title}</h1></div><div class="page-nav"><button class="icon-button" data-action="prev" aria-label="上一个表达式" title="上一个表达式" ${visible.indexOf(r)<=0?'disabled':''}>${icon('left')}</button><button class="icon-button" data-action="next" aria-label="下一个表达式" title="下一个表达式" ${visible.indexOf(r)>=visible.length-1?'disabled':''}>${icon('chevron')}</button></div></div>
+ <p class="page-desc${r.id==='counter'?' subdued-desc':''}">${r.desc}</p><div class="metadata"><span class="meta-item property-tag">${icon('layers')}${r.target}</span>${r.needs&&r.needs!=='无需关键帧'?`<span class="meta-item">${icon('key')}${r.needs}</span>`:''}</div>
  <div class="recipe-workbench"><div class="preview-column"><section class="panel preview-panel" aria-labelledby="previewTitle"><div class="panel-bar"><h2 id="previewTitle">${icon('box')}效果预览</h2><span class="live-badge" id="playStatus"><i></i>${manual?'交互演示':state.playing?'播放中':'已暂停'}</span></div>
- ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="0 0 600 335" role="${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg></div>
- ${manual?'':`<div class="transport"><button class="transport-btn" data-action="play" id="playButton" aria-label="${state.playing?'暂停演示':'播放演示'}" title="${state.playing?'暂停演示':'播放演示'}">${icon(state.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击恢复到 0 秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${state.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${state.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`}
+ ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="${r.id==='text-box'?'0 35 600 260':'0 0 600 335'}" role="${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg></div>
+ ${r.id==='path'?renderPathPulseControls():''}${manual?'':`<div class="transport"><button class="transport-btn" data-action="play" id="playButton" aria-label="${state.playing?'暂停演示':'播放演示'}" title="${state.playing?'暂停演示':'播放演示'}">${icon(state.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击恢复到 0 秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${state.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${state.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`}
  </section>
  <section class="parameter-section" aria-labelledby="parameterTitle"><div class="section-bar"><h2 id="parameterTitle">调整参数</h2><button class="text-button" data-action="reset">${icon('replay')}恢复默认</button></div>${renderParameterFields(r)}</section></div>
- <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box'].includes(r.id)?renderVariants(r):''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
+ <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box'].includes(r.id)?renderVariants(r):''}${r.id==='lookAt'?renderTargetOutputs():''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
  <section class="setup-card"><h2>${icon('info')}在 AE 中使用</h2><ol>${r.setup.map(s=>`<li>${escapeHTML(s)}</li>`).join('')}</ol></section></div></div>
  <details class="detail-section"><summary>参数解释与使用注意</summary><div class="detail-body"><table class="parameter-table"><tbody>${r.params.map(p=>`<tr><td>${p.key}</td><td>${p.explain||p.label}</td></tr>`).join('')}</tbody></table><div>${r.note?`<p>${escapeHTML(r.note)}</p>`:""}<p><strong>使用提示</strong></p><p>${escapeHTML(r.detail||'')}</p><p>${r.id==='path'?'形状组自身的变换应保持默认。重叠控制点会产生退化曲线，请拉开控制点。':'涉及具体图层和效果时，请先按“在 AE 中使用”完成准备。'}</p></div></div></details>
  <footer class="page-footer"><span>${recipes.length} 个表达式 · 参数修改即时生效</span><a href="${referenceURL}" target="_blank" rel="noopener noreferrer">Adobe 表达式参考 ↗</a></footer></div>`;
- updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();bindFade();syncAudioUI();if(r.id==='time')document.querySelector('.function-name').textContent='time × '+params().speed;schedule();
+ updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();bindFade();syncAudioUI();schedule();
 }
 function highlight(code){
  const rx=/(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b(?:if|else|for|true|false|var|const|let)\b|\b[A-Za-z_$][\w$]*(?=\s*\())/g;
@@ -418,7 +570,7 @@ function updateCode(){const el=$('code');if(!el)return;el.innerHTML=current().co
   for(const key of ['x','y'])document.querySelectorAll('[data-param="'+key+'"]').forEach(el=>el.disabled=params().previewType==='color');
  }
  if(state.current==='text-box'){
-  $('codeHint').textContent={size:'矩形路径 · Size',position:'矩形路径 · Position',radius:'矩形路径 · Roundness',tail:'聊天气泡专用 · 独立 Path'}[params().previewType];
+  $('codeHint').textContent={size:'FRAME → 大小',position:'FRAME → 位置',radius:'FRAME → 圆度',tail:'BOX → 尖角路径'}[params().previewType];
   for(const [key,disabled]of [['radius',params().radiusMode!=='fixed'],['radiusRatio',params().radiusMode!=='auto'],['tailSide',params().boxStyle!=='bubble']])document.querySelectorAll('[data-param="'+key+'"]').forEach(el=>el.disabled=disabled);
  }
  if(state.current==='elastic')$('codeHint').textContent=params().previewType==='position'?'位置 · 向上回弹':'缩放 · 双向弹性';
@@ -430,9 +582,11 @@ function renderShortcuts(){
  stopMicrophone();
  cancelAnimationFrame(state.frame);state.last=0;
  const groups=matchingShortcuts(),count=groups.reduce((n,g)=>n+g.list.length,0);if(!count){emptyContent();return}
- $('main').innerHTML=`<div class="page-inner">${searchContext(count)}<div class="eyebrow">KEYBOARD REFERENCE</div><h1 id="pageTitle">常用快捷键</h1><p class="page-desc">按操作查找，直接回到创作。搜索支持功能名称与按键组合。</p><div class="shortcut-summary"><span>${count} 项快捷键 · ${groups.length} 个分类</span><span>Windows · 默认键位</span></div>${groups.map(g=>`<section class="shortcut-section" id="${g.id}"><h2>${g.name}<span>${g.list.length}</span></h2><div class="shortcut-list">${g.list.map(k=>`<div class="key-row"><span class="key-description">${escapeHTML(k.desc)}</span><span class="key-combo">${k.key.split(' + ').map(part=>`<kbd>${escapeHTML(part)}</kbd>`).join('<span class="key-plus">+</span>')}</span></div>`).join('')}</div></section>`).join('')}<footer class="page-footer"><span>快捷键可在 AE 中自定义，实际以当前设置为准。</span><a href="${shortcutURL}" target="_blank" rel="noopener noreferrer">Adobe 快捷键参考 ↗</a></footer></div>`;
+ $('main').innerHTML=`<div class="page-inner">${searchContext(count)}<h1 id="pageTitle">常用快捷键</h1><p class="page-desc">按功能或按键查找常用快捷键。</p><div class="shortcut-summary"><span>${count} 项快捷键 · ${groups.length} 个分类</span><span>Windows · 默认键位</span></div>${groups.map(g=>`<section class="shortcut-section" id="${g.id}"><h2>${g.name}<span>${g.list.length}</span></h2><div class="shortcut-list">${g.list.map(k=>`<div class="key-row"><span class="key-description">${escapeHTML(k.desc)}</span><span class="key-combo">${k.key.split(' + ').map(part=>`<kbd>${escapeHTML(part)}</kbd>`).join('<span class="key-plus">+</span>')}</span></div>`).join('')}</div></section>`).join('')}<footer class="page-footer"><span>快捷键可在 AE 中自定义，实际以当前设置为准。</span><a href="${shortcutURL}" target="_blank" rel="noopener noreferrer">Adobe 快捷键参考 ↗</a></footer></div>`;
 }
 function selectRecipe(id,{focus=false}={}){
+ if(id==='distance'){id='lookAt';state.params.lookAt.output='scale'}
+ if(id==='path')pathDemo.fresh=true;
  if(id==='basics'||id==='value'){state.basics=true;state.time=0;try{history.replaceState(null,'','#basics')}catch{}renderNav();renderBasics();$('main').scrollTop=0;closeNav();return}
  if(id==='typewriter'){id='cursor';state.params.cursor.showCursor='no'}
  if(id==='counter-format'){id='counter';state.params.counter.separator='yes';state.params.counter.end=128000}
@@ -472,8 +626,9 @@ function updateTransport(){
  const d=duration();$('timeline').max=d;$('timeline').value=Math.min(state.time,d);$('timeline').style.setProperty('--fill',(state.time/d*100)+'%');$('timeReadout').textContent=state.time.toFixed(2)+' s';
  if($('playButton').getAttribute('aria-label')!==(state.playing?'暂停演示':'播放演示'))$('playButton').innerHTML=icon(state.playing?'pause':'play');$('playButton').setAttribute('aria-label',state.playing?'暂停演示':'播放演示');$('playButton').title=state.playing?'暂停演示':'播放演示';$('playStatus').innerHTML='<i></i>'+(state.playing?'播放中':'已暂停');$('repeatButton').setAttribute('aria-pressed',state.repeat);
 }
-function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(!state.basics&&state.mode==='exp'&&(state.playing||mic.status==='live')&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
+function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(state.current==='path'){if(!state.basics&&state.mode==='exp'&&pathDemo.running&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick);return}if(!state.basics&&state.mode==='exp'&&(state.playing||mic.status==='live')&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
 function tick(now){
+ if(state.current==='path'){tickPathPulse(now);return}
  if(state.current==='audio'&&mic.mode!=='simulated'&&mic.status!=='live')return;
  if(state.mode!=='exp'||(!state.playing&&mic.status!=='live')||document.hidden)return;
  if(mic.status==='live')sampleMicrophone(state.last?Math.min((now-state.last)/1000,.1):1/60);
@@ -485,8 +640,9 @@ function tick(now){
 function onParameter(input){
  const p=current().params.find(p=>p.key===input.dataset.param);if(!p)return;
  let value=input.value;
- if(p.type==='range'){if(value===''||!Number.isFinite(Number(value)))return;value=Math.max(p.min,Math.min(p.max,Number(value)));value=Number((Math.round((value-p.min)/p.step)*p.step+p.min).toFixed(4));}
+ if(p.type==='range'||p.type==='number'){if(value===''||!Number.isFinite(Number(value)))return;value=Math.max(p.min,Math.min(p.max,Number(value)));value=Number((Math.round((value-p.min)/p.step)*p.step+p.min).toFixed(4));}
  if(p.key==='fps'&&current().id==='timecode')value=Number(value);
+ if(state.current==='timecode'){state.time=0;state.last=0}
  params()[p.key]=value;
  if(state.current==='fade'){
   if(p.key==='inTime')params().outTime=Math.max(params().outTime,Number(value)+.5);
@@ -500,11 +656,13 @@ function onParameter(input){
  }
  if(p.key==='cursorChar'){state.time=0;state.last=0}
  syncVariants();
- if(state.current==='time')document.querySelector('.function-name').textContent='time × '+params().speed;
+ 
  document.querySelectorAll('[data-param="'+p.key+'"]').forEach(el=>{if(el!==input)el.value=value;if(el.type==='range')el.style.setProperty('--fill',(value-p.min)/(p.max-p.min)*100+'%')});
  if(!isContinuous())state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
 }
 function action(name){
+ if(name==='path-pulse'){startPathPulse();return}
+ if(name==='path-loop'){pathDemo.loop=!pathDemo.loop;syncPathPulseUI();if(pathDemo.loop&&!pathDemo.running)startPathPulse();return}
  if(name==='text-example'){onParameter({dataset:{param:'text'},value:'Hello John, 今天会下雨吗？\n今天不会下雨。'});return}
  if(name==='follow-auto'){resetFollow();state.playing=true;schedule();drawScene();return}
  if(name==='calibrate'){calibrateMicrophone();return}
@@ -514,21 +672,21 @@ function action(name){
  if(name==='clear'){clearSearch();return}
  if(name==='copy'){copyCode();return}
  if(name==='prev'||name==='next'){const list=matchingRecipes(),i=list.findIndex(r=>r.id===state.current);const r=list[i+(name==='next'?1:-1)];if(r)selectRecipe(r.id);return}
- if(name==='reset'){if(state.current==='follow')resetFollow();if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
+ if(name==='reset'){if(state.current==='path'){pathDemo.points=[[100,175],[300,175],[500,175]];pathDemo.fresh=true}if(state.current==='follow')resetFollow();if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
  if(name==='play'){state.playing=!state.playing;if(!isContinuous()&&state.time>=duration())state.time=0}
  if(name==='replay'){state.time=0;state.playing=true}
  if(name==='repeat')state.repeat=!state.repeat;
  updateTransport();drawScene();schedule();
 }
 function initialize(){
- const hash=location.hash.slice(1);if(['basics','value'].includes(hash))state.basics=true;else if(hash==='typewriter'){state.current='cursor';state.params.cursor.showCursor='no'}else if(hash==='counter-format'){state.current='counter';state.params.counter.separator='yes';state.params.counter.end=128000}else if(hash==='ease'){state.current='linear';state.params.linear.previewType='ease'}else if(hash==='color'){state.current='random';state.params.random.previewType='color'}else if(recipes.some(r=>r.id===hash))state.current=hash;
+ const hash=location.hash.slice(1);if(['basics','value'].includes(hash))state.basics=true;else if(hash==='typewriter'){state.current='cursor';state.params.cursor.showCursor='no'}else if(hash==='counter-format'){state.current='counter';state.params.counter.separator='yes';state.params.counter.end=128000}else if(hash==='ease'){state.current='linear';state.params.linear.previewType='ease'}else if(hash==='color'){state.current='random';state.params.random.previewType='color'}else if(hash==='distance'){state.current='lookAt';state.params.lookAt.output='scale'}else if(recipes.some(r=>r.id===hash))state.current=hash;
  groups.forEach(g=>state.collapsed[g.id]=g.id!==current().group.id);
  $('nav').addEventListener('click',e=>{const r=e.target.closest('[data-recipe]');if(r){selectRecipe(r.dataset.recipe);return}const g=e.target.closest('[data-group]');if(g){state.collapsed[g.dataset.group]=!state.collapsed[g.dataset.group];renderNav();document.querySelector('[data-group="'+g.dataset.group+'"]').focus({preventScroll:true});return}const k=e.target.closest('[data-key-group]');if(k){state.keyGroup=k.dataset.keyGroup;renderNav();$(state.keyGroup)?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'});closeNav()}});
  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
  document.querySelector('.mode-tabs').addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const mode=e.key==='Home'?'exp':e.key==='End'?'keys':state.mode==='exp'?'keys':'exp';setMode(mode);$(mode==='exp'?'tabExp':'tabKeys').focus()}});
  $('search').addEventListener('input',handleSearch);$('clearSearch').addEventListener('click',()=>{clearSearch();$('search').focus()});
  $('openNav').addEventListener('click',openNav);$('closeNav').addEventListener('click',()=>{closeNav();$('openNav').focus()});$('scrim').addEventListener('click',closeNav);
- $('main').addEventListener('click',e=>{const variant=e.target.closest('[data-variant]');if(variant){onParameter({dataset:{param:'previewType'},value:variant.dataset.variant});return}const b=e.target.closest('[data-action]');if(b)action(b.dataset.action)});
+ $('main').addEventListener('click',e=>{const output=e.target.closest('[data-output]');if(output){onParameter({dataset:{param:'output'},value:output.dataset.output});return}const variant=e.target.closest('[data-variant]');if(variant){onParameter({dataset:{param:'previewType'},value:variant.dataset.variant});return}const b=e.target.closest('[data-action]');if(b)action(b.dataset.action)});
  $('main').addEventListener('dblclick',e=>{const input=e.target.closest('input[type="range"]');if(!input)return;e.preventDefault();if(input.id==='timeline'){state.time=0;state.last=0;drawScene();updateTransport();return}resetParameter(input.dataset.param)});
  $('main').addEventListener('input',e=>{if(e.target.dataset.param)onParameter(e.target);if(e.target.id==='timeline'){state.time=Number(e.target.value);state.playing=false;cancelAnimationFrame(state.frame);drawScene();updateTransport()}});
  $('main').addEventListener('change',e=>{if(e.target.id==='micDevice'){mic.deviceId=e.target.value;if(mic.status==='live')startMicrophone();return}if(e.target.type==='number'&&e.target.dataset.param){onParameter(e.target);e.target.value=params()[e.target.dataset.param]}});
@@ -544,10 +702,10 @@ function initialize(){
 function bindPath(){
  if(!['path','path-motion'].includes(state.current))return;const svg=$('scene');let dragging=-1;
  const coord=e=>{const point=svg.createSVGPoint();point.x=e.clientX;point.y=e.clientY;return point.matrixTransform(svg.getScreenCTM().inverse())};
- svg.addEventListener('pointerdown',e=>{const handle=e.target.closest('[data-point]');if(!handle)return;dragging=Number(handle.dataset.point);svg.setPointerCapture(e.pointerId);e.preventDefault()});
- svg.addEventListener('pointermove',e=>{if(dragging<0)return;const p=coord(e);state.path[dragging]=[Math.max(45,Math.min(555,p.x)),Math.max(65,Math.min(285,p.y))];drawScene()});
- const finish=()=>{dragging=-1};svg.addEventListener('pointerup',finish);svg.addEventListener('pointercancel',finish);
- svg.addEventListener('keydown',e=>{const handle=e.target.closest('[data-point]');if(!handle||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const i=Number(handle.dataset.point),p=state.path[i],step=e.shiftKey?10:2;p[0]=Math.max(45,Math.min(555,p[0]+(e.key==='ArrowRight'?step:e.key==='ArrowLeft'?-step:0)));p[1]=Math.max(65,Math.min(285,p[1]+(e.key==='ArrowDown'?step:e.key==='ArrowUp'?-step:0)));drawScene();svg.querySelector('[data-point="'+i+'"]').focus()});
+ svg.addEventListener('pointerdown',e=>{const handle=e.target.closest('[data-point]');if(!handle)return;dragging=Number(handle.dataset.point);if(state.current==='path')stopPathPulse();svg.setPointerCapture(e.pointerId);e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(dragging<0)return;const p=coord(e);(state.current==='path'?pathDemo.points:state.path)[dragging]=[Math.max(45,Math.min(555,p.x)),Math.max(65,Math.min(285,p.y))];drawScene()});
+ const finish=()=>{if(dragging>=0&&state.current==='path')startPathPulse();dragging=-1};svg.addEventListener('pointerup',finish);svg.addEventListener('pointercancel',finish);
+ svg.addEventListener('keydown',e=>{const handle=e.target.closest('[data-point]');if(!handle||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const i=Number(handle.dataset.point),p=(state.current==='path'?pathDemo.points:state.path)[i],step=e.shiftKey?10:2;p[0]=Math.max(45,Math.min(555,p[0]+(e.key==='ArrowRight'?step:e.key==='ArrowLeft'?-step:0)));p[1]=Math.max(65,Math.min(285,p[1]+(e.key==='ArrowDown'?step:e.key==='ArrowUp'?-step:0)));if(state.current==='path')startPathPulse();drawScene();svg.querySelector('[data-point="'+i+'"]').focus()});
 }
 function renderVariants(r){
  const variant=r.params.find(p=>p.key==='previewType');if(!variant)return '';
@@ -654,7 +812,7 @@ function sceneModel(id,p,t,pathPoints){
    +svgText(65,82,'0',palette.muted,11)+svgText(245,82,'1000 X',palette.muted,11)+svgText(65,286,'1000 Y ↓',palette.muted,11,'start')
    +'<g data-mapping-handle class="path-handle" tabindex="0" role="button" aria-label="输入位置控制点，横向或纵向拖动，靠近中心自动吸附" transform="translate('+cx+' '+cy+')"><circle r="19" fill="transparent"/><circle r="8" fill="'+palette.green+'" stroke="#191920" stroke-width="2"/></g>'
    +line(280,180,316,180,palette.muted)+'<path d="m309 174 7 6-7 6" fill="none" stroke="'+palette.muted+'"/>'
-   +ghost(435,180,70)+actor(435,180,{size:70,scale:(sx/100)+' '+(sy/100),label:'',id:'mapping-output'})
+   +`<circle cx="435" cy="180" r="35" fill="none" stroke="${palette.line}" stroke-dasharray="4 4"/><g data-actor="mapping-output" transform="translate(435 180) scale(${sx/100} ${sy/100})"><circle r="35" fill="${palette.purple}"/><circle r="32" fill="none" stroke="#ffffff25"/></g>`
    +svgText(155,314,'X '+x+' · Y '+y,palette.green,14)+svgText(435,314,'X '+fmt(sx)+'% · Y '+fmt(sy)+'%',palette.purple,14);
   label='X → 宽度 / Y → 高度';value=centered?'中心吸附':axis==='x'?'X轴 · 宽度':'Y轴 · 高度';
  }else if(id==='elastic'){
@@ -687,12 +845,12 @@ function sceneModel(id,p,t,pathPoints){
   label='LINEAR / '+type.toUpperCase();value=`采样 ${quantized.toFixed(3)} s · ${p.fps} fps`;
  }else if(id==='timecode'){
   const total=Math.floor(t*p.fps),sec=Math.floor(total/p.fps),frames=total%p.fps,pad=n=>String(n).padStart(2,'0');
-  const code=`00:00:${pad(sec)}:${pad(frames)}`;
-  svg=svgText(300,125,'HH : MM : SS : FF',palette.muted,14)+svgText(300,198,code,palette.purple,48)+svgText(300,232,`${p.fps} FPS · NON-DROP FRAME`,palette.muted,12)+fractionTrack((t%1));
+  const parts=[pad(Math.floor(sec/3600)),pad(Math.floor(sec/60)%60),pad(sec%60),pad(frames)];
+  svg='<g data-timecode-labels>'+['时','分','秒','帧'].map((unit,i)=>svgText(165+i*90,125,unit,palette.muted,13)).join('')+'</g><g data-timecode-value>'+parts.map((part,i)=>svgText(165+i*90,192,part,palette.purple,48)+(i<3?svgText(210+i*90,190,':',palette.muted,35):'')).join('')+'</g>';
   label='CURRENT TIME';value=`第 ${total} 帧 · ${p.fps} fps`;
  }else if(id==='typewriter'||id==='cursor'){
-  const elapsed=Math.max(0,t-(p.startDelay||0)),count=Math.min(p.text.length,Math.floor(elapsed*p.speed)),showCursor=id==='cursor'&&p.showCursor!=='no'&&elapsed-p.text.length/p.speed<p.endDelay,blink=showCursor&&Math.floor(t*p.blinkSpeed*2)%2===0;
-  const shown=p.text.substring(0,count),cursorChar=id==='cursor'?(p.cursorChar??'|'):'',emWidth=Array.from(p.text+cursorChar).reduce((sum,c)=>sum+(/[^\x00-\xff]/.test(c)?1:.64),0),fontSize=Math.min(34,410/Math.max(1,emWidth));
+  const elapsed=Math.max(0,t-(p.showCursor==='no'?0:(p.startDelay||0))),count=Math.min(p.text.length,Math.floor(elapsed*p.speed)),showCursor=id==='cursor'&&p.showCursor!=='no'&&elapsed-p.text.length/p.speed<p.endDelay,blink=showCursor&&Math.floor(t*p.blinkSpeed*2)%2===0;
+  const shown=p.text.substring(0,count),cursorChar=id==='cursor'?(p.cursorChar??'│'):'',emWidth=Array.from(p.text+cursorChar).reduce((sum,c)=>sum+(/[^\x00-\xff]/.test(c)?1:.64),0),fontSize=Math.min(34,410/Math.max(1,emWidth));
   svg=`<rect x="70" y="116" width="460" height="112" rx="9" fill="#22212b" stroke="#3d374b"/>`+`<text x="${id==='cursor'?95:300}" y="191" text-anchor="${id==='cursor'?'start':'middle'}" fill="#e8e2f5" font-size="${fontSize}" font-family="Consolas, monospace" xml:space="preserve">${escapeHTML(shown)}<tspan data-cursor="true" fill="${palette.purple}">${blink?escapeHTML(cursorChar):''}</tspan></text>`+fractionTrack(p.text.length?count/p.text.length:1,267);
   label='CHARACTERS';value=`${count} / ${p.text.length} · ${p.speed} 字/s`;
  }else if(id==='counter'||id==='counter-format'){
@@ -756,10 +914,11 @@ function drawScene(){
  const focusKey=focused&&svg.contains?.(focused)?['data-point','data-fade-edge'].find(key=>focused.hasAttribute(key)):null;
  const focusValue=focusKey?focused.getAttribute(focusKey):null;
  const sceneParams=state.current==='audio'?{...params(),liveMode:mic.mode,liveLevel:mic.level,liveWave:mic.wave,liveBands:mic.bands}:state.current==='follow'?{...params(),followState:followDemo}:params();
- const result=sceneModel(state.current,sceneParams,state.time,state.path);
+ const result=sceneModel(state.current,sceneParams,state.time,state.current==='path'?pathPulsePoints():state.path);
  svg.innerHTML=`<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#2e2d3b" stroke-width=".65"/></pattern><radialGradient id="stageGlow"><stop stop-color="#a78ad7" stop-opacity=".06"/><stop offset="1" stop-color="#a78ad7" stop-opacity="0"/></radialGradient></defs><rect width="600" height="335" fill="url(#grid)"/><ellipse cx="300" cy="167" rx="240" ry="165" fill="url(#stageGlow)"/>${result.svg}`;
  if(state.current==='text-box')fitTextBackground(svg,params());
  if(state.current==='anchor')fitAnchorDemo(svg,params(),state.time);
+ if(state.current==='timecode')alignTimecodeUnits(svg);
  if(focusKey)svg.querySelector('['+focusKey+'="'+focusValue+'"]').focus({preventScroll:true});
  // 预览读数已从界面移除；场景仍保留结果数据供内部绘制使用。
 }
@@ -955,18 +1114,18 @@ function fitTextBackground(svg,p){
 function isContinuous(id=state.current){return id==='sin'||id==='time'}
 function renderParameterFields(r){
  const advanced=r.id==='text-box'?['paddingMode','opticalY']:[];
- const fields=r.params.filter(p=>p.key!=='previewType');
+ const fields=r.params.filter(p=>!['previewType','output'].includes(p.key));
  const render=p=>`<div data-control="${p.key}" class="parameter-field ${p.key==='text'?'full':''}">${renderControl(p)}</div>`;
  return `<div class="controls">${fields.filter(p=>!advanced.includes(p.key)).map(render).join('')}</div>`+(advanced.length?`<details class="advanced-controls"><summary>高级设置</summary><div class="controls">${fields.filter(p=>advanced.includes(p.key)).map(render).join('')}</div></details>`:'');
 }
 function setupFor(r){
- if(r.id==='lookAt')return params().previewType==='3d'?['创建三维图层TARGET，并启用当前图层的3D开关。','当前图层保持无父级，关闭自动定向。','把代码粘贴到当前图层的Orientation（方向），移动TARGET观察结果。']:['创建二维目标图层，命名为TARGET。','当前图层保持无父级，关闭自动定向。','把代码粘贴到当前图层的Rotation（旋转）；素材原本朝右，方向不同时调整角度修正。'];
- if(r.id==='text-box'&&params().boxStyle==='frame')return [r.setup[0],r.setup[1],r.setup[2],'关闭填充、添加描边。修改TEXT的文字或字号，外框自动更新。'];
+ if(r.id==='lookAt')return targetSetup();
+ if(r.id==='text-box'&&params().boxStyle==='frame')return [r.setup[0],r.setup[1],r.setup[2],'关闭填充，启用描边。'];
  return r.setup;
 }
 function syncRecipeUI(){
  const r=current(),p=params(),hide=(key,yes)=>{const el=document.querySelector('[data-control="'+key+'"]');if(el)el.hidden=yes};
- if(r.id==='cursor')for(const key of ['cursorChar','blinkSpeed','endDelay'])hide(key,p.showCursor==='no');
+ if(r.id==='cursor')for(const key of ['cursorChar','blinkSpeed','endDelay','startDelay'])hide(key,p.showCursor==='no');
  if(r.id==='sin')hide('phaseStep',p.wave!=='stagger');
  if(r.id==='lookAt'){hide('targetZ',p.previewType!=='3d');hide('angleOffset',p.previewType!=='2d');}
  if(r.id==='random'){hide('x',p.previewType==='color');hide('y',p.previewType==='color');hide('fps',p.fixed==='fixed');}
@@ -979,7 +1138,7 @@ function syncRecipeUI(){
  if(r.id==='text-box'&&document.querySelector('.setup-card'))document.querySelector('.setup-card').insertAdjacentHTML('beforeend',`<details class="layer-structure"><summary>查看图层层级</summary><pre>TEXT\n外框形状图层\n└─内容\n  └─BOX\n    ├─FRAME${p.boxStyle==='bubble'?'\n    ├─形状1\n    │ └─路径1（尖角）':''}\n    └─${p.boxStyle==='bubble'?'填充':'描边'}</pre></details>`);
  const hints={lookAt:p.previewType==='3d'?'粘贴到Orientation · 方向':'粘贴到Rotation · 旋转',fade:'粘贴到Opacity · 不透明度',anchor:'粘贴到Anchor Point · 锚点',stagger:p.previewType==='opacity'?'粘贴到Opacity · 不透明度':'粘贴到Position · 位置','path-motion':p.previewType==='rotation'?'粘贴到Rotation · 旋转':'粘贴到Position · 位置'};
  if(hints[r.id])$('codeHint').textContent=hints[r.id];
- if(r.id==='lookAt')document.querySelector('.property-tag').innerHTML=icon('layers')+(p.previewType==='3d'?'Orientation · 3D方向':'Rotation · 2D旋转');
+ if(r.id==='lookAt')syncTargetUI();
  const transport=document.querySelector('.transport');if(transport){transport.classList.toggle('continuous-transport',isContinuous());$('timeline').hidden=isContinuous();$('repeatButton').hidden=isContinuous();}
 }
 function renderBasics(){
@@ -999,6 +1158,7 @@ function numberText(p,t){
  return p.prefix+(negative?'-':'')+parts.join('.')+p.suffix;
 }
 function roundOneScene(id,p,t,pathPoints){
+ if(id==='timecode')return timecodeTimerScene(p,t);
  if(id==='counter'){
   const shown=numberText(p,t),size=Math.min(65,440/Math.max(1,[...shown].reduce((n,c)=>n+(/[^\x00-\xff]/.test(c)?1:.63),0)));
   return {svg:svgText(300,195,shown,palette.purple,size)+svgText(100,260,String(p.start),palette.muted,13,'start')+svgText(500,260,String(p.end),palette.muted,13,'end')+fractionTrack(t/p.duration,278),label:'',value:shown};
@@ -1076,14 +1236,88 @@ function lookAtScene(p){
   const plane=[[100,85,0],[490,85,0],[490,285,0],[100,285,0]].map(project);
   svg+=`<polygon points="${plane.map(v=>v.x+','+v.y).join(' ')}" fill="#ffffff02" stroke="${palette.faint}"/>`;
   for(const [v,name,color]of [[[85,0,0],'X',palette.muted],[[0,85,0],'Y',palette.muted],[[0,0,85],'Z',palette.green]]){const q=project(a.map((x,i)=>x+v[i]));svg+=line(origin.x,origin.y,q.x,q.y,color)+svgText(q.x+10,q.y,name,color,11);}
-  const corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>project(a.map((v,i)=>v+side[i]*38*x+up[i]*38*y)));
+  const distance=Math.hypot(...n)*2,size=mix(p.near,p.far,clamp01(distance/800))/100;
+  const corners=[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>project(a.map((v,i)=>v+side[i]*38*x*size+up[i]*38*y*size)));
   svg+=`<polygon data-oriented-plane points="${corners.map(v=>v.x+','+v.y).join(' ')}" fill="#b6a0f04a" stroke="${palette.purple}" stroke-width="2"/>`+line(origin.x,origin.y,target.x,target.y,palette.green,'4 4')+svgText(300,285,'Z轴指向TARGET',palette.muted,12);
  }else{
   origin={x:220,y:190};target={x:p.targetX,y:p.targetY};const angle=Math.atan2(target.y-origin.y,target.x-origin.x)*180/Math.PI+p.angleOffset;
-  svg=ring(origin.x,origin.y,59)+line(origin.x,origin.y,target.x,target.y,palette.green,'5 4')+`<g data-look-arrow transform="translate(${origin.x} ${origin.y}) rotate(${angle})"><path d="M-22 -17 30 0 -22 17 -13 0Z" fill="${palette.purple}"/></g>`;
+  svg=ring(origin.x,origin.y,59)+line(origin.x,origin.y,target.x,target.y,palette.green,'5 4')+`<g data-look-arrow transform="translate(${origin.x} ${origin.y}) rotate(${angle}) scale(${mix(p.near,p.far,clamp01(Math.hypot(target.x-origin.x,target.y-origin.y)*2/800))/100})"><path d="M-22 -17 30 0 -22 17 -13 0Z" fill="${palette.purple}"/></g>`;
  }
  svg+=`<g data-target class="path-handle" role="button" tabindex="0" aria-label="目标TARGET，可拖动或按方向键移动" transform="translate(${target.x} ${target.y})"><circle r="19" fill="transparent"/><circle r="8" fill="${palette.green}"/>${svgText(0,-18,'TARGET',palette.green,12)}</g>`;
  return {svg,label:'',value:p.previewType};
+}
+
+function renderTargetOutputs(){return `<div class="demo-switch output-switch" role="group" aria-label="复制属性"><button data-output="direction" aria-pressed="${params().output==='direction'}">朝向 · <span data-direction-name>${params().previewType==='3d'?'方向':'旋转'}</span></button><button data-output="scale" aria-pressed="${params().output==='scale'}">缩放 · S</button></div>`}
+function targetSetup(){
+ const p=params(),is3d=p.previewType==='3d';
+ return [is3d?'创建三维TARGET，启用当前图层的3D开关。':'创建二维目标图层TARGET，箭头朝右。',
+ '当前图层无父级，关闭自动定向。',
+ `将「朝向」代码粘贴到${is3d?'Orientation（方向）':'Rotation（旋转）'}，将「缩放」代码粘贴到Scale（S）。`];
+}
+function syncTargetUI(){
+ const p=params(),is3d=p.previewType==='3d';
+ document.querySelector('.property-tag').innerHTML=icon('layers')+(is3d?'Orientation / Scale · 方向与缩放':'Rotation / Scale · 旋转与缩放');
+ document.querySelectorAll('[data-output]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.output===p.output));
+ const name=document.querySelector('[data-direction-name]');if(name)name.textContent=is3d?'方向':'旋转';
+ $('codeHint').textContent=p.output==='scale'?'粘贴到Scale · 缩放（S）':is3d?'粘贴到Orientation · 方向':'粘贴到Rotation · 旋转';
+}
+const pathDemo={points:[[100,175],[300,175],[500,175]],time:0,running:false,loop:false,fresh:true};
+function pathPulseOffset(t){
+ if(t<0||t>=1.8)return 0;
+ if(t<.09)return 92*Math.sin(t/.09*Math.PI/2);
+ const u=t-.09;return 92*Math.exp(-4.4*u)*Math.cos(19*u)*(1-smooth((t-1.4)/.4));
+}
+function pathPulsePoints(){
+ const y=pathDemo.points[1][1],delta=pathPulseOffset(pathDemo.time)*(y>=167.5?-1:1),room=Math.max(0,delta<0?y-45:290-y);
+ const offset=room?room*Math.tanh(delta/room):0;
+ return pathDemo.points.map((p,i)=>[p[0],p[1]+(i===1?offset:0)]);
+}
+function renderPathPulseControls(){return `<div class="path-pulse-controls"><button class="text-button" data-action="path-pulse">${icon('replay')}再次弹动</button><button class="pulse-loop" data-action="path-loop" role="switch" aria-checked="${pathDemo.loop}" aria-label="循环弹动"><span>循环</span><i aria-hidden="true"></i></button></div>`}
+function syncPathPulseUI(){
+ const button=document.querySelector('[data-action="path-loop"]');if(button)button.setAttribute('aria-checked',pathDemo.loop);
+ if(state.current==='path'&&$('playStatus'))$('playStatus').innerHTML='<i></i>'+(pathDemo.running?'演示中':'可拖动');
+}
+function startPathPulse(render=true){
+ pathDemo.time=0;pathDemo.running=render||pathDemo.loop||!matchMedia('(prefers-reduced-motion:reduce)').matches;
+ if(render){syncPathPulseUI();drawScene();schedule()}
+}
+function stopPathPulse(){pathDemo.running=false;pathDemo.time=1.8;cancelAnimationFrame(state.frame);syncPathPulseUI()}
+function tickPathPulse(now){
+ if(state.mode!=='exp'||state.basics||document.hidden||!pathDemo.running)return;
+ if(state.last)pathDemo.time+=Math.min((now-state.last)/1000,.1);state.last=now;
+ if(pathDemo.time>=2.5){if(pathDemo.loop)pathDemo.time%=2.5;else{pathDemo.time=1.8;pathDemo.running=false}}
+ drawScene();syncPathPulseUI();if(pathDemo.running)state.frame=requestAnimationFrame(tick);
+}
+function renderBasics(){
+ stopMicrophone();cancelAnimationFrame(state.frame);state.last=0;
+ $('main').innerHTML=`<div class="page-inner basics-page swiss-intro">
+ <header class="intro-header"><h1 id="pageTitle">表达式入门</h1><p>选对属性，粘贴代码，开始创作。</p></header>
+ <section class="intro-workflow" aria-label="三步使用">
+ <article><div class="step-mark"><span>01</span>${icon('layers')}</div><h2>选择效果</h2><p>按效果页说明创建图层，准确命名。</p></article>
+ <article><div class="step-mark"><span>02</span>${icon('sliders')}</div><h2>打开表达式</h2><p>找到指定属性，按住<kbd>Alt</kbd>点击秒表。<br><span class="secondary">Mac使用<kbd>Option</kbd>。</span></p></article>
+ <article><div class="step-mark"><span>03</span>${icon('copy')}</div><h2>粘贴代码</h2><p>复制当前代码到AE。<br><span class="secondary">网页参数修改后，需要重新复制。</span></p></article>
+ </section>
+ <div class="intro-reference">
+ <section class="intro-section"><span class="section-label">属性与命名</span><h2>粘贴到正确的位置</h2><p>图层位置与矩形路径位置是不同属性。按完整路径展开，再粘贴对应代码。</p><div class="property-route"><span>内容</span><b>→</b><span>BOX</span><b>→</b><span>FRAME</span><b>→</b><strong>位置</strong></div><p class="secondary">名称如TEXT、BOX请按说明输入；前后不加空格，不包含引号或「」。</p></section>
+ <section class="intro-section"><span class="section-label">原始值</span><h2>保留已有动画</h2><p><code>value</code>读取属性在当前时刻的原始值，包含已有关键帧。</p><pre><code>value + [0, 20];</code></pre><p class="secondary">这行代码保留原动画，并在二维位置上向下偏移20像素。仅保留原值可写<code>value;</code>。</p></section>
+ <section class="intro-section intro-values"><span class="section-label">数值与维度</span><h2>一个值，或一组值</h2><div class="value-examples"><div><code>40</code><span>旋转、不透明度</span></div><div><code>[x, y]</code><span>二维位置、缩放</span></div></div><p class="secondary">位置已分离维度时，单轴属性使用单个数值。</p></section>
+ <section class="intro-section intro-start"><span class="section-label">开始体验</span><h2>从一个效果开始</h2><div class="intro-links"><button data-go="wiggle">自然抖动<span>↗</span></button><button data-go="cursor">打字机<span>↗</span></button><button data-go="fade">自动淡入淡出<span>↗</span></button></div></section>
+ </div><p class="basics-footnote">网页用于观察效果；随机数、字体与音频以AE中的实际结果为准。</p></div>`;
+}
+
+function formatTimecodeTimer(p,t){
+ const seconds=mix(p.startTime,p.endTime,clamp01(t/p.duration)),fps=Number(p.fps),frames=Math.max(0,Math.floor(seconds*fps+.000001)),pad=n=>String(n).padStart(2,'0');
+ return [Math.floor(frames/(fps*3600)),Math.floor(frames/(fps*60))%60,Math.floor(frames/fps)%60,frames%fps].map(pad).join(':');
+}
+function timecodeTimerScene(p,t){
+ const value=formatTimecodeTimer(p,t);
+ const labels=['时','分','秒','帧'].map((unit,i)=>`<text data-timecode-unit="${i}" x="${300+(i*3-4.5)*26.4}" y="126" fill="${palette.muted}" font-size="13" text-anchor="middle">${unit}</text>`).join('');
+ return {svg:`<g data-timecode-labels>${labels}</g><text data-timecode-value x="300" y="194" text-anchor="middle" fill="${palette.purple}" font-size="48" style="font-family:Arial,Helvetica,'Segoe UI',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0">${value}</text>`,label:'',value};
+}
+function alignTimecodeUnits(svg){
+ const text=svg.querySelector('[data-timecode-value]');if(!text?.getComputedTextLength)return;
+ const left=300-text.getComputedTextLength()/2;
+ svg.querySelectorAll('[data-timecode-unit]').forEach((unit,i)=>unit.setAttribute('x',left+(i?text.getSubStringLength(0,i*3):0)+text.getSubStringLength(i*3,2)/2));
 }
 
 initialize();</script>

@@ -238,7 +238,7 @@ recipe('audio',{
 });
 recipe('control',{
  title:'滑块控制旋转',fn:'Slider → ease() → Rotation',short:'slider',desc:'用一个滑块控制旋转角度。直接拖动画布左侧滑杆，观察数值、角度与图形同步变化。',target:'Rotation · 旋转',needs:'需要滑块控制效果',
- params:[range('R','预览滑块',50,0,100,1,'','模拟 AE 中滑块控制的数值，不写入代码。'),range('angle','最大角度',360,90,720,15,'°','滑块达到 100 时的旋转角度。')],
+ params:[range('R','预览滑块',0,0,100,1,'','约3秒从0演示到100；手动调整可接管预览，不写入代码。'),range('angle','最大角度',360,90,720,15,'°','滑块达到 100 时的旋转角度。')],
  setup:['给当前图层添加 Slider Control / 滑块控制，并将效果重命名为 R。','把表达式贴到 Rotation / 旋转。','调整 R 中的滑块数值；输入 0–100 对应目标旋转范围。'],
  code:p=>`R = effect("R")(1);\nease(R, 0, 100, 0, ${p.angle});`,note:'这里使用 ease 缓动映射，滑块数值与旋转角度不是简单的线性比例。',duration:()=>6
 });
@@ -465,7 +465,7 @@ const conciseCopy={
  follow:{desc:'多个对象依次淡入，延迟跟随领头对象。',setup:['为二维领头图层LEADER的位置设置关键帧。','将跟随图层连续排列在LEADER下方，全部保持无父级。','给每个跟随图层分别粘贴位置、不透明度代码。'],note:'位置与不透明度代码需同时使用。'},
  stagger:{desc:'多个对象在各自位置依次上移、淡入。',setup:['新建空对象CTRL，将入场图层连续放在其下方。','摆好各图层位置，分别粘贴位置、不透明度代码。','动画从CTRL入点开始，顺序由图层排列决定。'],note:'修改间隔后，同步更新位置与不透明度代码。'},
  audio:{desc:'将音频强弱转换为图层大小变化。',setup:['选中音频层：动画→关键帧辅助→将音频转换为关键帧。','将生成层命名为Audio Amplitude，双声道滑块改名为AMP。','将代码贴到二维图层的缩放（Scale）。'],note:'麦克风仅在本页处理，不录制、不上传；离开页面即停止。'},
- control:{desc:'拖动滑块，控制图层旋转角度。',setup:['添加滑块控制（Slider Control），改名为R。','将代码贴到旋转（Rotation），调整R数值。'],note:'滑块0–100对应0至最大角度，使用缓动映射。'},
+ control:{desc:'滑块用3秒从0演示到100，也可手动拖动。',setup:['添加滑块控制（Slider Control），改名为R。','将代码贴到旋转（Rotation），调整R数值。'],note:'网页自动演示约3秒，手动拖动可接管。滑块0–100对应0至最大角度，使用缓动映射。'},
  path:{desc:'拖动三点控制曲线，可预览弹动。',setup:['新建二维空对象P1、P2、P3。','新建二维形状图层，添加贝塞尔路径，组变换保持默认。','将代码贴到路径（Path），移动空对象控制曲线。'],note:'弹动仅为网页演示；AE需另给控制点制作动画。'},
  'path-motion':{desc:'对象沿路径移动，并跟随路径转向。',setup:['新建二维形状图层PATH，绘制开放曲线。','将形状组命名为ROUTE、路径命名为CURVE，组变换保持默认。','新建朝右、无父级的二维箭头，分别粘贴位置和旋转代码。'],note:'网页控制点仅修改示例；AE使用PATH中的实际曲线。'}
 };
@@ -484,6 +484,44 @@ recipe('timecode',{
  detail:'从图层入点开始。起止时间单位为秒，计时时长决定从起点到终点所用的秒数；设置为两者差值的绝对值时正常计时。固定显示“时:分:秒:帧”，支持所列整数帧率。网页重播仅控制预览。',
  code:p=>`startTime = ${p.startTime};\nendTime = ${p.endTime};\nduration = ${p.duration};\nfps = ${p.fps};\nseconds = linear(time - inPoint, 0, duration, startTime, endTime);\nframes = Math.max(0, Math.floor(seconds * fps + 0.000001));\nfunction pad(n) { return ("0" + n).slice(-2); }\nh = Math.floor(frames / (fps * 3600));\nm = Math.floor(frames / (fps * 60)) % 60;\ns = Math.floor(frames / fps) % 60;\nf = frames % fps;\npad(h) + ":" + pad(m) + ":" + pad(s) + ":" + pad(f);`,
  duration:p=>p.duration+1
+});
+
+// The web demo and the exported P2 expression share this response curve.
+function springPathOffset(t, amplitude, frequency, decay) {
+ var pull = 0.09, settle = 1.8;
+ if (t < 0 || t >= settle) return 0;
+ if (t < pull) return -amplitude * Math.sin(t / pull * Math.PI / 2);
+ var u = t - pull, fade = Math.max(0, Math.min(1, (t - 1.4) / 0.4));
+ fade = fade * fade * (3 - 2 * fade);
+ return -amplitude * Math.exp(-decay * u) * Math.cos(2 * Math.PI * frequency * u) * (1 - fade);
+}
+recipe('audio',{
+ desc:'音量驱动大小，可调平滑让缩放更柔和。',
+ params:[...recipesById.audio.params,range('smoothTime','平滑时长',.2,0,1,.05,'s','对过去一段时间的音量取9次平均；0关闭平滑，越大越柔和、响应越慢。')],
+ code:p=>`audioProperty = thisComp.layer("Audio Amplitude")\n    .effect("AMP")(1);\nsmoothTime = ${p.smoothTime};\naudio = smoothTime > 0\n    ? audioProperty.smooth(smoothTime, 9, time - smoothTime / 2)\n    : audioProperty.value;\ns = linear(audio, 0, ${p.maxAudio}, 100, ${p.maxScale});\n[s, s];`,
+ note:'平滑时长默认0.2秒；越大越柔和，也会稍慢半拍。麦克风仅在本页处理，不录制、不上传。',
+ detail:'先平均音量，再映射缩放。仅采样当前及过去的音量，不提前响应；平滑窗口越长，短促尖峰越弱，延迟约为窗口的一半。收音灵敏度仅影响网页麦克风。'
+});
+recipe('timecode',{
+ setup:[...recipesById.timecode.setup,'AE请使用等宽数字字体，避免数字宽度变化引起跳动。'],
+ note:'网页数字使用固定字位，不依赖本机字体的等宽特性；AE请用等宽数字字体。结束时间较小时倒计时。'
+});
+recipe('path',{
+ desc:'三点控制曲线，滑块调弧度，P2表达式实现弹动。',
+ params:[
+  choice('previewType','复制属性','path',[['path','路径 · Path'],['position','P2弹动 · Position']],'路径代码贴到形状路径；P2弹动代码贴到中间空对象的位置。'),
+  range('ratio','路径弧度',.333,0,.6,.001,'','AE在形状层添加滑块控制，命名Path Radian，初始值设为此数；0为折线。'),
+  range('amplitude','弹动幅度',80,0,120,1,'px','P2向上拉起的距离；正值向上，回弹后恢复原位置。'),
+  range('frequency','弹动频率',3,1,6,.1,'Hz','每秒振荡次数，越大弹动越快。'),
+  range('decay','衰减速度',4.4,1,10,.1,'','越大越快停下；1.8秒后回到原位置。'),
+  choice('pulseLoop','循环弹动','yes',[['no','关闭'],['yes','开启']],'默认开启，每2.5秒重复一次；与预览下方循环开关同步，修改后需重新复制P2表达式。')
+ ],
+ setup:['新建二维空对象P1、P2、P3，保持无父级。','形状层添加贝塞尔路径与滑块控制，组变换保持默认。','滑块命名Path Radian并设为0.333；路径代码贴到Path。','P2弹动代码贴到P2的位置（未分离维度）。'],
+ code:p=>p.previewType==='position'
+  ?`amplitude = ${p.amplitude};\nfrequency = ${p.frequency};\ndecay = ${p.decay};\nloop = ${p.pulseLoop==='yes'};\n${springPathOffset.toString()}\nt = time - inPoint;\nif (loop && t >= 0) t = t % 2.5;\n[value[0], value[1] + springPathOffset(t, amplitude, frequency, decay)];`
+  :recipesById.path.originalCode.replace('ratio = 0.333;',`// Path Radian滑块初始值：${p.ratio}\nratio = clamp(effect("Path Radian")(1), 0, 0.6);`).replace('direction = normalize(next - prev);','delta = next - prev;\n    direction = length(delta) > 0 ? normalize(delta) : [0, 0];'),
+ note:'路径与P2位置分别粘贴。循环开关同时更新P2代码，修改参数后请重新复制。',
+ detail:'Path Radian滑块放在路径所在的形状图层，控制平滑手柄长度；P2的位置决定拱起高度。P2从图层入点开始快速向上拉起，再衰减回弹，1.8秒后恢复原位置；循环间隔2.5秒。网页与P2代码使用相同的弹动曲线。'
 });
 
 const groups = [
@@ -510,7 +548,7 @@ const state = {mode:'exp',current:'wiggle',keyGroup:null,query:{exp:'',keys:''},
 recipes.forEach(r=>state.params[r.id]=Object.fromEntries(r.params.map(p=>[p.key,p.value])));
 const current = () => recipesById[state.current];
 const params = () => state.params[state.current];
-const duration = () => current().duration(params());
+const duration = () => previewDuration();
 const matched = text => state.query[state.mode].trim().toLowerCase().split(/\s+/).every(t=>text.toLowerCase().includes(t));
 const matchingRecipes = () => recipes.filter(r=>matched([r.title,r.name,r.fn,r.short,r.target,r.desc,r.tag,r.group.name,r.detail,...r.setup,r.code(state.params[r.id])].join(' ')));
 const matchingShortcuts = () => shortcuts.map(g=>({...g,list:g.list.filter(k=>matched(g.name+' '+k.key+' '+k.desc))})).filter(g=>g.list.length);
@@ -538,21 +576,21 @@ function renderRecipe(){
  if(state.current!=='audio')stopMicrophone();
  cancelAnimationFrame(state.frame);state.last=0;
  const r=current(),visible=matchingRecipes(); if(!visible.length){emptyContent();return}
- const manual=manualIds.has(r.id)||r.id==='follow';if(r.id==='path'&&pathDemo.fresh){pathDemo.fresh=false;startPathPulse(false)}
+ const manual=manualIds.has(r.id)||r.id==='follow';if(r.id==='path'&&pathDemo.fresh){pathDemo.fresh=false;startPathPulse(false)}if(r.id==='control'&&controlDemo.fresh){controlDemo.fresh=false;startControlDemo(false)}
  $('main').innerHTML=`<div class="page-inner recipe-${r.id}">${searchContext(visible.length)}
 
  <div class="title-row"><div class="title-heading"><h1 id="pageTitle">${r.title}</h1></div><div class="page-nav"><button class="icon-button" data-action="prev" aria-label="上一个表达式" title="上一个表达式" ${visible.indexOf(r)<=0?'disabled':''}>${icon('left')}</button><button class="icon-button" data-action="next" aria-label="下一个表达式" title="下一个表达式" ${visible.indexOf(r)>=visible.length-1?'disabled':''}>${icon('chevron')}</button></div></div>
  <p class="page-desc${r.id==='counter'?' subdued-desc':''}">${r.desc}</p><div class="metadata"><span class="meta-item property-tag">${icon('layers')}${r.target}</span>${r.needs&&r.needs!=='无需关键帧'?`<span class="meta-item">${icon('key')}${r.needs}</span>`:''}</div>
  <div class="recipe-workbench"><div class="preview-column"><section class="panel preview-panel" aria-labelledby="previewTitle"><div class="panel-bar"><h2 id="previewTitle">${icon('box')}效果预览</h2><span class="live-badge" id="playStatus"><i></i>${manual?'交互演示':state.playing?'播放中':'已暂停'}</span></div>
- ${['linear','text-box'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}${r.id==='follow'?renderFollowControls():''}<div class="stage ${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="${r.id==='text-box'?'0 35 600 260':'0 0 600 335'}" role="${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg></div>
- ${r.id==='path'?renderPathPulseControls():''}${manual?'':`<div class="transport"><button class="transport-btn" data-action="play" id="playButton" aria-label="${state.playing?'暂停演示':'播放演示'}" title="${state.playing?'暂停演示':'播放演示'}">${icon(state.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击恢复到 0 秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${state.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${state.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`}
+ ${['linear','text-box','path'].includes(r.id)?'':renderVariants(r)}${r.id==='audio'?renderAudioControls():''}<div class="stage ${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'path-stage':''}" id="stage"><svg id="scene" viewBox="${r.id==='text-box'?'0 35 600 260':'0 0 600 335'}" role="${['path','path-motion','fade','lookAt','distance','linear','control','follow'].includes(r.id)?'group':'img'}" aria-label="${r.title}效果演示"></svg></div>
+ ${hasPreviewTransport(r.id)?renderPreviewTransport():''}
  </section>
  <section class="parameter-section" aria-labelledby="parameterTitle"><div class="section-bar"><h2 id="parameterTitle">调整参数</h2><button class="text-button" data-action="reset">${icon('replay')}恢复默认</button></div>${renderParameterFields(r)}</section></div>
- <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box'].includes(r.id)?renderVariants(r):''}${r.id==='lookAt'?renderTargetOutputs():''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
+ <div class="code-column"><section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-bar"><h2 id="codeTitle">${icon('code')}表达式</h2><button class="copy-button" id="copyButton" data-action="copy" title="复制当前参数对应的完整表达式">${icon('copy')}<span>复制代码</span></button></div>${['linear','text-box','path'].includes(r.id)?renderVariants(r):''}${r.id==='lookAt'?renderTargetOutputs():''}<div class="code-scroll"><pre><code id="code"></code></pre></div><div class="code-footer"><span>AE · JavaScript</span><span id="codeHint">参数与代码同步</span></div></section>
  <section class="setup-card"><h2>${icon('info')}在 AE 中使用</h2><ol>${r.setup.map(s=>`<li>${escapeHTML(s)}</li>`).join('')}</ol></section></div></div>
  <details class="detail-section"><summary>参数解释与使用注意</summary><div class="detail-body"><table class="parameter-table"><tbody>${r.params.map(p=>`<tr><td>${p.key}</td><td>${p.explain||p.label}</td></tr>`).join('')}</tbody></table><div>${r.note?`<p>${escapeHTML(r.note)}</p>`:""}<p><strong>使用提示</strong></p><p>${escapeHTML(r.detail||'')}</p><p>${r.id==='path'?'形状组自身的变换应保持默认。重叠控制点会产生退化曲线，请拉开控制点。':'涉及具体图层和效果时，请先按“在 AE 中使用”完成准备。'}</p></div></div></details>
  <footer class="page-footer"><span>${recipes.length} 个表达式 · 参数修改即时生效</span><a href="${referenceURL}" target="_blank" rel="noopener noreferrer">Adobe 表达式参考 ↗</a></footer></div>`;
- updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();bindFade();syncAudioUI();schedule();
+ updateCode();drawScene();updateTransport();bindPath();bindTarget();bindMapping();bindRotationSlider();bindFollow();bindFade();syncAudioUI();if(r.id==='control')syncControlDemoStatus();schedule();
 }
 function highlight(code){
  const rx=/(\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b\d+(?:\.\d+)?\b|\b(?:if|else|for|true|false|var|const|let)\b|\b[A-Za-z_$][\w$]*(?=\s*\())/g;
@@ -586,7 +624,6 @@ function renderShortcuts(){
 }
 function selectRecipe(id,{focus=false}={}){
  if(id==='distance'){id='lookAt';state.params.lookAt.output='scale'}
- if(id==='path')pathDemo.fresh=true;
  if(id==='basics'||id==='value'){state.basics=true;state.time=0;try{history.replaceState(null,'','#basics')}catch{}renderNav();renderBasics();$('main').scrollTop=0;closeNav();return}
  if(id==='typewriter'){id='cursor';state.params.cursor.showCursor='no'}
  if(id==='counter-format'){id='counter';state.params.counter.separator='yes';state.params.counter.end=128000}
@@ -594,19 +631,20 @@ function selectRecipe(id,{focus=false}={}){
  if(id==='color'){id='random';state.params.random.previewType='color'}
  if(!recipes.some(r=>r.id===id))return;
  state.basics=false;
- state.current=id;if(id==='follow'){resetFollow();state.playing=true}state.time=0;state.collapsed[current().group.id]=false;
+ state.current=id;resetPreviewPlayback();state.collapsed[current().group.id]=false;
  try{history.replaceState(null,'','#'+id)}catch{}
  renderNav();renderRecipe();$('main').scrollTop=0;if(focus)$('main').focus({preventScroll:true});closeNav();
 }
 function setMode(mode){
  if(mode===state.mode)return;state.mode=mode;$('search').value=state.query[mode];
+ if(mode==='exp')resetPreviewPlayback();
  document.querySelectorAll('[data-mode]').forEach(b=>{const yes=b.dataset.mode===mode;b.setAttribute('aria-selected',yes);b.tabIndex=yes?0:-1});
  $('topbarContext').textContent=mode==='exp'?'表达式':'快捷键';renderNav();mode==='exp'?renderRecipe():renderShortcuts();$('main').scrollTop=0;
 }
 function handleSearch(){
  state.basics=false;
  state.query[state.mode]=$('search').value;
- if(state.mode==='exp'){const visible=matchingRecipes();if(visible.length&&!visible.some(r=>r.id===state.current)){state.current=visible[0].id;state.time=0}renderRecipe()}else renderShortcuts();
+ if(state.mode==='exp'){const visible=matchingRecipes();if(visible.length&&!visible.some(r=>r.id===state.current)){state.current=visible[0].id;resetPreviewPlayback()}renderRecipe()}else renderShortcuts();
  renderNav();$('main').scrollTop=0;
 }
 function clearSearch(){$('search').value='';handleSearch()}
@@ -620,22 +658,18 @@ async function copyCode(){
  if(!copied){const input=document.createElement('textarea');input.value=code;input.style.cssText='position:fixed;left:-9999px;top:0';document.body.append(input);input.select();try{copied=document.execCommand('copy')}catch{}input.remove()}
  if(copied){const button=$('copyButton');button.classList.add('copied');button.innerHTML=icon('check')+'<span>已复制</span>';toast('已复制当前表达式，可以粘贴到 AE')}else{const selection=getSelection();const range=document.createRange();range.selectNodeContents($('code'));selection.removeAllRanges();selection.addRange(range);toast('已选中代码，请按 Ctrl / ⌘ + C 复制')}
 }
-function updateTransport(){
- if(!$('timeline'))return;
- if(state.current==='audio'&&mic.mode!=='simulated')return;
- const d=duration();$('timeline').max=d;$('timeline').value=Math.min(state.time,d);$('timeline').style.setProperty('--fill',(state.time/d*100)+'%');$('timeReadout').textContent=state.time.toFixed(2)+' s';
- if($('playButton').getAttribute('aria-label')!==(state.playing?'暂停演示':'播放演示'))$('playButton').innerHTML=icon(state.playing?'pause':'play');$('playButton').setAttribute('aria-label',state.playing?'暂停演示':'播放演示');$('playButton').title=state.playing?'暂停演示':'播放演示';$('playStatus').innerHTML='<i></i>'+(state.playing?'播放中':'已暂停');$('repeatButton').setAttribute('aria-pressed',state.repeat);
-}
-function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(state.current==='path'){if(!state.basics&&state.mode==='exp'&&pathDemo.running&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick);return}if(!state.basics&&state.mode==='exp'&&(state.playing||mic.status==='live')&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
+function updateTransport(){syncPreviewTransport()}
+function schedule(){cancelAnimationFrame(state.frame);state.last=0;if(['path','control'].includes(state.current)){const running=state.current==='path'?pathDemo.running:controlDemo.running;if(!state.basics&&state.mode==='exp'&&running&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick);return}if(!state.basics&&state.mode==='exp'&&state.playing&&!manualIds.has(state.current)&&!document.hidden&&$('scene'))state.frame=requestAnimationFrame(tick)}
 function tick(now){
  if(state.current==='path'){tickPathPulse(now);return}
+ if(state.current==='control'){tickControlDemo(now);return}
  if(state.current==='audio'&&mic.mode!=='simulated'&&mic.status!=='live')return;
- if(state.mode!=='exp'||(!state.playing&&mic.status!=='live')||document.hidden)return;
+ if(state.mode!=='exp'||!state.playing||document.hidden)return;
  if(mic.status==='live')sampleMicrophone(state.last?Math.min((now-state.last)/1000,.1):1/60);
  if(state.current==='follow')advanceFollow(state.last?Math.min((now-state.last)/1000,.1):0);
  if(state.last)state.time+=Math.min((now-state.last)/1000,.1);state.last=now;
- const d=duration();if(!isContinuous()&&state.current!=='follow'&&state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
- drawScene();updateTransport();if(state.playing||mic.status==='live')state.frame=requestAnimationFrame(tick);
+ const d=duration();if(state.current!=='follow'&&!(state.current==='audio'&&mic.mode!=='simulated')&&state.time>d){if(state.repeat)state.time%=d;else{state.time=d;state.playing=false}}
+ drawScene();updateTransport();if(state.playing)state.frame=requestAnimationFrame(tick);
 }
 function onParameter(input){
  const p=current().params.find(p=>p.key===input.dataset.param);if(!p)return;
@@ -644,6 +678,7 @@ function onParameter(input){
  if(p.key==='fps'&&current().id==='timecode')value=Number(value);
  if(state.current==='timecode'){state.time=0;state.last=0}
  params()[p.key]=value;
+ if(state.current==='control'&&p.key==='R')stopControlDemo();
  if(state.current==='fade'){
   if(p.key==='inTime')params().outTime=Math.max(params().outTime,Number(value)+.5);
   if(p.key==='outTime')params().inTime=Math.min(params().inTime,Number(value)-.5);
@@ -658,13 +693,12 @@ function onParameter(input){
  syncVariants();
  
  document.querySelectorAll('[data-param="'+p.key+'"]').forEach(el=>{if(el!==input)el.value=value;if(el.type==='range')el.style.setProperty('--fill',(value-p.min)/(p.max-p.min)*100+'%')});
- if(!isContinuous())state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
+ if(state.current==='path'&&['amplitude','frequency','decay'].includes(p.key))startPathPulse();
+ state.time=Math.min(state.time,duration());updateCode();drawScene();updateTransport();
 }
 function action(name){
- if(name==='path-pulse'){startPathPulse();return}
- if(name==='path-loop'){pathDemo.loop=!pathDemo.loop;syncPathPulseUI();if(pathDemo.loop&&!pathDemo.running)startPathPulse();return}
+ if(['play','replay','repeat'].includes(name)){previewAction(name);return}
  if(name==='text-example'){onParameter({dataset:{param:'text'},value:'Hello John, 今天会下雨吗？\n今天不会下雨。'});return}
- if(name==='follow-auto'){resetFollow();state.playing=true;schedule();drawScene();return}
  if(name==='calibrate'){calibrateMicrophone();return}
  if(name==='mic'){startMicrophone();return}
  if(name==='stop-mic'){stopMicrophone();syncAudioUI();drawScene();return}
@@ -672,10 +706,7 @@ function action(name){
  if(name==='clear'){clearSearch();return}
  if(name==='copy'){copyCode();return}
  if(name==='prev'||name==='next'){const list=matchingRecipes(),i=list.findIndex(r=>r.id===state.current);const r=list[i+(name==='next'?1:-1)];if(r)selectRecipe(r.id);return}
- if(name==='reset'){if(state.current==='path'){pathDemo.points=[[100,175],[300,175],[500,175]];pathDemo.fresh=true}if(state.current==='follow')resetFollow();if(state.current==='audio')stopMicrophone();state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];state.time=0;renderRecipe();toast('已恢复本条表达式的默认参数');return}
- if(name==='play'){state.playing=!state.playing;if(!isContinuous()&&state.time>=duration())state.time=0}
- if(name==='replay'){state.time=0;state.playing=true}
- if(name==='repeat')state.repeat=!state.repeat;
+ if(name==='reset'){if(state.current==='path')pathDemo.points=[[100,175],[300,175],[500,175]];state.params[state.current]=Object.fromEntries(current().params.map(p=>[p.key,p.value]));state.path=[[100,225],[300,105],[500,225]];resetPreviewPlayback();renderRecipe();toast('已恢复本条表达式的默认参数');return}
  updateTransport();drawScene();schedule();
 }
 function initialize(){
@@ -687,8 +718,8 @@ function initialize(){
  $('search').addEventListener('input',handleSearch);$('clearSearch').addEventListener('click',()=>{clearSearch();$('search').focus()});
  $('openNav').addEventListener('click',openNav);$('closeNav').addEventListener('click',()=>{closeNav();$('openNav').focus()});$('scrim').addEventListener('click',closeNav);
  $('main').addEventListener('click',e=>{const output=e.target.closest('[data-output]');if(output){onParameter({dataset:{param:'output'},value:output.dataset.output});return}const variant=e.target.closest('[data-variant]');if(variant){onParameter({dataset:{param:'previewType'},value:variant.dataset.variant});return}const b=e.target.closest('[data-action]');if(b)action(b.dataset.action)});
- $('main').addEventListener('dblclick',e=>{const input=e.target.closest('input[type="range"]');if(!input)return;e.preventDefault();if(input.id==='timeline'){state.time=0;state.last=0;drawScene();updateTransport();return}resetParameter(input.dataset.param)});
- $('main').addEventListener('input',e=>{if(e.target.dataset.param)onParameter(e.target);if(e.target.id==='timeline'){state.time=Number(e.target.value);state.playing=false;cancelAnimationFrame(state.frame);drawScene();updateTransport()}});
+ $('main').addEventListener('dblclick',e=>{const input=e.target.closest('input[type="range"]');if(!input)return;e.preventDefault();if(input.id==='timeline'){seekPreviewTime(0);return}resetParameter(input.dataset.param)});
+ $('main').addEventListener('input',e=>{if(e.target.dataset.param)onParameter(e.target);if(e.target.id==='timeline')seekPreviewTime(e.target.value)});
  $('main').addEventListener('change',e=>{if(e.target.id==='micDevice'){mic.deviceId=e.target.value;if(mic.status==='live')startMicrophone();return}if(e.target.type==='number'&&e.target.dataset.param){onParameter(e.target);e.target.value=params()[e.target.dataset.param]}});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('sidebar').classList.contains('open')){closeNav();$('openNav').focus()}if(e.key==='Tab'&&$('sidebar').classList.contains('open')){const elements=[...$('sidebar').querySelectorAll('input,button,a')].filter(x=>!x.disabled&&x.getClientRects().length);const first=elements[0],last=elements.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
  window.addEventListener('pagehide',()=>stopMicrophone());
@@ -697,7 +728,7 @@ function initialize(){
  $('nav').addEventListener('click',e=>{if(e.target.closest('[data-basics]'))selectRecipe('basics')});
  $('main').addEventListener('click',e=>{const go=e.target.closest('[data-go]');if(go)selectRecipe(go.dataset.go)});
  matchMedia('(max-width:760px)').addEventListener('change',syncDrawer);syncDrawer();
- renderNav();renderRecipe();
+ resetPreviewPlayback();renderNav();renderRecipe();
 }
 function bindPath(){
  if(!['path','path-motion'].includes(state.current))return;const svg=$('scene');let dragging=-1;
@@ -888,9 +919,9 @@ function sceneModel(id,p,t,pathPoints){
   svg=line(x,y,p.targetX,p.targetY,palette.green,'4 4')+actor(x,y,{size:48,scale:s/100,label:'A',id:'distance-scale'})+svgText(x,84,fmt(s)+' %',palette.purple,17)+svgText(300,294,fmt(dist)+' px',palette.muted,15)+`<g data-target="true" class="target-handle" tabindex="0" role="button" aria-label="拖动目标点 TARGET，方向键移动，双击复位" transform="translate(${p.targetX} ${p.targetY})"><circle r="22" fill="transparent"/><circle class="target-ring" r="9" fill="#263b33" stroke="${palette.green}" stroke-width="2"/>${cross(0,0,palette.green)}${svgText(0,-25,'TARGET',palette.green,13)}</g>`;
   label='DISTANCE → SCALE';value=`${fmt(dist)} px → ${fmt(s)} %`;
  }else if(id==='audio'){
-  const audio=p.liveMode&&p.liveMode!=='simulated'?(p.liveLevel||0):(Math.max(0,Math.sin(t*4.8))**3*25+Math.max(0,Math.sin(t*9.6))*5),scale=mix(100,p.maxScale,clamp01(audio/p.maxAudio));
+  const rawAudio=simulatedAudioLevel(t),audio=p.liveMode&&p.liveMode!=='simulated'?(p.liveLevel||0):smoothAudioLevel(simulatedAudioLevel,t,p.smoothTime),scale=mix(100,p.maxScale,clamp01(audio/p.maxAudio));
   svg=svgText(160,91,'音频频谱 · Spectrum',palette.muted,14)+svgText(430,91,'图层缩放',palette.purple,14)+line(288,164,325,164,palette.muted)+`<path d="m318 158 7 6-7 6" fill="none" stroke="${palette.muted}"/>`;
-  for(let i=0;i<13;i++){const live=p.liveMode&&p.liveMode!=='simulated';const level=live?(p.liveBands?.[i]||0):clamp01(audio/p.maxAudio)*(.2+.8*Math.sin(t*(2+i*.11)+i*.7)**2);const height=5+clamp01(level)*105;svg+=`<rect data-audio-bar="${i}" x="${85+i*12}" y="${215-height}" width="7" height="${height}" rx="2" fill="${i%3?palette.green:'#5b937f'}"/>`}
+  for(let i=0;i<13;i++){const live=p.liveMode&&p.liveMode!=='simulated';const level=live?(p.liveBands?.[i]||0):clamp01(rawAudio/p.maxAudio)*(.2+.8*Math.sin(t*(2+i*.11)+i*.7)**2);const height=5+clamp01(level)*105;svg+=`<rect data-audio-bar="${i}" x="${85+i*12}" y="${215-height}" width="7" height="${height}" rx="2" fill="${i%3?palette.green:'#5b937f'}"/>`}
 
   svg+=actor(430,172,{size:36,scale:scale/100})+svgText(160,275,fmt(audio),palette.green,23)+svgText(430,275,Math.round(scale)+' %',palette.purple,23);
   label=p.liveMode&&p.liveMode!=='simulated'?'MICROPHONE / SMOOTH LEVEL':'SIMULATED AMPLITUDE';value=`${fmt(audio)} → ${fmt(scale)} %`;
@@ -911,14 +942,13 @@ function sceneModel(id,p,t,pathPoints){
 function drawScene(){
  const svg=$('scene');if(!svg)return;
  const focused=document.activeElement;
- const focusKey=focused&&svg.contains?.(focused)?['data-point','data-fade-edge'].find(key=>focused.hasAttribute(key)):null;
+ const focusKey=focused&&svg.contains?.(focused)?['data-point','data-fade-edge','data-rotation-slider','data-follow-handle'].find(key=>focused.hasAttribute(key)):null;
  const focusValue=focusKey?focused.getAttribute(focusKey):null;
  const sceneParams=state.current==='audio'?{...params(),liveMode:mic.mode,liveLevel:mic.level,liveWave:mic.wave,liveBands:mic.bands}:state.current==='follow'?{...params(),followState:followDemo}:params();
  const result=sceneModel(state.current,sceneParams,state.time,state.current==='path'?pathPulsePoints():state.path);
  svg.innerHTML=`<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#2e2d3b" stroke-width=".65"/></pattern><radialGradient id="stageGlow"><stop stop-color="#a78ad7" stop-opacity=".06"/><stop offset="1" stop-color="#a78ad7" stop-opacity="0"/></radialGradient></defs><rect width="600" height="335" fill="url(#grid)"/><ellipse cx="300" cy="167" rx="240" ry="165" fill="url(#stageGlow)"/>${result.svg}`;
  if(state.current==='text-box')fitTextBackground(svg,params());
  if(state.current==='anchor')fitAnchorDemo(svg,params(),state.time);
- if(state.current==='timecode')alignTimecodeUnits(svg);
  if(focusKey)svg.querySelector('['+focusKey+'="'+focusValue+'"]').focus({preventScroll:true});
  // 预览读数已从界面移除；场景仍保留结果数据供内部绘制使用。
 }
@@ -927,6 +957,17 @@ function drawScene(){
 const mic={mode:'simulated',status:'idle',stream:null,context:null,source:null,analyser:null,buffer:null,level:0,wave:[],token:0,message:'可使用麦克风实时收音，或观看模拟演示。'};
 Object.assign(mic,{deviceId:'',devices:[],floor:.012,calibration:[],calibrationTime:0,calibrating:false,gate:false});
 Object.assign(mic,{spectrum:null,bands:Array(13).fill(0),bandFloor:Array(13).fill(0),bandSum:Array(13).fill(0),bandSamples:0});
+Object.assign(mic,{elapsed:0,history:[[0,0]]});
+function simulatedAudioLevel(t){return t<0?0:Math.max(0,Math.sin(t*4.8))**3*25+Math.max(0,Math.sin(t*9.6))*5}
+function smoothAudioLevel(sample,t,width){
+ if(!(width>0))return sample(t);
+ let sum=0;for(let i=0;i<9;i++)sum+=sample(t-width+i*width/8);return sum/9;
+}
+function microphoneLevelAt(t){
+ const h=mic.history;if(t<0)return 0;
+ for(let i=h.length-1;i>0;i--)if(t>=h[i-1][0]){const a=h[i-1],b=h[i];return a[1]+(b[1]-a[1])*Math.max(0,Math.min(1,(t-a[0])/(b[0]-a[0]||1)))}
+ return h[0][1];
+}
 function renderAudioControls(){return `<div class="audio-controls"><div class="audio-actions"><button data-action="mic" id="micStart">启用麦克风</button><button data-action="stop-mic" id="micStop" hidden>停止收音</button><button data-action="simulate" id="micSimulate">模拟演示</button><button data-action="calibrate" id="micCalibrate" hidden>校准静音</button></div><label class="mic-device-label" for="micDevice">收音设备 · Input <select id="micDevice"><option value="">系统默认（授权后可选择设备）</option>${mic.devices.map(d=>`<option value="${escapeHTML(d.deviceId)}" ${d.deviceId===mic.deviceId?'selected':''}>${escapeHTML(d.label||'麦克风')}</option>`).join('')}</select></label><p id="micStatus" role="status"></p></div>`}
 function syncAudioUI(){
  if(state.current!=='audio'||!$('micStatus'))return;
@@ -934,8 +975,7 @@ function syncAudioUI(){
  $('micSimulate').setAttribute('aria-pressed',mic.mode==='simulated');
  if($('micCalibrate')){$('micCalibrate').hidden=mic.status!=='live';$('micCalibrate').disabled=mic.calibrating}
  if($('micDevice'))$('micDevice').disabled=mic.status==='pending';
- const transport=document.querySelector('.transport');if(transport)transport.hidden=mic.mode!=='simulated';
- if(mic.mode!=='simulated')$('playStatus').innerHTML='<i></i>'+({live:'实时收音',pending:'等待授权',error:'收音未开启',idle:'已停止'}[mic.status]);
+ updateTransport();
 }
 function stopMicrophone(message='已停止收音。点击“启用麦克风”重新开始。'){
  ++mic.token;const active=mic.status==='live'||mic.status==='pending';
@@ -945,6 +985,7 @@ function stopMicrophone(message='已停止收音。点击“启用麦克风”�
  mic.stream=null;mic.source=null;mic.context=null;mic.analyser=null;mic.buffer=null;mic.level=0;mic.wave=[];mic.status='idle';
  mic.calibrating=false;mic.calibration=[];mic.gate=false;
  mic.spectrum=null;mic.bands.fill(0);mic.bandFloor.fill(0);
+ mic.elapsed=0;mic.history=[[0,0]];
  if(active||mic.mode!=='simulated'){mic.mode='input';mic.message=message}
 }
 async function startMicrophone(){
@@ -995,8 +1036,9 @@ function sampleMicrophone(dt=1/60){
  }
  mic.gate=rms>(mic.gate?mic.floor:mic.floor*1.25);
  const target=mic.gate?Math.min(60,Math.max(0,rms-mic.floor)*100*gain):0;
- const tau=target>mic.level?.08:.18;
- mic.level+=(target-mic.level)*(1-Math.exp(-Math.max(0,dt)/tau));
+ mic.elapsed+=Math.max(0,dt);mic.history.push([mic.elapsed,target]);
+ while(mic.history.length>2&&mic.history[1][0]<mic.elapsed-1.1)mic.history.shift();
+ mic.level=smoothAudioLevel(microphoneLevelAt,mic.elapsed,state.params.audio.smoothTime);
  if(mic.level<.1)mic.level=0;
  for(let i=0;i<13;i++){
   const target=mic.gate?Math.min(1,Math.max(0,rawBands[i]-mic.bandFloor[i])/(1-mic.bandFloor[i])*Math.sqrt(gain/6)):0;
@@ -1008,6 +1050,7 @@ function sampleMicrophone(dt=1/60){
 function calibrateMicrophone(){
  if(mic.status!=='live')return;
  mic.calibrating=true;mic.calibration=[];mic.calibrationTime=0;mic.level=0;mic.gate=false;
+ mic.elapsed=0;mic.history=[[0,0]];
  mic.bands.fill(0);mic.bandSum.fill(0);mic.bandSamples=0;
  mic.message='正在校准静音 · 请保持安静约 1 秒，然后开始说话。';syncAudioUI();
 }
@@ -1043,10 +1086,9 @@ function autoFollowPosition(t){
  return [300-125*Math.cos(angle),175+52*Math.sin(angle*2)];
 }
 function resetFollow(){Object.assign(followDemo,{manual:false,clock:0,position:autoFollowPosition(0),history:[]});if($('followMode'))$('followMode').textContent='拖动L自由演示'}
-function renderFollowControls(){return '<div class="demo-switch"><button data-action="follow-auto">自动演示</button><span id="followMode" class="follow-mode">'+(followDemo.manual?'自由拖动':'拖动L自由演示')+'</span></div>'}
 function advanceFollow(dt){
  followDemo.clock+=dt;
- if(!followDemo.manual){const cycle=.6+3.6+4*params().delay+.45;if(followDemo.clock>=cycle){followDemo.clock=0;followDemo.history=[];followDemo.position=autoFollowPosition(0)}}
+ if(!followDemo.manual){const cycle=duration();if(followDemo.clock>=cycle){if(state.repeat){followDemo.clock%=cycle;followDemo.history=[];followDemo.position=autoFollowPosition(0)}else{followDemo.clock=cycle;state.playing=false}}}
  if(followDemo.manual){followDemo.history.push([followDemo.clock,...followDemo.position]);while(followDemo.history.length>2&&followDemo.history[1][0]<followDemo.clock-3)followDemo.history.shift()}
 }
 function historyPosition(history,time){
@@ -1111,15 +1153,15 @@ function fitTextBackground(svg,p){
  set('[data-text-layout]',{transform:'translate('+(300-(left+width/2)*s)+' '+(177-(g.y+g.h/2)*s)+') scale('+s+')'});
 }
 
-function isContinuous(id=state.current){return id==='sin'||id==='time'}
 function renderParameterFields(r){
  const advanced=r.id==='text-box'?['paddingMode','opticalY']:[];
- const fields=r.params.filter(p=>!['previewType','output'].includes(p.key));
+ const fields=r.params.filter(p=>!['previewType','output','pulseLoop'].includes(p.key));
  const render=p=>`<div data-control="${p.key}" class="parameter-field ${p.key==='text'?'full':''}">${renderControl(p)}</div>`;
  return `<div class="controls">${fields.filter(p=>!advanced.includes(p.key)).map(render).join('')}</div>`+(advanced.length?`<details class="advanced-controls"><summary>高级设置</summary><div class="controls">${fields.filter(p=>advanced.includes(p.key)).map(render).join('')}</div></details>`:'');
 }
 function setupFor(r){
  if(r.id==='lookAt')return targetSetup();
+ if(r.id==='path')return [r.setup[0],r.setup[1],`滑块命名Path Radian并设为${params().ratio}；路径代码贴到Path。`,r.setup[3]];
  if(r.id==='text-box'&&params().boxStyle==='frame')return [r.setup[0],r.setup[1],r.setup[2],'关闭填充，启用描边。'];
  return r.setup;
 }
@@ -1129,6 +1171,7 @@ function syncRecipeUI(){
  if(r.id==='sin')hide('phaseStep',p.wave!=='stagger');
  if(r.id==='lookAt'){hide('targetZ',p.previewType!=='3d');hide('angleOffset',p.previewType!=='2d');}
  if(r.id==='random'){hide('x',p.previewType==='color');hide('y',p.previewType==='color');hide('fps',p.fixed==='fixed');}
+ if(r.id==='path'){hide('ratio',p.previewType!=='path');for(const key of ['amplitude','frequency','decay'])hide(key,p.previewType!=='position');$('codeHint').textContent=p.previewType==='position'?'P2 → Position · 位置':'形状图层 → Path · 路径';document.querySelector('.property-tag').innerHTML=icon('layers')+(p.previewType==='position'?'Position · P2位置':'Shape Path · 形状路径');}
  if(r.id==='text-box'){
   hide('tailSide',p.boxStyle!=='bubble');hide('radius',p.radiusMode!=='fixed');hide('radiusRatio',p.radiusMode!=='auto');
   const tail=document.querySelector('[data-variant="tail"]');if(tail)tail.hidden=p.boxStyle!=='bubble';
@@ -1139,7 +1182,6 @@ function syncRecipeUI(){
  const hints={lookAt:p.previewType==='3d'?'粘贴到Orientation · 方向':'粘贴到Rotation · 旋转',fade:'粘贴到Opacity · 不透明度',anchor:'粘贴到Anchor Point · 锚点',stagger:p.previewType==='opacity'?'粘贴到Opacity · 不透明度':'粘贴到Position · 位置','path-motion':p.previewType==='rotation'?'粘贴到Rotation · 旋转':'粘贴到Position · 位置'};
  if(hints[r.id])$('codeHint').textContent=hints[r.id];
  if(r.id==='lookAt')syncTargetUI();
- const transport=document.querySelector('.transport');if(transport){transport.classList.toggle('continuous-transport',isContinuous());$('timeline').hidden=isContinuous();$('repeatButton').hidden=isContinuous();}
 }
 function renderBasics(){
  stopMicrophone();cancelAnimationFrame(state.frame);state.last=0;
@@ -1261,31 +1303,45 @@ function syncTargetUI(){
  const name=document.querySelector('[data-direction-name]');if(name)name.textContent=is3d?'方向':'旋转';
  $('codeHint').textContent=p.output==='scale'?'粘贴到Scale · 缩放（S）':is3d?'粘贴到Orientation · 方向':'粘贴到Rotation · 旋转';
 }
-const pathDemo={points:[[100,175],[300,175],[500,175]],time:0,running:false,loop:false,fresh:true};
+const controlDemo={time:0,running:false,repeat:true,fresh:true};
+function syncControlDemoStatus(){if(state.current==='control')updateTransport()}
+function syncControlDemoValue(){
+ const value=state.params.control.R;
+ document.querySelectorAll('[data-param="R"]').forEach(el=>{el.value=value;if(el.type==='range')el.style.setProperty('--fill',value+'%')});
+ syncControlDemoStatus();
+}
+function startControlDemo(render=true){
+ controlDemo.time=0;controlDemo.running=true;
+ state.params.control.R=0;state.last=0;
+ if(render){syncControlDemoValue();drawScene();schedule()}
+}
+function stopControlDemo(){controlDemo.running=false;controlDemo.time=state.params.control.R/100*3;cancelAnimationFrame(state.frame);syncControlDemoStatus()}
+function tickControlDemo(now){
+ if(state.mode!=='exp'||state.basics||document.hidden||!controlDemo.running)return;
+ if(state.last)controlDemo.time+=Math.min((now-state.last)/1000,.1);state.last=now;
+ if(controlDemo.time>=3){if(controlDemo.repeat)controlDemo.time%=3;else{controlDemo.time=3;controlDemo.running=false}}
+ state.params.control.R=Math.round(controlDemo.time/3*100);
+ syncControlDemoValue();drawScene();if(controlDemo.running)state.frame=requestAnimationFrame(tick);
+}
+const pathDemo={points:[[100,175],[300,175],[500,175]],time:0,running:false,loop:true,fresh:true};
 function pathPulseOffset(t){
- if(t<0||t>=1.8)return 0;
- if(t<.09)return 92*Math.sin(t/.09*Math.PI/2);
- const u=t-.09;return 92*Math.exp(-4.4*u)*Math.cos(19*u)*(1-smooth((t-1.4)/.4));
+ const p=state.params.path;return springPathOffset(t,p.amplitude,p.frequency,p.decay);
 }
 function pathPulsePoints(){
- const y=pathDemo.points[1][1],delta=pathPulseOffset(pathDemo.time)*(y>=167.5?-1:1),room=Math.max(0,delta<0?y-45:290-y);
- const offset=room?room*Math.tanh(delta/room):0;
+ const offset=pathPulseOffset(pathDemo.time);
  return pathDemo.points.map((p,i)=>[p[0],p[1]+(i===1?offset:0)]);
 }
-function renderPathPulseControls(){return `<div class="path-pulse-controls"><button class="text-button" data-action="path-pulse">${icon('replay')}再次弹动</button><button class="pulse-loop" data-action="path-loop" role="switch" aria-checked="${pathDemo.loop}" aria-label="循环弹动"><span>循环</span><i aria-hidden="true"></i></button></div>`}
-function syncPathPulseUI(){
- const button=document.querySelector('[data-action="path-loop"]');if(button)button.setAttribute('aria-checked',pathDemo.loop);
- if(state.current==='path'&&$('playStatus'))$('playStatus').innerHTML='<i></i>'+(pathDemo.running?'演示中':'可拖动');
-}
+function syncPathPulseUI(){if(state.current==='path')updateTransport()}
 function startPathPulse(render=true){
- pathDemo.time=0;pathDemo.running=render||pathDemo.loop||!matchMedia('(prefers-reduced-motion:reduce)').matches;
+ pathDemo.loop=state.params.path.pulseLoop==='yes';state.last=0;
+ pathDemo.time=0;pathDemo.running=true;
  if(render){syncPathPulseUI();drawScene();schedule()}
 }
 function stopPathPulse(){pathDemo.running=false;pathDemo.time=1.8;cancelAnimationFrame(state.frame);syncPathPulseUI()}
 function tickPathPulse(now){
  if(state.mode!=='exp'||state.basics||document.hidden||!pathDemo.running)return;
  if(state.last)pathDemo.time+=Math.min((now-state.last)/1000,.1);state.last=now;
- if(pathDemo.time>=2.5){if(pathDemo.loop)pathDemo.time%=2.5;else{pathDemo.time=1.8;pathDemo.running=false}}
+ if(pathDemo.loop){if(pathDemo.time>=2.5)pathDemo.time%=2.5}else if(pathDemo.time>=1.8){pathDemo.time=1.8;pathDemo.running=false}
  drawScene();syncPathPulseUI();if(pathDemo.running)state.frame=requestAnimationFrame(tick);
 }
 function renderBasics(){
@@ -1311,13 +1367,93 @@ function formatTimecodeTimer(p,t){
 }
 function timecodeTimerScene(p,t){
  const value=formatTimecodeTimer(p,t);
- const labels=['时','分','秒','帧'].map((unit,i)=>`<text data-timecode-unit="${i}" x="${300+(i*3-4.5)*26.4}" y="126" fill="${palette.muted}" font-size="13" text-anchor="middle">${unit}</text>`).join('');
- return {svg:`<g data-timecode-labels>${labels}</g><text data-timecode-value x="300" y="194" text-anchor="middle" fill="${palette.purple}" font-size="48" style="font-family:Arial,Helvetica,'Segoe UI',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0">${value}</text>`,label:'',value};
+ // Fixed character cells avoid re-centering the whole string when a fallback
+ // font has proportional digits. Colons get narrower cells for normal spacing.
+ const widths=Array.from(value,c=>c===':'?14:27),total=widths.reduce((a,b)=>a+b,0);
+ let x=300-total/2;const centers=widths.map(w=>{const center=x+w/2;x+=w;return center});
+ const labels=['时','分','秒','帧'].map((unit,i)=>`<text data-timecode-unit="${i}" x="${(centers[i*3]+centers[i*3+1])/2}" y="126" fill="${palette.muted}" font-size="13" text-anchor="middle">${unit}</text>`).join('');
+ const digits=Array.from(value,(c,i)=>`<text data-timecode-cell="${i}" x="${centers[i]}" y="194" text-anchor="middle">${c}</text>`).join('');
+ return {svg:`<g data-timecode-labels>${labels}</g><g data-timecode-value aria-label="${value}" fill="${palette.purple}" font-size="48" style="font-family:Arial,Helvetica,'Segoe UI',sans-serif;font-variant-numeric:tabular-nums;letter-spacing:0">${digits}</g>`,label:'',value};
 }
-function alignTimecodeUnits(svg){
- const text=svg.querySelector('[data-timecode-value]');if(!text?.getComputedTextLength)return;
- const left=300-text.getComputedTextLength()/2;
- svg.querySelectorAll('[data-timecode-unit]').forEach((unit,i)=>unit.setAttribute('x',left+(i?text.getSubStringLength(0,i*3):0)+text.getSubStringLength(i*3,2)/2));
+
+// All timed previews use the same controls; static interactive examples do not.
+function hasPreviewTransport(id=state.current){return !['text-box','linear','lookAt','distance'].includes(id)}
+function resetPreviewPlayback(){
+ state.time=0;state.last=0;state.playing=true;state.repeat=true;
+ if(state.current==='control'){controlDemo.repeat=true;controlDemo.fresh=true}
+ if(state.current==='path'){params().pulseLoop='yes';pathDemo.loop=true;pathDemo.fresh=true}
+ if(state.current==='follow')resetFollow();
+ if(state.current==='audio'){
+  stopMicrophone();mic.mode='simulated';mic.message='可使用麦克风实时收音，或观看模拟演示。';
+ }
+}
+function previewDuration(){
+ if(state.current==='control')return 3;
+ if(state.current==='path')return pathDemo.loop?2.5:1.8;
+ if(state.current==='follow')return .6+3.6+4*params().delay+.45;
+ return current().duration(params());
+}
+function previewPlayback(){
+ if(state.current==='path')return {time:pathDemo.time,playing:pathDemo.running,repeat:pathDemo.loop};
+ if(state.current==='control')return {time:controlDemo.time,playing:controlDemo.running,repeat:controlDemo.repeat};
+ return {time:state.current==='follow'?followDemo.clock:state.time,playing:state.playing,repeat:state.repeat};
+}
+function renderPreviewTransport(){
+ const p=previewPlayback();
+ return `<div class="transport" role="group" aria-label="预览播放控制"><button class="transport-btn" data-action="play" id="playButton" aria-label="${p.playing?'暂停演示':'播放演示'}" title="${p.playing?'暂停演示':'播放演示'}">${icon(p.playing?'pause':'play')}</button><button class="transport-btn" data-action="replay" id="replayButton" aria-label="从头重播" title="从头重播">${icon('replay')}</button><input type="range" id="timeline" title="双击回到0秒" aria-label="演示时间" min="0" max="${duration()}" step="0.01" value="${p.time}"><output id="timeReadout">0.00 s</output><button class="loop-toggle" id="repeatButton" data-action="repeat" aria-pressed="${p.repeat}" title="只控制网页预览，不修改表达式">预览重播</button></div>`;
+}
+function syncPreviewTransport(){
+ if(!$('timeline'))return;
+ const p=previewPlayback(),d=duration(),micInput=state.current==='audio'&&mic.mode!=='simulated',live=micInput&&mic.status==='live',manual=state.current==='follow'&&followDemo.manual;
+ const t=Math.min(d,Math.max(0,manual||live?p.time%d:p.time));
+ $('timeline').max=d;$('timeline').value=t;$('timeline').style.setProperty('--fill',t/d*100+'%');
+ $('timeline').disabled=micInput||manual;
+ $('timeline').title=micInput?'实时收音无法定位时间':manual?'自由拖动模式；从头重播可恢复自动演示':'双击回到0秒';
+ $('timeReadout').textContent=(micInput||manual?p.time:t).toFixed(2)+' s';
+ const title=p.playing?'暂停演示':'播放演示',button=$('playButton');
+ if(button.getAttribute('aria-label')!==title)button.innerHTML=icon(p.playing?'pause':'play');
+ button.setAttribute('aria-label',title);button.title=title;button.disabled=micInput&&!live;
+ $('replayButton').disabled=micInput;$('replayButton').title=micInput?'切换到模拟演示后可重播':'从头重播';
+ $('repeatButton').setAttribute('aria-pressed',p.repeat);$('repeatButton').disabled=micInput;
+ $('repeatButton').title=state.current==='path'?'控制预览重播，并同步P2表达式的循环设置':'只控制网页预览，不修改表达式';
+ const status=micInput?({live:p.playing?'实时收音':'已暂停',pending:'等待授权',error:'收音未开启',idle:'已停止'}[mic.status]):p.playing?'播放中':'已暂停';
+ $('playStatus').innerHTML='<i></i>'+status;
+}
+function seekPreviewTime(value,pause=true){
+ if((state.current==='audio'&&mic.mode!=='simulated')||(state.current==='follow'&&followDemo.manual))return;
+ const t=Math.max(0,Math.min(duration(),Number(value)||0));
+ state.time=t;state.last=0;
+ if(state.current==='path'){pathDemo.time=t;if(pause)pathDemo.running=false}
+ else if(state.current==='control'){controlDemo.time=t;if(pause)controlDemo.running=false;params().R=Math.round(t/3*100);syncControlDemoValue()}
+ else{if(state.current==='follow')followDemo.clock=t;if(pause)state.playing=false}
+ cancelAnimationFrame(state.frame);drawScene();updateTransport();schedule();
+}
+function previewAction(name){
+ const id=state.current,p=previewPlayback();state.last=0;
+ if(name==='repeat'){
+  if(id==='path'){
+   pathDemo.loop=!p.repeat;params().pulseLoop=pathDemo.loop?'yes':'no';updateCode();
+   if(pathDemo.loop&&!pathDemo.running)startPathPulse();
+   else if(!pathDemo.loop&&pathDemo.time>=1.8){pathDemo.time=1.8;pathDemo.running=false}
+  }else if(id==='control')controlDemo.repeat=!p.repeat;
+  else state.repeat=!p.repeat;
+ }else if(name==='replay'){
+  if(id==='path'){startPathPulse();return}
+  if(id==='control'){startControlDemo();return}
+  if(id==='follow')resetFollow();state.time=0;state.playing=true;
+ }else if(id==='path'){
+  if(!p.playing&&pathDemo.time>=duration())pathDemo.time=0;
+  pathDemo.running=!p.playing;
+ }else if(id==='control'){
+  if(!p.playing&&controlDemo.time>=3){controlDemo.time=0;params().R=0;syncControlDemoValue()}
+  controlDemo.running=!p.playing;
+ }else{
+  if(!p.playing&&p.time>=duration()&&!(id==='follow'&&followDemo.manual)&&!(id==='audio'&&mic.mode!=='simulated')){
+   if(id==='follow')resetFollow();state.time=0;
+  }
+  state.playing=!p.playing;
+ }
+ drawScene();updateTransport();schedule();
 }
 
 initialize();</script>
